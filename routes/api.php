@@ -26,4 +26,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::prefix('auth') -> name('auth.') -> group(function(){
     Route::post('signup', [AuthController::class, 'signup']) -> name('signup');         // API Handle Signup
     Route::post('signin', [AuthController::class, 'signin']) -> name('signin');         // API Handle Signin
+    Route::post('signout', [AuthController::class, 'signout']) -> name('signout')->middleware('auth:sanctum');      // API Handle Signout
 });
