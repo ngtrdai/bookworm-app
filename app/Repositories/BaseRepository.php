@@ -3,6 +3,6 @@
 namespace App\Repositories;
 
 
-abstract class BaseRepository{
-    
+interface BaseRepository{
+    public function getAll();
 }

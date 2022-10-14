@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Repositories\BaseRepository;
 
-class AuthRepository extends BaseRepository
+class AuthRepository implements BaseRepository
 {
     public function signup(AuthRequest $request)
     {
@@ -48,5 +48,9 @@ class AuthRepository extends BaseRepository
         return response()->json([
             'message' => 'Logged out',
         ]);
+    }
+
+    public function getAll(){
+        // Not use
     }
 }
