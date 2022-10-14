@@ -3,6 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+// Include Controller
+use App\Http\Controllers\Api\AuthController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,4 +19,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+
+// Routes for signin and signup
+Route::prefix('auth') -> name('auth.') -> group(function(){
+    Route::post('signup', [AuthController::class, 'signup']) -> name('signup');         // API Handle Signup
+    Route::post('signin', [AuthController::class, 'signin']) -> name('signin');         // API Handle Signin
 });
