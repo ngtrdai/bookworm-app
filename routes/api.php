@@ -25,18 +25,31 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // Routes for signin and signup
 Route::prefix('auth') -> name('auth.') -> group(function(){
-    Route::post('signup', [AuthController::class, 'signup']) -> name('signup');         // API Handle Signup
-    Route::post('signin', [AuthController::class, 'signin']) -> name('signin');         // API Handle Signin
-    Route::post('signout', [AuthController::class, 'signout']) -> name('signout')->middleware('auth:sanctum');      // API Handle Signout
+    // Route for API signup
+    Route::post('signup', [AuthController::class, 'signup']) -> name('signup');
+    // Route for API signin
+    Route::post('signin', [AuthController::class, 'signin']) -> name('signin');
+    // Route for API signout
+    Route::post('signout', [AuthController::class, 'signout']) -> name('signout')->middleware('auth:sanctum');
 });
 
 // Routes for books
 Route::prefix('books') -> name('books.') -> group(function(){
-    Route::get('/', [BookController::class, 'getListBooks']) -> name('getListBooks');   // API Handle Get All Books
-    Route::get('/{id}', [BookController::class, 'getBook']) -> name('getBook');         // API Handle Get Book
+    // Route for API get list books
+    Route::get('/', [BookController::class, 'getListBooks']) -> name('getListBooks');
+    // Route for API get book by id
+    Route::get('/{id}', [BookController::class, 'getBook']) -> name('getBook');
 });
 
 // Routes for products
 Route::prefix('products') -> name('products') -> group(function(){
-    Route::get('onsale', [ProductController::class, 'getOnSale']) -> name('getOnSale');   // API Handle Get On Sale Products
+    // Route for API get list products on sale
+    Route::get('onsale', [ProductController::class, 'getOnSale']) -> name('getOnSale');
+    // Route for API get list featured of products
+    Route::prefix('featured') -> name('featured.') -> group(function(){
+        // Route for API get list popular products
+        Route::get('popular', [ProductController::class, 'getPopular']) -> name('getPopular');
+        // Route for API get list recommended products
+        Route::get('recommended', [ProductController::class, 'getRecommended']) -> name('getRecommended');
+    });
 });

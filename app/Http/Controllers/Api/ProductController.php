@@ -19,4 +19,14 @@ class ProductController extends Controller
         $books = $this->bookRepository->getOnSale();
         return response()->json($books);
     }
+
+    public function getPopular(){
+        $books = $this->bookRepository->getPopular();
+        return response()->json($books);
+    }
+
+    public function getRecommended(){
+        $books = $this->bookRepository->getRecommended();
+        return response()->json($books);
+    }
 }
