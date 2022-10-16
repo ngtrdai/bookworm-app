@@ -19,14 +19,14 @@ class BookRepository implements BaseRepository
     }
 
     public function getOnSale(){
-        return BookCollection::where('sale_price', '>', 0)->get();
-    }
-
-    public function getFinalPrice(BookRequest $request){
-        $book = Book::find($request -> id);
-        if($book -> sale_price > 0){
-            return $book -> sale_price;
-        }
-        return $book -> price;
+        $listBooks = Book::select('book.*')
+            -> leftjoin('discount as d', 'book.id', '=', 'd.book_id')
+            -> where('d.discount_start_date', '<=', now())
+            -> where(function($query){
+                $query -> where('d.discount_end_date', '>=', now())
+                    -> orWhereNull('d.discount_end_date');
+            })
+            -> get();
+        return new BookCollection($listBooks);
     }
 }

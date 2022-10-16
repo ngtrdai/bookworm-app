@@ -8,8 +8,15 @@ use App\Repositories\BookRepository;
 
 class ProductController extends Controller
 {
+    private BookRepository $bookRepository;
+
+    public function __construct(BookRepository $bookRepository)
+    {
+        $this->bookRepository = $bookRepository;
+    }
+
     public function getOnSale(){
-        $products = BookRepository::getOnSale();
-        return response()->json($products);
+        $books = $this->bookRepository->getOnSale();
+        return response()->json($books);
     }
 }
