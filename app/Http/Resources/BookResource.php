@@ -3,7 +3,7 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\CategoryResource;
+use App\Models\Book;
 
 class BookResource extends JsonResource
 {
@@ -24,6 +24,7 @@ class BookResource extends JsonResource
             'book_summary' => $this->book_summary,
             'book_cover_photo' => $this->book_cover_photo,
             'book_category' => $this -> category -> category_name,
+            'final_price' => Book::finalPrice($this -> id),
         ];
     }
 }

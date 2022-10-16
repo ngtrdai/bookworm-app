@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Route;
 // Include Controller
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BookController;
-
+use App\Http\Controllers\Api\ProductController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -30,7 +30,13 @@ Route::prefix('auth') -> name('auth.') -> group(function(){
     Route::post('signout', [AuthController::class, 'signout']) -> name('signout')->middleware('auth:sanctum');      // API Handle Signout
 });
 
-// Routes for Book
+// Routes for books
 Route::prefix('books') -> name('books.') -> group(function(){
     Route::get('/', [BookController::class, 'getListBooks']) -> name('getListBooks');   // API Handle Get All Books
+    Route::get('/{id}', [BookController::class, 'getBook']) -> name('getBook');         // API Handle Get Book
+});
+
+// Routes for products
+Route::prefix('products') -> name('products') -> group(function(){
+    Route::get('onsale', [ProductController::class, 'getOnSale']) -> name('getOnSale');   // API Handle Get On Sale Products
 });

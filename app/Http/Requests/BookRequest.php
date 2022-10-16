@@ -13,7 +13,7 @@ class BookRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,15 @@ class BookRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'id' => 'required|integer',
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'id.required' => 'Id is required',
+            'id.integer' => 'Id must be integer',
         ];
     }
 }
