@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BookController;
 use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ShopController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -52,4 +53,11 @@ Route::prefix('products') -> name('products') -> group(function(){
         // Route for API get list recommended products
         Route::get('recommended', [ProductController::class, 'getRecommended']) -> name('getRecommended');
     });
+});
+
+// Routes for shop
+Route::prefix('shop') -> name('shop.') -> group(function(){
+    // Route for API get list products
+    Route::get('{category?}{author?}{rating?}{sort_by?}{no_items?}', [ShopController::class, 'getListProducts']) -> name('getListProducts');
+
 });

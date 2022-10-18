@@ -11,7 +11,6 @@ use App\Http\Resources\BookResource;
 class ProductRepository implements BaseRepository
 {
     public function getOnSale(){
-        return BookCollection::where('sale_price', '>', 0)->get();
     }
 
     public function getAll(){

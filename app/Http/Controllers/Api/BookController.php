@@ -23,9 +23,10 @@ class BookController extends Controller
         return response()->json($books);
     }
 
-    public function getBook(BookRequest $request)
+    public function getBook(Request $request, $id)
     {
-        $book = $this->bookRepository->getById($request);
-        return response()->json($book);
+        return $request -> all();
+        // $book = $this->bookRepository->getById($request);
+        // return response()->json($book);
     }
 }

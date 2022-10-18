@@ -14,8 +14,8 @@ class BookRepository implements BaseRepository
         return new BookCollection(Book::all());
     }
 
-    public function getById(BookRequest $request){
-        return new BookResource(Book::find($request -> id));
+    public function getById($id){
+        return Book::find($id);
     }
 
     public function getOnSale(){
@@ -57,7 +57,9 @@ class BookRepository implements BaseRepository
                         'book.*', 
                         DB::raw('count(review.id) as total_review'), 
                         DB::raw('case
-                                    when now() >= discount.discount_start_date and (now() <=discount.discount_end_date or discount.discount_end_date is null) then discount.discount_price
+                                    when now() >= discount.discount_start_date 
+                                    and (now() <= discount.discount_end_date or discount.discount_end_date is null) 
+                                    then discount.discount_price
                                     else book.book_price
                                 end as final_price'))
             -> leftjoin('review', 'book.id', '=', 'review.book_id')

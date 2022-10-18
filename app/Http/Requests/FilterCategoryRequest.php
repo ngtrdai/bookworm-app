@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BookRequest extends FormRequest
+class FilterCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class BookRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return false;
     }
 
     /**
@@ -24,15 +24,7 @@ class BookRequest extends FormRequest
     public function rules()
     {
         return [
-            'id' => 'nullable|required|integer',
-        ];
-    }
-
-    public function messages()
-    {
-        return [
-            'id.required' => 'Id is required',
-            'id.integer' => 'Id must be integer',
+            //
         ];
     }
 }
