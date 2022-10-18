@@ -34,6 +34,7 @@ Route::prefix('auth') -> name('auth.') -> group(function(){
     Route::post('signout', [AuthController::class, 'signout']) -> name('signout')->middleware('auth:sanctum');
 });
 
+
 // Routes for books
 Route::prefix('books') -> name('books.') -> group(function(){
     // Route for API get list books
