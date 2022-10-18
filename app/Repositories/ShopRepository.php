@@ -58,7 +58,7 @@ class ShopRepository implements BaseRepository
         return new BookCollection($books);
     }
 
-    public function sortBy($bookTable, $sortBy, $sortOrder = 'desc'){
+    public function sortBy($bookTable, $sortBy){
         // Sort by popular
         switch($sortBy){
             case 'sale':
@@ -66,8 +66,8 @@ class ShopRepository implements BaseRepository
                                         -> orderBy('final_price', 'asc');
                 break;
             case 'popular':
-                $bookTable = $bookTable -> orderBy('no_of_reviews', $sortOrder)
-                                        -> orderBy('final_price', $sortOrder);
+                $bookTable = $bookTable -> orderBy('no_of_reviews', 'desc')
+                                        -> orderBy('final_price', 'asc');
                 break;
             case 'price-asc':
                 $bookTable = $bookTable -> orderBy('final_price', 'asc');
