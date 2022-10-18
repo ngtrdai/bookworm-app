@@ -5,7 +5,8 @@ use App\Repositories\BaseRepository;
 use App\Http\Requests\FilterRequest;
 use App\Http\Resources\BookCollection;
 use App\Models\Book;
-
+use App\Helpers\HelperModel;
+use Illuminate\Support\Facades\DB;
 class ShopRepository implements BaseRepository
 {
     public function getAll(){
@@ -23,22 +24,35 @@ class ShopRepository implements BaseRepository
 
     public function filterProducts($category, $author, $rating , $sortBy, $noItems){
         // Filtering
-        $books = Book::with('category', 'author')
-            ->when($category !== null, function($query) use ($category){
-                return $query->where('category_id', $category);
-            })
-            ->when($author !== null, function($query) use ($author){
-                return $query->where('author_id', $author);
-            })
-            ->when($rating !== null, function($query) use ($rating){
-                return $query->join('review', 'book.id', '=', 'review.book_id')
-                    ->selectRaw('book.*, AVG(review.rating_start) as avg_rating')
-                    ->groupBy('book.id')
-                    ->havingRaw('AVG(review.rating_start) >= ?', [$rating]);
-            });
+        $books = Book::leftjoin('review', 'book.id', '=', 'review.book_id')
+                    -> leftjoin('discount', 'book.id', '=', 'discount.book_id')
+                    -> select('book.*')
+                    -> selectRaw('count(review.id) as no_of_reviews')
+                    -> selectRaw('avg(review.rating_start) as avg_rating')
+                    -> selectRaw('case
+                                    when now() >= discount.discount_start_date
+                                    and (now() <= discount.discount_end_date
+                                    or discount.discount_end_date is null) then discount.discount_price 
+                                    else 0
+                                end as discount_price')
+                    -> selectRaw('case
+                                    when now() >= discount.discount_start_date
+                                    and (now() <= discount.discount_end_date
+                                    or discount.discount_end_date is null) then book.book_price - discount.discount_price 
+                                    else book.book_price
+                                end as final_price')
+                    -> groupBy('book.id', 'discount.discount_price', 'discount.discount_start_date', 'discount.discount_end_date')
+                    -> when($category !== null, function($query) use ($category){
+                        return $query->where('book.category_id', $category);
+                    })
+                    -> when($author !== null, function($query) use ($author){
+                        return $query->where('book.author_id', $author);
+                    })
+                    -> when($rating !== null, function($query) use ($rating){
+                        return $query->havingRaw('avg(review.rating_start) >= ?', [$rating]);
+                    });
         // Sorting
         $books = $this -> sortBy($books, $sortBy);
-
         // Pagination
         $books = $books->paginate($noItems);
         return new BookCollection($books);
@@ -47,20 +61,21 @@ class ShopRepository implements BaseRepository
     public function sortBy($bookTable, $sortBy, $sortOrder = 'desc'){
         // Sort by popular
         switch($sortBy){
+            case 'sale':
+                $bookTable = $bookTable -> orderBy('discount_price', 'desc')
+                                        -> orderBy('final_price', 'asc');
+                break;
             case 'popular':
-                $bookTable = $bookTable->leftjoin('review', 'book.id', '=', 'review.book_id')
-                    ->selectRaw('book.*, case when COUNT(review.book_id) is null then 0 else COUNT(review.book_id) end as total_review')
-                    ->groupBy('book.id')
-                    ->orderBy('total_review', $sortOrder);
+                $bookTable = $bookTable -> orderBy('no_of_reviews', $sortOrder)
+                                        -> orderBy('final_price', $sortOrder);
                 break;
-            case 'price':
-                $bookTable = $bookTable->orderBy('book_price', $sortOrder);
+            case 'price-asc':
+                $bookTable = $bookTable -> orderBy('final_price', 'asc');
                 break;
-            case 'title':
-                $bookTable = $bookTable->orderBy('book_title', $sortOrder);
+            case 'price-desc':
+                $bookTable = $bookTable -> orderBy('final_price', 'desc');
                 break;
             default:
-                $bookTable = $bookTable->orderBy('book_title', $sortOrder);
                 break;
         }
         return $bookTable;
