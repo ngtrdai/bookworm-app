@@ -10,83 +10,79 @@ use Illuminate\Support\Facades\DB;
 
 class BookRepository implements BaseRepository
 {
+
+    /**
+     * Get all books
+     * @return BookCollection
+     */
     public function getAll(){
         return new BookCollection(Book::all());
     }
 
+    /**
+     * Get book by id
+     * @return BookCollection
+     */
     public function getById($id){
-        return Book::find($id);
+        return new BookCollection([Book::find($id)]);
     }
 
+    /* 
+     * Get top env('LIMIT_NO_OF_ITEMS_ON_SALE') books with the most discount which is calculating by this formula:
+     * final_price = book_price@books table – discount_price@discounts table
+     */
     public function getOnSale(){
-        $listBooks = Book::select('book.*')
-            -> leftjoin('discount as d', 'book.id', '=', 'd.book_id')
-            -> where('d.discount_start_date', '<=', now())
-            -> where(function($query){
-                $query -> where('d.discount_end_date', '>=', now())
-                    -> orWhereNull('d.discount_end_date');
-            })
-            -> get();
-        return new BookCollection($listBooks);
+        $books = Book::select('book.*')
+                    -> groupBy('book.id')
+                    -> orderBy('final_price', 'desc')
+                    -> limit(env('LIMIT_NO_OF_ITEMS_ON_SALE'));
+        $books = $this -> getFinalPrice($books)-> get();
+        return new BookCollection($books);
     }
 
+    /*
+     * Get top env('LIMIT_NO_OF_ITEMS_POPULAR') books with most reviews - total number review of a book and lowest final price
+     */
     public function getPopular(){
-        /*
-        select
-            b.*,
-            count(r.id) as total_review,
-            case
-                when now() >= d.discount_start_date
-                and (now() <= d.discount_end_date
-                or d.discount_end_date is null) then d.discount_price
-                else b.book_price
-            end as final_price
-        from
-            book as b
-        left join review as r on
-            b.id = r.book_id
-        left join discount as d on
-            b.id = d.book_id 
-        group by
-            b.id, d.discount_start_date , d.discount_end_date , d.discount_price 
-        order by
-            "total_review" desc, "final_price" asc
-        limit 8
-        */
-        $listBooks = Book::select(
-                        'book.*', 
-                        DB::raw('count(review.id) as total_review'), 
-                        DB::raw('case
+        $books = Book::leftjoin('review', 'book.id', '=', 'review.book_id')
+                    -> select('book.*')
+                    -> selectRaw('count(review.id) as total_review')
+                    -> groupBy('book.id')
+                    -> orderBy('total_review', 'desc')
+                    -> orderBy('final_price', 'asc')
+                    -> limit(env('LIMIT_NO_OF_ITEMS_POPULAR'));
+        $books = $this -> getFinalPrice($books) -> get();
+        return new BookCollection($books);
+    }
+    
+    /*
+     * Get top 8 books with most rating stars – check the average number of rating star and lowest final price.
+     */
+    public function getRecommended(){
+        $books = Book::leftjoin('review', 'book.id', '=', 'review.book_id')
+                    -> select('book.*')
+                    -> selectRaw('coalesce(avg(review.rating_start), 0.0) as avg_rating_star')
+                    -> groupBy('book.id')
+                    -> orderBy('avg_rating_star', 'desc')
+                    -> orderBy('final_price', 'asc')
+                    -> limit(env('LIMIT_NO_OF_ITEMS_RECOMMENDED'));
+        $books = $this -> getFinalPrice($books) -> get();
+        return new BookCollection($books);
+    }
+
+    /*
+    *   Get final price of books.
+    *   If book is on sale, final price = book price - discount price
+    *   If book is not on sale, final price = book price
+    */
+    public function getFinalPrice($query){
+        return $query -> leftjoin('discount', 'book.id', '=', 'discount.book_id')
+                      -> selectRaw('case
                                     when now() >= discount.discount_start_date 
                                     and (now() <= discount.discount_end_date or discount.discount_end_date is null) 
-                                    then discount.discount_price
+                                    then book.book_price - discount.discount_price
                                     else book.book_price
-                                end as final_price'))
-            -> leftjoin('review', 'book.id', '=', 'review.book_id')
-            -> leftjoin('discount', 'book.id', '=', 'discount.book_id')
-            -> groupBy('book.id', 'discount.discount_start_date', 'discount.discount_end_date', 'discount.discount_price')
-            -> orderBy('total_review', 'desc')
-            -> orderBy('final_price', 'asc')
-            -> limit(8)
-            -> get();
-        return new BookCollection($listBooks);
-    }
-
-    public function getRecommended(){
-        $listBooks = Book::select(
-                        'book.*', 
-                        DB::raw('case when avg(review.rating_start) is null then 0 else avg(review.rating_start) end as avg_rating_star'), 
-                        DB::raw('case
-                                    when now() >= discount.discount_start_date and (now() <=discount.discount_end_date or discount.discount_end_date is null) then discount.discount_price
-                                    else book.book_price
-                                end as final_price'))
-            -> leftjoin('review', 'book.id', '=', 'review.book_id')
-            -> leftjoin('discount', 'book.id', '=', 'discount.book_id')
-            -> groupBy('book.id', 'discount.discount_start_date', 'discount.discount_end_date', 'discount.discount_price')
-            -> orderBy('avg_rating_star', 'desc')
-            -> orderBy('final_price', 'asc')
-            -> limit(8)
-            -> get();
-        return new BookCollection($listBooks);
+                                end as final_price')
+                      -> groupBy('discount.discount_start_date', 'discount.discount_end_date', 'discount.discount_price');
     }
 }

@@ -17,9 +17,6 @@ class ShopController extends Controller
 
     public function getListProducts(FilterRequest $request){
         $queryParamsArr = $this->shopRepository->filterQueryParams($request);
-        if($queryParamsArr === false){
-            return response()->json(['message' => 'No filter value provided'], 400);
-        }
         return $this->shopRepository->filterProducts(...$queryParamsArr);
     }
 }

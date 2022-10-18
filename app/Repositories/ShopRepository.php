@@ -51,10 +51,8 @@ class ShopRepository implements BaseRepository
                     -> when($rating !== null, function($query) use ($rating){
                         return $query->havingRaw('avg(review.rating_start) >= ?', [$rating]);
                     });
-        // Sorting
-        $books = $this -> sortBy($books, $sortBy);
-        // Pagination
-        $books = $books->paginate($noItems);
+        // Sorting and Pagination
+        $books = $this -> sortBy($books, $sortBy) -> paginate($noItems);
         return new BookCollection($books);
     }
 
