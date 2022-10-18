@@ -1,18 +1,12 @@
 <?php
 namespace App\Repositories;
 
-use App\Repositories\BaseRepository;
 use App\Http\Requests\FilterRequest;
 use App\Http\Resources\BookCollection;
 use App\Models\Book;
-use App\Helpers\HelperModel;
-use Illuminate\Support\Facades\DB;
-class ShopRepository implements BaseRepository
-{
-    public function getAll(){
-        
-    }
 
+class ShopRepository
+{
     public function filterQueryParams(FilterRequest $request){
         $category = $request->category;
         $author = $request->author;

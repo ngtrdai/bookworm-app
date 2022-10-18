@@ -6,9 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 
 use App\Models\User;
-use App\Repositories\BaseRepository;
 
-class AuthRepository implements BaseRepository
+class AuthRepository
 {
     public function signup(AuthRequest $request)
     {

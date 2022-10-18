@@ -1,14 +1,10 @@
 <?php
 namespace App\Repositories;
 
-use App\Http\Requests\BookRequest;
 use App\Models\Book;
-use App\Repositories\BaseRepository;
 use App\Http\Resources\BookCollection;
-use App\Http\Resources\BookResource;
-use Illuminate\Support\Facades\DB;
 
-class BookRepository implements BaseRepository
+class BookRepository
 {
 
     /**
