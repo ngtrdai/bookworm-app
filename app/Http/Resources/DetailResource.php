@@ -4,6 +4,8 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
+use App\Models\Review;
+
 class DetailResource extends JsonResource
 {
     /**
@@ -14,6 +16,17 @@ class DetailResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'book_title' => $this->book_title,
+            'book_author_name' => $this->author->author_name,
+            'book_summary' => $this->book_summary,
+            'book_cover_photo' => $this->book_cover_photo,
+            'book_category_name' => $this->category->category_name,
+            'book_price' => $this->book_price,
+            'final_price' => $this->finalPrice($this->id),
+            'book_rating' => Review::avgRatingStar($this -> id),
+            'book_rating_count' => Review::countStars($this -> id),
+        ];
     }
 }

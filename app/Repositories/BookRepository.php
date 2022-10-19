@@ -20,7 +20,7 @@ class BookRepository
      * @return BookCollection
      */
     public function getById($id){
-        return new BookCollection([Book::find($id)]);
+        // return new BookCollection([Book::find($id)]);
     }
 
     /* 
@@ -28,12 +28,13 @@ class BookRepository
      * final_price = book_price@books table – discount_price@discounts table
      */
     public function getOnSale(){
-        $books = Book::select('book.*')
+        $books = Book::select('book.*', 'discount.discount_price')
                     -> groupBy('book.id')
-                    -> orderBy('final_price', 'desc')
+                    -> orderBy('final_price', 'asc')
                     -> limit(env('LIMIT_NO_OF_ITEMS_ON_SALE'));
         $books = $this -> getFinalPrice($books)-> get();
-        return new BookCollection($books);
+        // return new BookCollection($books);
+        return $books;
     }
 
     /*

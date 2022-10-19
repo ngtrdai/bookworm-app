@@ -6,8 +6,12 @@ use Illuminate\Support\Facades\Route;
 // Include Controller
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BookController;
-use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ShopController;
+use App\Http\Controllers\Api\ProductController;
+use App\Http\Controllers\Api\ReviewController;
+use App\Http\Controllers\Api\OrderController;
+
+use App\Http\Requests\ProductRequest;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -39,29 +43,37 @@ Route::prefix('auth') -> name('auth.') -> group(function(){
 Route::prefix('books') -> name('books.') -> group(function(){
     // Route for API get list books
     Route::get('/', [BookController::class, 'getListBooks']) -> name('getListBooks');
-    // Route for API get book by id
-    Route::get('/{id}', [BookController::class, 'getBook']) -> name('getBook');
     // Route for API get list products on sale
-    Route::get('onsale', [BookController::class, 'getOnSale']) -> name('getOnSale');
+    Route::get('/onsale', [BookController::class, 'getOnSale']) -> name('getOnSale');
     // Route for API get list featured of products
-    Route::prefix('featured') -> name('featured.') -> group(function(){
+    Route::prefix('/featured') -> name('featured.') -> group(function(){
         // Route for API get list popular products
-        Route::get('popular', [BookController::class, 'getPopular']) -> name('getPopular');
+        Route::get('/popular', [BookController::class, 'getPopular']) -> name('getPopular');
         // Route for API get list recommended products
-        Route::get('recommended', [BookController::class, 'getRecommended']) -> name('getRecommended');
+        Route::get('/recommended', [BookController::class, 'getRecommended']) -> name('getRecommended');
     });
 });
 
 
-
-// // Routes for shop
-// Route::prefix('shop') -> name('shop.') -> group(function(){
-//     // Route for API get list products
-//     Route::get('{category?}{author?}{rating?}{sort_by?}{no_items?}', [ShopController::class, 'getListProducts']) -> name('getListProducts');
-//     // Routes for products
-//     Route::prefix('products') -> name('products') -> group(function(){
-        
-//     });
-// });
-
-Route::apiResource('shop', ShopController::class);
+Route::prefix('shop') -> name('shop.') -> group(function(){
+    // Route for API get list products (Filtering, Sorting, Pagination)
+    Route::apiResource('/', ShopController::class)->only(['index'])
+        -> missing(function (Request $request) {
+            return response()->json(['message' => 'Not Found!'], 404);
+    });
+    // Route for API get detail product and load review of product
+    Route::prefix('product') -> name('product.') -> group(function(){
+        // Route for API get detail product
+        Route::get('/{id}', [ProductController::class, 'show']);
+        // Route for API get list review of product
+        Route::apiResource('/{id}/review', ReviewController::class)->only(['index', 'store'])
+            -> missing(function (Request $request) {
+                return response()->json(['message' => 'Not Found!'], 404);
+        });
+    });
+    // Route for API for order products
+    Route::apiResource('/order', OrderController::class)->only(['index', 'store'])
+            -> missing(function (Request $request) {
+                return response()->json(['message' => 'Not Found!'], 404);
+    });
+});
