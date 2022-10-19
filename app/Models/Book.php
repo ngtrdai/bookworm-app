@@ -33,15 +33,14 @@ class Book extends Model
 
     public static function finalPrice($id)
     {
-        return Book::select(Book::raw('
-                case
-                    when now() >= d.discount_start_date
-                    and (now() <= d.discount_end_date
-                    or d.discount_end_date is null) then d.discount_price
-                    else b.book_price
-                end as final_price'))
-            -> from('book as b') 
-            -> leftjoin('discount as d', 'b.id', '=', 'd.book_id') 
-            -> where('b.id', $id) -> first()->final_price;
+        $finalPrice = Book::leftjoin('discount', 'book.id', '=', 'discount.book_id')
+                        ->  selectRaw('case
+                                            when now() >= discount.discount_start_date
+                                            and (now() <= discount.discount_end_date
+                                            or discount.discount_end_date is null) then book.book_price - discount.discount_price 
+                                            else book.book_price
+                                        end as final_price')
+                        ->  where('book.id', $id) -> first()->final_price;
+        return $finalPrice;
     }
 }

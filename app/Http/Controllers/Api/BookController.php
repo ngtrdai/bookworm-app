@@ -46,6 +46,39 @@ use App\Repositories\BookRepository;
  *          description="Successful operation"
  *       )
  *    )
+  * @OA\Get(
+ *      path="/api/books/onsale",
+ *      operationId="getOnSale",
+ *      tags={"Books"},
+ *      summary="Get list of books on sale",
+ *      description="Returns list of books on sale",
+ *      @OA\Response(
+ *          response=200,
+ *          description="Successful operation"
+ *       )
+ *)
+ * @OA\Get(
+ *      path="/api/books/featured/popular",
+ *      operationId="getProductPopular",
+ *      tags={"Books"},
+ *      summary="Get list of popular books",
+ *      description="Returns list of popular books",
+ *      @OA\Response(
+ *          response=200,
+ *          description="Successful operation"
+ *       )
+ *    )
+ * @OA\Get(
+ *      path="/api/books/featured/recommended",
+ *      operationId="getProductRecommended",
+ *      tags={"Books"},
+ *      summary="Get list of recommended books",
+ *      description="Returns list of recommended books",
+ *      @OA\Response(
+ *          response=200,
+ *          description="Successful operation"
+ *       )
+ *    )
  */
 
 class BookController extends Controller
@@ -67,5 +100,20 @@ class BookController extends Controller
     {
         $book = $this->bookRepository->getById($request->id);
         return response()->json($book);
+    }
+
+    public function getOnSale(){
+        $books = $this->bookRepository->getOnSale();
+        return response()->json($books);
+    }
+
+    public function getPopular(){
+        $books = $this->bookRepository->getPopular();
+        return response()->json($books);
+    }
+
+    public function getRecommended(){
+        $books = $this->bookRepository->getRecommended();
+        return response()->json($books);
     }
 }

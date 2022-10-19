@@ -41,24 +41,27 @@ Route::prefix('books') -> name('books.') -> group(function(){
     Route::get('/', [BookController::class, 'getListBooks']) -> name('getListBooks');
     // Route for API get book by id
     Route::get('/{id}', [BookController::class, 'getBook']) -> name('getBook');
-});
-
-// Routes for products
-Route::prefix('products') -> name('products') -> group(function(){
     // Route for API get list products on sale
-    Route::get('onsale', [ProductController::class, 'getOnSale']) -> name('getOnSale');
+    Route::get('onsale', [BookController::class, 'getOnSale']) -> name('getOnSale');
     // Route for API get list featured of products
     Route::prefix('featured') -> name('featured.') -> group(function(){
         // Route for API get list popular products
-        Route::get('popular', [ProductController::class, 'getPopular']) -> name('getPopular');
+        Route::get('popular', [BookController::class, 'getPopular']) -> name('getPopular');
         // Route for API get list recommended products
-        Route::get('recommended', [ProductController::class, 'getRecommended']) -> name('getRecommended');
+        Route::get('recommended', [BookController::class, 'getRecommended']) -> name('getRecommended');
     });
 });
 
-// Routes for shop
-Route::prefix('shop') -> name('shop.') -> group(function(){
-    // Route for API get list products
-    Route::get('{category?}{author?}{rating?}{sort_by?}{no_items?}', [ShopController::class, 'getListProducts']) -> name('getListProducts');
 
-});
+
+// // Routes for shop
+// Route::prefix('shop') -> name('shop.') -> group(function(){
+//     // Route for API get list products
+//     Route::get('{category?}{author?}{rating?}{sort_by?}{no_items?}', [ShopController::class, 'getListProducts']) -> name('getListProducts');
+//     // Routes for products
+//     Route::prefix('products') -> name('products') -> group(function(){
+        
+//     });
+// });
+
+Route::apiResource('shop', ShopController::class);

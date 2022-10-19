@@ -49,10 +49,10 @@
                 }
             }
         },
-        "/api/products/onsale": {
+        "/api/books/onsale": {
             "get": {
                 "tags": [
-                    "Products"
+                    "Books"
                 ],
                 "summary": "Get list of books on sale",
                 "description": "Returns list of books on sale",
@@ -64,14 +64,59 @@
                 }
             }
         },
-        "/api/products/features/popular": {
+        "/api/books/featured/popular": {
             "get": {
                 "tags": [
-                    "Products"
+                    "Books"
                 ],
-                "summary": "Get list of popular products",
-                "description": "Returns list of popular products",
+                "summary": "Get list of popular books",
+                "description": "Returns list of popular books",
                 "operationId": "getProductPopular",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/api/books/featured/recommended": {
+            "get": {
+                "tags": [
+                    "Books"
+                ],
+                "summary": "Get list of recommended books",
+                "description": "Returns list of recommended books",
+                "operationId": "getProductRecommended",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/api/order": {
+            "get": {
+                "tags": [
+                    "Order"
+                ],
+                "summary": "Get list/filter/sort of products",
+                "description": "Returns list/filter/sort of products",
+                "operationId": "getOrderList",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/api/shop": {
+            "get": {
+                "tags": [
+                    "Shop"
+                ],
+                "summary": "Get list/filter/sort of products",
+                "description": "Returns list/filter/sort of products",
+                "operationId": "getListShopByFilteringAndSorting",
                 "responses": {
                     "200": {
                         "description": "Successful operation"
