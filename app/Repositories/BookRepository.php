@@ -2,25 +2,15 @@
 namespace App\Repositories;
 
 use App\Models\Book;
-use App\Http\Resources\BookCollection;
 
 class BookRepository
 {
 
     /**
      * Get all books
-     * @return BookCollection
      */
     public function getAll(){
-        return new BookCollection(Book::all());
-    }
-
-    /**
-     * Get book by id
-     * @return BookCollection
-     */
-    public function getById($id){
-        // return new BookCollection([Book::find($id)]);
+        return Book::all();
     }
 
     /* 
@@ -49,7 +39,7 @@ class BookRepository
                     -> orderBy('final_price', 'asc')
                     -> limit(env('LIMIT_NO_OF_ITEMS_POPULAR'));
         $books = $this -> getFinalPrice($books) -> get();
-        return new BookCollection($books);
+        return $books;
     }
     
     /*
@@ -64,7 +54,7 @@ class BookRepository
                     -> orderBy('final_price', 'asc')
                     -> limit(env('LIMIT_NO_OF_ITEMS_RECOMMENDED'));
         $books = $this -> getFinalPrice($books) -> get();
-        return new BookCollection($books);
+        return $books;
     }
 
     /*

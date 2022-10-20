@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\FilterRequest;
-use App\Http\Requests\ProductRequest;
 use App\Repositories\ShopRepository;
+use App\Http\Resources\BookCollection;
 use Illuminate\Http\Request;
 /**
  * @OA\Get(
@@ -38,6 +38,7 @@ class ShopController extends Controller
     public function index(FilterRequest $request)
     {
         $queryParamsArr = $this->shopRepository->filterQueryParams($request);
-        return $this->shopRepository->filterProducts(...$queryParamsArr);
+        $products = $this->shopRepository->filterProducts(...$queryParamsArr);
+        return response()->json(new BookCollection($products), 200);
     }
 }

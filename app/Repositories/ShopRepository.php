@@ -2,7 +2,6 @@
 namespace App\Repositories;
 
 use App\Http\Requests\FilterRequest;
-use App\Http\Resources\BookCollection;
 use App\Models\Book;
 
 class ShopRepository
@@ -47,24 +46,27 @@ class ShopRepository
                     });
         // Sorting and Pagination
         $books = $this -> sortBy($books, $sortBy) -> paginate($noItems);
-        return new BookCollection($books);
+        return $books;
     }
 
+    private const SORT_BY_SALE = 'sale';
+    private const SORT_BY_POPULAR = 'popular';
+    private const SORT_BY_PRICE_ASC = 'price_asc';
+    private const SORT_BY_PRICE_DESC = 'price_desc';
     public function sortBy($bookTable, $sortBy){
-        // Sort by popular
         switch($sortBy){
-            case 'sale':
+            case Self::SORT_BY_SALE:
                 $bookTable = $bookTable -> orderBy('discount_price', 'desc')
                                         -> orderBy('final_price', 'asc');
                 break;
-            case 'popular':
+            case Self::SORT_BY_POPULAR:
                 $bookTable = $bookTable -> orderBy('no_of_reviews', 'desc')
                                         -> orderBy('final_price', 'asc');
                 break;
-            case 'price-asc':
+            case Self::SORT_BY_PRICE_ASC:
                 $bookTable = $bookTable -> orderBy('final_price', 'asc');
                 break;
-            case 'price-desc':
+            case Self::SORT_BY_PRICE_DESC:
                 $bookTable = $bookTable -> orderBy('final_price', 'desc');
                 break;
             default:

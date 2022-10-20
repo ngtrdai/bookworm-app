@@ -14,6 +14,7 @@ class ProductRepository{
         ]);
         if($validator->fails()){
             return response()->json([
+                'status' => 'error',
                 'message' => $validator->errors()->first(),
             ], 400);
         }

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
+use App\Http\Resources\BookCollection;
 
 use App\Repositories\BookRepository;
 
@@ -92,28 +92,23 @@ class BookController extends Controller
 
     public function getListBooks()
     {
+        
         $books = $this->bookRepository->getAll();
-        return response()->json($books);
-    }
-
-    public function getBook(Request $request)
-    {
-        $book = $this->bookRepository->getById($request->id);
-        return response()->json($book);
+        return response()->json(new BookCollection($books), 200);
     }
 
     public function getOnSale(){
         $books = $this->bookRepository->getOnSale();
-        return response()->json($books);
+        return response()->json(new BookCollection($books), 200);
     }
 
     public function getPopular(){
         $books = $this->bookRepository->getPopular();
-        return response()->json($books);
+        return response()->json(new BookCollection($books), 200);
     }
 
     public function getRecommended(){
         $books = $this->bookRepository->getRecommended();
-        return response()->json($books);
+        return response()->json(new BookCollection($books), 200);
     }
 }

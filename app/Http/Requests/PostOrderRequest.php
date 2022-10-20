@@ -29,4 +29,13 @@ class PostOrderRequest extends FormRequest
             'items_order.*.quantity' => 'required|integer|min:1',
         ];
     }
+
+    public function failedValidation($validator)
+    {
+        $response = response()->json([
+            'status' => 'error',
+            'message' => $validator->errors()->first(),
+        ], 422);
+        throw new \Illuminate\Validation\ValidationException($validator, $response);
+    }
 }

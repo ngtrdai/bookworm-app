@@ -29,4 +29,13 @@ class FilterReviewsRequest extends FormRequest
             'no_items' => 'nullable|integer',
         ];
     }
+
+    public function failedValidation($validator)
+    {
+        $response = response()->json([
+            'status' => 'error',
+            'message' => $validator->errors()->first(),
+        ], 422);
+        throw new \Illuminate\Validation\ValidationException($validator, $response);
+    }
 }

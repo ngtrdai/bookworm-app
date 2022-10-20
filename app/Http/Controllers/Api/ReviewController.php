@@ -26,7 +26,7 @@ class ReviewController extends Controller
             $queryParamsArr = $this -> productRepository -> filterQueryParamsForLoadReviews($request);
             $reviews = $this -> productRepository -> filterReviews($id, ...$queryParamsArr);
         }
-        return $reviews;
+        return response()->json($reviews, 200);
     }
 
     public function store(PostReviewRequest $request, $id)
@@ -36,17 +36,6 @@ class ReviewController extends Controller
             $paramsFiltered = $this -> productRepository -> filterParamsForCreateReview($request);
             $review = $this -> productRepository -> createReview($id, ...$paramsFiltered);
         }
-        return $review;
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        return response()->json($review, 200);
     }
 }

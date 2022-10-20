@@ -28,11 +28,12 @@ class BookRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function failedValidation($validator)
     {
-        return [
-            'id.required' => 'Id is required',
-            'id.integer' => 'Id must be integer',
-        ];
+        $response = response()->json([
+            'status' => 'error',
+            'message' => $validator->errors()->first(),
+        ], 422);
+        throw new \Illuminate\Validation\ValidationException($validator, $response);
     }
 }

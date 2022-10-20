@@ -23,6 +23,6 @@ class ProductController extends Controller
         if($validate){
             $bookDetail = $this->productRepository->getProductById($id);
         }
-        return new DetailResource($bookDetail);
+        return response()->json(new DetailResource($bookDetail), 200);
     }
 }
