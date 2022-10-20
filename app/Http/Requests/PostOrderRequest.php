@@ -24,7 +24,6 @@ class PostOrderRequest extends FormRequest
     public function rules()
     {
         return [
-            'user_id' => 'required|integer|exists:user,id',
             'items_order' => 'required|array',
             'items_order.*.book_id' => 'required|integer|exists:book,id',
             'items_order.*.quantity' => 'required|integer|min:1',

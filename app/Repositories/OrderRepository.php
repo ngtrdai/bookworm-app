@@ -4,38 +4,45 @@ namespace App\Repositories;
 
 use App\Models\Order;
 use App\Models\Book;
-
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 class OrderRepository{
 
+    /**
+     * @param $request
+     * @description This function is used to handle parameters from request for creating new order.
+     * @return mixed
+     */
     public function filterParams($request){
-        $amount = 0;
-        $userId = $request->user_id;
+        $userId = $request->user()->id;
         $itemsOrder = $request->items_order;
         foreach($itemsOrder as $key => $item){
             $finalPrice = Book::finalPrice($item['book_id']);
-            $itemsOrder[$key]['book_price'] = $finalPrice;
-            $itemsOrder[$key]['total_price'] = $finalPrice * $item['quantity'];
-            $amount += $itemsOrder[$key]['total_price'];
+            $itemsOrder[$key]['price'] = $finalPrice;
         }
-        return [$userId, $itemsOrder, $amount];
+        return [$userId, $itemsOrder];
     }
 
-    public function createOrder($userId, $itemsOrder, $amount){
-        // Thêm vào bảng order vơi user_id, order_date và order_amount
-        $order = Order::create([
-            'user_id' => $userId,
-            'order_date' => now(),
-            'order_amount' => $amount,
-        ]);
-        // Thêm các item vào bảng order_item với order_id vừa tạo
-        foreach($itemsOrder as $item){
-            $order->items()->create([
-                'order_id' => $order->id,
-                'book_id' => $item['book_id'],
-                'quantity' => $item['quantity'],
-                'price' => $item['total_price'],
+    /**
+     * @param $userId
+     * @param $itemsOrder
+     * @description Create order and order items
+     * @return Order
+     */
+    public function createOrder($userId, $itemsOrder){
+        DB::beginTransaction();
+        try{
+            $order = Order::create([
+                'user_id' => $userId,
+                'order_date' => Carbon::now(),
+                'order_amount' => count($itemsOrder),
             ]);
+            $order->items()->createMany($itemsOrder);
+            DB::commit();
+            return $order;
+        }catch(\Exception $e){
+            DB::rollBack();
+            return $e;
         }
-        return $order;
-    }
+    }       
 }

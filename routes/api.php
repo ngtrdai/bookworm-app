@@ -72,7 +72,7 @@ Route::prefix('shop') -> name('shop.') -> group(function(){
         });
     });
     // Route for API for order products
-    Route::apiResource('/order', OrderController::class)->only(['index', 'store'])
+    Route::middleware('auth:sanctum')->apiResource('/order', OrderController::class)->only(['index', 'store'])
             -> missing(function (Request $request) {
                 return response()->json(['message' => 'Not Found!'], 404);
     });
