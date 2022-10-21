@@ -59,7 +59,7 @@ class BookRepository
 
     /*
     *   Get final price of books.
-    *   If book is on sale, final price = book price - discount price
+    *   If book is on sale, final price = discount price
     *   If book is not on sale, final price = book price
     */
     public function getFinalPrice($query){
@@ -67,9 +67,13 @@ class BookRepository
                       -> selectRaw('case
                                     when now() >= discount.discount_start_date 
                                     and (now() <= discount.discount_end_date or discount.discount_end_date is null) 
-                                    then book.book_price - discount.discount_price
+                                    then discount.discount_price
                                     else book.book_price
                                 end as final_price')
                       -> groupBy('discount.discount_start_date', 'discount.discount_end_date', 'discount.discount_price');
+    }
+
+    public function getSubPrice($query){
+        
     }
 }
