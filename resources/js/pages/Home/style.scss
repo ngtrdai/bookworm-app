@@ -2,25 +2,5 @@
     margin-top: 20px;
 }
 
-.onsale {
-    padding: 0px;
-    .onsale__title {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-    }
-}
 
-.carousel {
-    background-color: #ffffff;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-    padding: 30px 30px;
-    width: 100%;
-}
 
-.carousel__books{
-    .react-multi-carousel-item {
-        display: flex;
-        justify-content: center;
-    }
-}

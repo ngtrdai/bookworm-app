@@ -23,7 +23,7 @@ function Header() {
     return (
         <header>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
-                <Container>
+                <Container fluid>
                     <Navbar.Brand href="#">BOOKWORM</Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">

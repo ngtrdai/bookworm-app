@@ -2,23 +2,23 @@ import axiosClient from "./axiosClient";
 
 const bookApi = {
     getBooks: () => {
-        const url = "/books";
+        const url = "api/books";
         return axiosClient.get(url);
     },
     getBook: (id) => {
-        const url = `/books/${id}`;
+        const url = `api/books/${id}`;
         return axiosClient.get(url, { id });
     },
     getOnSaleBooks: () => {
-        const url = "/books/onsale";
+        const url = "api/books/onsale";
         return axiosClient.get(url);
     },
     getPopularBooks: () => {
-        const url = "/books/featured/popular";
+        const url = "api/books/featured/popular";
         return axiosClient.get(url);
     },
     getRecommendedBooks: () => {
-        const url = "/books/featured/recommended";
+        const url = "api/books/featured/recommended";
         return axiosClient.get(url);
     }
 };

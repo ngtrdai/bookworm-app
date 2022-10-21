@@ -1,0 +1,39 @@
+.bookworm__featured{
+    margin-top: 24px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    h1 {
+        margin: auto;
+        font-size: 28px;
+    }
+
+    .bookworm__featured__tabs{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+
+        h2 {
+            background-color: white;
+            border-radius: 10px;
+            width: 200px;
+            height: 50px;
+            margin: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+            text-align: center;
+            &:hover {
+                background-color: #8ee4af;
+            }
+        }
+
+        .bookworm__featured__tab--active{
+            background-color: #5cdb95;
+            color: #ffffff;
+        }
+    }
+
+    
+}
