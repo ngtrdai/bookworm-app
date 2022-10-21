@@ -1,15 +1,16 @@
-import {Button, Container, Nav, Navbar, NavDropdown} from 'react-bootstrap';
+import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
-import { useNavigate} from 'react-router-dom';
-import { setItemActive } from '../../reducers/header';
-import {useState} from 'react';
+import { useNavigate, useLocation} from 'react-router-dom';
+import { setItemActive } from '../../../reducers/header';
+import SignIn from '../../Modals/Auth/signIn';
+import { useState } from 'react';
 
 function Header() {
     let navigate = useNavigate();
     const dispatch = useDispatch();
-
+    const location = useLocation();
     let itemActive = useSelector(state => state.headerReducer.itemActive);
-
+    itemActive = itemActive ? itemActive : location.pathname.replace('/', '');
     const handleItemClick = (item) => {
         // Handle khi click vào item
         navigate(`/${item}`);
@@ -48,7 +49,7 @@ function Header() {
                                     </NavDropdown>
                                 </>
                                 :
-                                <Nav.Link>SignIn</Nav.Link>
+                                <Nav.Link><SignIn text={'SignIn'}/></Nav.Link>
                             }
                         </Nav>
                     </Navbar.Collapse>

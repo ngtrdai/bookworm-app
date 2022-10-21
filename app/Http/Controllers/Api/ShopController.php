@@ -39,6 +39,7 @@ class ShopController extends Controller
     {
         $queryParamsArr = $this->shopRepository->filterQueryParams($request);
         $products = $this->shopRepository->filterProducts(...$queryParamsArr);
-        return response()->json(new BookCollection($products), 200);
+        // return response()->json(new BookCollection($products), 200);
+        return new BookCollection($products);
     }
 }
