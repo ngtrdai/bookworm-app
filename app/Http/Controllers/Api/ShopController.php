@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\FilterRequest;
 use App\Repositories\ShopRepository;
 use App\Http\Resources\BookCollection;
+use App\Http\Resources\FilterResource;
 use Illuminate\Http\Request;
 /**
  * @OA\Get(
@@ -41,5 +42,9 @@ class ShopController extends Controller
         $products = $this->shopRepository->filterProducts(...$queryParamsArr);
         // return response()->json(new BookCollection($products), 200);
         return new BookCollection($products);
+    }
+
+    public function getListFiltering(){
+        return new FilterResource([]);
     }
 }

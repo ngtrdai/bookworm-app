@@ -1,12 +1,11 @@
 import React from "react";
-import { useState, useEffect } from 'react';
+import { useState} from 'react';
 import { Container, Row } from "react-bootstrap";
 import Popular from "./Popular";
 import Recommended from "./Recommended";
 import "./style.scss";
 function Featured(){
     const [featured, setFeatured] = useState('recommended');
-
     return (
         <>
             <Container className="bookworm__featured">

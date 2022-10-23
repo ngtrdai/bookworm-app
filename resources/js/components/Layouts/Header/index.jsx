@@ -2,7 +2,7 @@ import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation} from 'react-router-dom';
 import { setItemActive } from '../../../reducers/header';
-import SignIn from '../../Modals/Auth/signIn';
+import SignIn from '../../Modals/SignIn';
 import { useState } from 'react';
 
 function Header() {

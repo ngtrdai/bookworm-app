@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
-import {Router, Route, Routes, Redirect } from "react-router-dom";
-import bookApi from "./api/bookApi";
-import Header from "./components/Layouts/Header";
-import Footer from "./components/Layouts/Footer";
-import Home from "./pages/Home";
+import React from "react";
+import {Route, Routes } from "react-router-dom";
+
+import { Header, Footer } from "./components/Layouts";
+import { Home, Shop } from "./pages";
+
 import 'bootstrap/dist/css/bootstrap.css';
 
 function App(){
@@ -12,6 +12,8 @@ function App(){
             <Header />
             <Routes>
                 <Route path="/home" element={<Home />} />
+                {/* <Route path="/" element={<Redirect to="/home" />} /> */}
+                <Route path='/shop' element={<Shop />} />
                 <Route path="*" element={<h1>Not Found</h1>} />
             </Routes>
             <Footer />
