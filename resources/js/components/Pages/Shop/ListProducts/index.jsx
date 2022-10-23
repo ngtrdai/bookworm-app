@@ -1,9 +1,14 @@
 import React from "react";
+import SortingBar from "./SortingBar";
+import Products from "./Products";
+import { Row } from "react-bootstrap";
+import "./style.scss";
 
 function ListProducts(){
     return (
-        <div className='list-products'>
-            <h1>List Products</h1>
+        <div className='shop__listproduct'>
+            <SortingBar />
+            <Products />
         </div>
     );
 }

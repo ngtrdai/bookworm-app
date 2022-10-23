@@ -11,9 +11,9 @@ function CardCustom({ book }) {
   };
   return (  
     <Card className="card__custom" onClick={() => handleOnClick()}>
-      <Card.Img variant="top" src={book.book_cover_photo ? IMAGE[book.book_cover_photo] :IMAGE['bookDefault']} />
+      <Card.Img variant="top" src={book.book_cover_photo ? IMAGE[book.book_cover_photo] :IMAGE['bookDefault']} className="card__custom__img"/>
       <Card.Body>
-        <Card.Title>{book.book_title}</Card.Title>
+        <Card.Title className="card__custom__title">{book.book_title}</Card.Title>
         <Card.Text>{book.author_name}</Card.Text>
       </Card.Body>
       <Card.Footer>

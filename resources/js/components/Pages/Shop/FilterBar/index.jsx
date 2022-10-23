@@ -47,14 +47,12 @@ function FilterBar(){
     console.log(filterMenuList);
     return (
         <div className='shop__filterbar'>
-            <div className='shop__filterbar__title'>
-                <h6>Filter By</h6>
-                {
-                    filterMenuList.map((filterMenu, index) => (
-                        <FilterMenu key={index} menuName={filterMenu.menuName} menuItems={filterMenu.menuItems} />
-                    ))
-                }
-            </div>
+            <h6>Filter By</h6>
+            {
+                filterMenuList.map((filterMenu, index) => (
+                    <FilterMenu key={index} menuName={filterMenu.menuName} menuItems={filterMenu.menuItems} />
+                ))
+            }
         </div>
     );
 }

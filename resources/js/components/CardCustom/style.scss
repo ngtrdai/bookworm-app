@@ -1,3 +1,14 @@
 .card__custom{
-    width: 18rem;
+    width: 15rem;
+    height: 30rem !important;
+    margin-bottom: 16px;
+    .card__custom__img{
+        height: 300px !important;
+    }
+
+    .card__custom__title{
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 }

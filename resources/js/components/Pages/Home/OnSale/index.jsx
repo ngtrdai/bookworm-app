@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react'
-import { Button, Container } from 'react-bootstrap'
+import { Button, Container, DropdownButton } from 'react-bootstrap'
 import Carousel from 'react-multi-carousel';
 import { useNavigate } from 'react-router-dom';
 import CardCustom from "../../../CardCustom/CardCustom";
+import bookApi from '../../../../api/bookApi';
 import 'react-multi-carousel/lib/styles.css';
 import "./style.scss";
-import bookApi from '../../../../api/bookApi';
 
 function OnSale(){
 
@@ -53,12 +53,12 @@ function OnSale(){
             <Container className="bookworm__onsale">
                 <div className='bookworm__onsale__title'>
                     <h2>On Sale</h2>
-                    <span><Button>View All</Button></span>
+                    <DropdownButton drop='end' title='View All' onClick={() => {navigate('/shop')}}/>
                 </div>
             </Container>
             <Container className="p-12 mt-2">
                 <div className="carousel">
-                    <Carousel responsive={responsive} className="carousel__books">
+                    <Carousel responsive={responsive} className="carousel__books" infinite={true}>
                         { books.map((book, index) => {
                             return (<CardCustom book={book} key={index}/>)
                         })}
