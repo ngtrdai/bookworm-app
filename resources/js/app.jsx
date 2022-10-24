@@ -1,8 +1,7 @@
 import React from "react";
-import {Route, Routes } from "react-router-dom";
-
-import { Header, Footer } from "./components/Layouts";
-import { Home, Shop } from "./pages";
+import { Route, Routes } from "react-router-dom";
+import { Header, Footer } from "./components";
+import { Home, Shop } from "./screens";
 
 import 'bootstrap/dist/css/bootstrap.css';
 
@@ -12,7 +11,6 @@ function App(){
             <Header />
             <Routes>
                 <Route path="/home" element={<Home />} />
-                {/* <Route path="/" element={<Redirect to="/home" />} /> */}
                 <Route path='/shop' element={<Shop />} />
                 <Route path="*" element={<h1>Not Found</h1>} />
             </Routes>
