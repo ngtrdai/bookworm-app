@@ -34,12 +34,12 @@ function CardAddToCart({book}) {
             <Card.Header className="bookworm__detail__card__header">
                 {book.book_price === book.final_price ? (
                     <div className="bookworm__detail__card__price">
-                        <span className="bookworm__detail__card__price__finalprice">${(book.final_price * quantity).toFixed(2)}</span>
+                        <span className="bookworm__detail__card__price__finalprice">${book.final_price}</span>
                     </div>
                 ) : (
                     <div className="bookworm__detail__card__price">
-                        <span className="bookworm__detail__card__price__bookprice">${(book.book_price * quantity).toFixed(2)}</span>
-                        <span className="bookworm__detail__card__price__finalprice">${(book.final_price * quantity).toFixed(2)}</span>
+                        <span className="bookworm__detail__card__price__bookprice">${book.book_price}</span>
+                        <span className="bookworm__detail__card__price__finalprice">${book.final_price}</span>
                     </div>
                 )}
             </Card.Header>
