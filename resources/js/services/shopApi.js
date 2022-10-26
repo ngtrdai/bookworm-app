@@ -8,6 +8,10 @@ const shopApi = {
     getListProducts: (params) => {
         const url = "api/shop";
         return axiosClient.get(url, { params });
+    },
+    getDetailProduct: (id) => {
+        const url = `api/shop/product/${id}`;
+        return axiosClient.get(url);
     }
 };
 

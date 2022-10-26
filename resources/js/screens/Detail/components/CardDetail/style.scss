@@ -1,0 +1,19 @@
+.bookworm__detail__image {
+    img {
+        width: 100%;
+        // Radius img top-left and bot-left equal card
+        border-top-left-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+    }
+}
+
+.bookworm__detail__author {
+    margin-top: 20px;
+    text-align: right;
+}
+
+.bookworm__detail__description{
+    p:first-child {
+        margin-bottom: 0;
+    }
+}
