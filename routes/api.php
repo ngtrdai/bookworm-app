@@ -61,6 +61,8 @@ Route::prefix('shop') -> name('shop.') -> group(function(){
         -> missing(function (Request $request) {
             return response()->json(['message' => 'Not Found!'], 404);
     });
+    // Route for API get list filtering
+    Route::get('/filtering', [ShopController::class, 'getListFiltering']) -> name('getFiltering');
     // Route for API get detail product and load review of product
     Route::prefix('product') -> name('product.') -> group(function(){
         // Route for API get detail product
