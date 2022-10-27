@@ -1,4 +1,5 @@
 /******/ (() => { // webpackBootstrap
+<<<<<<< HEAD
 /******/ 	var __webpack_modules__ = ({
 
 /***/ "./node_modules/@popperjs/core/lib/createPopper.js":
@@ -74576,6 +74577,10 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 	__webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/js/index.jsx")))
 /******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["css/app"], () => (__webpack_require__("./resources/scss/app.scss")))
 /******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
+=======
+/******/ 	"use strict";
+/******/ 	
+>>>>>>> Update file
 /******/ 	
 /******/ })()
 ;
