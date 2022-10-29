@@ -27,10 +27,11 @@ class ProductRepository{
     }
 
     public function filterQueryParamsForLoadReviews($request){
+        $bookId = $request->book_id;
         $rating = $request->rating;
         $noItems = $request->no_items !== null ? $request->no_items : env('DEFAULT_NO_OF_ITEMS_FOR_REVIEWS');
         $sortBy = $request->sort_by !== null ? $request->sort_by : env('DEFAUT_SORT_BY_FOR_REVIEWS');
-        return [$rating, $sortBy, $noItems];
+        return [$bookId, $rating, $sortBy, $noItems];
     }
 
     public function filterReviews($id, $rating, $sortBy, $noItems){
@@ -58,11 +59,12 @@ class ProductRepository{
     }
 
     public function filterParamsForCreateReview($request){
+        $bookId = $request->book_id;
         $title = $request->title;
         $detail = $request->detail;
         $rating = $request->rating;
         $reviewDate = date('Y-m-d H:i:s');
-        return [$title, $detail, $rating, $reviewDate];
+        return [$bookId, $title, $detail, $rating, $reviewDate];
     }
 
     public function createReview($bookId, $title, $detail, $rating, $reviewDate){

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Card } from "react-bootstrap";
+import { CartUtils } from "../../../../utils";
 import "./style.scss";
 function CardAddToCart({book}) {
     const [quantity, setQuantity] = useState(1);
@@ -7,16 +8,8 @@ function CardAddToCart({book}) {
         min: 1,
         max: 8
     };
-    const getCart = () => {
-        const cart = localStorage.getItem("cart");
-        if (cart) {
-            return JSON.parse(cart);
-        }
-        return [];
-    };
-
     const handleAddToCart = () => {
-        const cart = getCart();
+        const cart = CartUtils.getCart();
         const index = cart.findIndex((item) => item.id === book.id);
         if (index === -1) {
             cart.push({
@@ -25,7 +18,14 @@ function CardAddToCart({book}) {
                 book: book
             });
         } else {
-            cart[index].quantity += quantity;
+            // Quantity <= 8
+            if (cart[index].quantity + quantity <= minMaxQuantity.max) {
+                cart[index].quantity += quantity;
+            }else{
+                // Throw error
+                console.log("Quantity is too much");
+            }
+
         }
         localStorage.setItem("cart", JSON.stringify(cart));
     };

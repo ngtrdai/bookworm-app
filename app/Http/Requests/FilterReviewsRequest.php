@@ -24,6 +24,7 @@ class FilterReviewsRequest extends FormRequest
     public function rules()
     {
         return [
+            'book_id' => 'required|integer|exists:book,id',
             'rating' => 'nullable|integer|between:1,5',
             'sort_by' => 'nullable|string|in:' . env('SORT_BY_ARRAY_FOR_REVIEW'),
             'no_items' => 'nullable|integer',

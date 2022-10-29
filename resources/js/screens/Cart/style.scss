@@ -1,0 +1,24 @@
+.bookworm__cart{
+    margin-top: 20px;
+
+    .bookworm__cart__content {
+
+        .bookworm__cart__image{
+            width: 100px;
+            height: 150px;
+            margin-right: 20px;
+        }
+
+    }
+
+    .bookworm__cart__price__discount{
+        text-decoration: line-through;
+        color: gray;
+        font-size: 16px;
+    }
+
+    .bookworm__cart__price__final{
+        font-weight: 600;
+        font-size: 26px;
+    }
+}

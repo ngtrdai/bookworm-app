@@ -12,11 +12,8 @@ const shopApi = {
     getDetailProduct: (id) => {
         const url = `api/shop/product/${id}`;
         return axiosClient.get(url);
-    },
-    getReviewProduct: (id, params) => {
-        const url = `api/shop/product/${id}/review`;
-        return axiosClient.get(url, {params});
     }
+
 };
 
 export default shopApi;

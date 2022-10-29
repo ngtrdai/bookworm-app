@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Col, Row, Dropdown } from "react-bootstrap";
-import { CardDetail } from "../../components";
-import { shopApi } from "../../../../services";
+import { Card, Col, Row, Dropdown, Nav } from "react-bootstrap";
+import { CardDetail, ReviewForm } from "../../components";
+import { reviewApi } from "../../../../services";
 import { StringUtils } from "../../../../utils";
 import "./style.scss";
 function BookReview({ id }) {
     const [reviews, setReviews] = useState([]);
     const [currentPage, setCurrentPage] = useState(0);
-    const [fromToPage, setFromToPage] = useState({ from: 0, to: 0, total: 0 });
+    const [totalPage, setTotalPage] = useState(0);
+    const [fromToPage, setFromToPage] = useState({ from: 0, to: 0});
     const [sortType, setSortType] = useState('newest');
     const [showType, setShowType] = useState('15');
 
@@ -32,13 +33,13 @@ function BookReview({ id }) {
     useEffect(() => {
         const fetchReviews = async () => {
             try {
-                const response = await shopApi.getReviewProduct(id);
+                const response = await reviewApi.getReviewProduct({book_id: id});
                 setReviews(response.data);
                 setCurrentPage(response.current_page);
+                setTotalPage(response.total);
                 setFromToPage({
                     from: response.from,
-                    to: response.to,
-                    total: response.total,
+                    to: response.to
                 });
             }
             catch (error) {
@@ -116,8 +117,53 @@ function BookReview({ id }) {
                                             </div>
                                         );
                                     })}
+                                    <Nav className='d-flex justify-content-center'>
+                                        <ul className='bookworm__reviews__pagination'>
+                                            <li className={`bookworm__reviews__pagination__item ${currentPage === 1 ? 'disabled' : ''}`}>
+                                                <a className='bookworm__reviews__pagination__link' href='#' onClick={() => setFilterParams({ ...filterParams, page: currentPage - 1 })}>
+                                                    Previous
+                                                </a>
+                                            </li>
+                                            {
+                                                [... Array(totalPage).keys()].map(x => x + 1).map((pageIndex, index) => {
+                                                    if (currentPage === 1) {
+                                                        if([1, 2, 3].includes(pageIndex)) {
+                                                            return (
+                                                                <li className={`bookworm__reviews__pagination__item ${currentPage === pageIndex ? 'active' : ''}`}>
+                                                                    <a className='bookworm__reviews__pagination__link' href='#' onClick={() => setFilterParams({ ...filterParams, page: pageIndex })}>
+                                                                        {pageIndex}
+                                                                    </a>
+                                                                </li>
+                                                            );
+                                                        }
+                                                    } else if (currentPage === totalPage) {
+                                                        if([totalPage - 2, totalPage - 1, totalPage].includes(pageIndex)) {
+                                                            return (
+                                                                <li className={`bookworm__reviews__pagination__item ${currentPage === pageIndex ? 'active' : ''}`}>
+                                                                    <a className='bookworm__reviews__pagination__link' href='#' onClick={() => setFilterParams({ ...filterParams, page: pageIndex })}>
+                                                                        {pageIndex}
+                                                                    </a>
+                                                                </li>
+                                                            );
+                                                        }
+                                                    } else if ([currentPage - 1, currentPage, currentPage + 1].includes(pageIndex)) {
+                                                        return (
+                                                            <li className={`bookworm__reviews__pagination__item ${currentPage === pageIndex ? 'active' : ''}`}>
+                                                                <a className='bookworm__reviews__pagination__link' href='#' onClick={() => setFilterParams({ ...filterParams, page: pageIndex })}>  
+                                                                    {pageIndex}
+                                                                </a>
+                                                            </li>
+                                                        );
+                                                    }
+                                                })
+                                            }
+                                        </ul>
+                                    </Nav>
                                 </Card.Body>
                             </Card>
+                        </Col>
+                        <Col xs={12} md={4} lg={4} className="bookworm__detail__colitem">
+                            <ReviewForm id={id}/>
                         </Col>
                     </Row>
                 </React.Fragment>

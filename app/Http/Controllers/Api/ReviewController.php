@@ -19,23 +19,17 @@ class ReviewController extends Controller
         $this->productRepository = $productRepository;
     }
 
-    public function index(FilterReviewsRequest $request, $id)
+    public function index(FilterReviewsRequest $request)
     {
-        $validateStatus = $this -> productRepository -> validateIDBook($id);
-        if($validateStatus){
-            $queryParamsArr = $this -> productRepository -> filterQueryParamsForLoadReviews($request);
-            $reviews = $this -> productRepository -> filterReviews($id, ...$queryParamsArr);
-        }
+        $queryParamsArr = $this -> productRepository -> filterQueryParamsForLoadReviews($request);
+        $reviews = $this -> productRepository -> filterReviews(...$queryParamsArr);
         return response()->json($reviews, 200);
     }
 
-    public function store(PostReviewRequest $request, $id)
+    public function store(PostReviewRequest $request)
     {
-        $validateStatus = $this -> productRepository -> validateIDBook($id);
-        if($validateStatus){
-            $paramsFiltered = $this -> productRepository -> filterParamsForCreateReview($request);
-            $review = $this -> productRepository -> createReview($id, ...$paramsFiltered);
-        }
+        $paramsFiltered = $this -> productRepository -> filterParamsForCreateReview($request);
+        $review = $this -> productRepository -> createReview(...$paramsFiltered);
         return response()->json($review, 200);
     }
 }

@@ -24,6 +24,7 @@ class PostReviewRequest extends FormRequest
     public function rules()
     {
         return [
+            'book_id' => 'required|integer|exists:book,id',
             'title' => 'required|string|max:255',
             'detail' => 'required|string',
             'rating' => 'required|integer|between:1,5',
