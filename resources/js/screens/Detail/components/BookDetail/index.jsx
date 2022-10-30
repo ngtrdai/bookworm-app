@@ -9,9 +9,7 @@ function BookDetail({ id }) {
     useEffect(() => {
         const fetchBookDetail = async () => {
             try {
-                console.log(id);
                 const response = await shopApi.getDetailProduct({id: id});
-                console.log(response);
                 setBookDetail(response);
             } catch (error) {
                 console.log("Failed to fetch book detail: ", error);
@@ -28,8 +26,8 @@ function BookDetail({ id }) {
             ) : (
                 <React.Fragment>
                     <DetailTitle CategoryName={StringUtils.capitalizeWords(bookDetail.book_category_name)} />
-                    <Row className='mb-3'>
-                        <Col xs={12} md={8} lg={8} className="bookworm__detail__colitem">
+                    <Row className='mb-2'>
+                        <Col xs={12} md={8} lg={8} className="bookworm__detail__colitem mb-2">
                             <CardDetail book={bookDetail}/>
                         </Col>
                         <Col xs={12} md={4} lg={4} className="bookworm__detail__colitem">

@@ -27,7 +27,7 @@ function CardAddToCart({book}) {
                 alert.show && <AlertCustom variant="success" message={alert.message} />
             }
             <Card>
-                <Card.Header className="bookworm__detail__card__header">
+                <Card.Header className="bookworm__detail__card__header px-4">
                     {book.book_price === book.final_price ? (
                         <div className="bookworm__detail__card__price">
                             <span className="bookworm__detail__card__price__finalprice">${book.final_price}</span>
@@ -39,8 +39,8 @@ function CardAddToCart({book}) {
                         </div>
                     )}
                 </Card.Header>
-                <Card.Body className="bookworm__detail__card__body">
-                    <span>Quantity</span>
+                <Card.Body className="bookworm__detail__card__body px-4 my-4">
+                    <span className="mb-0">Quantity</span>
                     <div className="bookworm__detail__card__body__quantity">
                         {quantity <= minMaxQuantity.min ? (
                             <button className="bookworm__detail__card__body__quantity__button" disabled>-</button>

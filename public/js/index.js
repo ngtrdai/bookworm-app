@@ -13576,14 +13576,15 @@ function CardCustom(_ref) {
         children: book.author_name
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__["default"].Footer, {
+      className: "card__custom__price",
       children: book.final_price !== book.book_price ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__["default"].Text, {
-        className: "card__price",
+        className: "card__price__discount",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
-          className: "card__price--final",
-          children: ["$", book.final_price]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
           className: "card__price--original",
           children: ["$", book.book_price]
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("span", {
+          className: "card__price--final",
+          children: ["$", book.final_price]
         })]
       }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__["default"].Text, {
         className: "card__price",
@@ -14461,7 +14462,7 @@ function CardForCart() {
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"].Body, {
       children: cart.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
-        className: "bookworm__cart__empty",
+        className: "bookworm__cart__empty p-2",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h5", {
           children: "Your cart is empty"
         })
@@ -14610,7 +14611,7 @@ function CartTotal() {
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["default"].Body, {
       className: "bookworm__cart_total",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h1", {
-        children: ["$", total]
+        children: ["$", total.toFixed(2)]
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("button", {
         children: "Place order"
       })]
@@ -14751,27 +14752,25 @@ function BookDetail(_ref) {
             switch (_context.prev = _context.next) {
               case 0:
                 _context.prev = 0;
-                console.log(id);
-                _context.next = 4;
+                _context.next = 3;
                 return _services__WEBPACK_IMPORTED_MODULE_2__.shopApi.getDetailProduct({
                   id: id
                 });
-              case 4:
+              case 3:
                 response = _context.sent;
-                console.log(response);
                 setBookDetail(response);
-                _context.next = 12;
+                _context.next = 10;
                 break;
-              case 9:
-                _context.prev = 9;
+              case 7:
+                _context.prev = 7;
                 _context.t0 = _context["catch"](0);
                 console.log("Failed to fetch book detail: ", _context.t0);
-              case 12:
+              case 10:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 9]]);
+        }, _callee, null, [[0, 7]]);
       }));
       return function fetchBookDetail() {
         return _ref2.apply(this, arguments);
@@ -14789,12 +14788,12 @@ function BookDetail(_ref) {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components__WEBPACK_IMPORTED_MODULE_1__.DetailTitle, {
         CategoryName: _utils__WEBPACK_IMPORTED_MODULE_3__.StringUtils.capitalizeWords(bookDetail.book_category_name)
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__["default"], {
-        className: "mb-3",
+        className: "mb-2",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__["default"], {
           xs: 12,
           md: 8,
           lg: 8,
-          className: "bookworm__detail__colitem",
+          className: "bookworm__detail__colitem mb-2",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components__WEBPACK_IMPORTED_MODULE_1__.CardDetail, {
             book: bookDetail
           })
@@ -14943,160 +14942,164 @@ function BookReview(_ref) {
     fetchReviews();
   }, [filterParams]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-    children: reviews.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-      className: "bookworm__detail__loading",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
-        className: "bookworm__detail__loading__spinner"
-      })
-    }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__["default"], {
-        className: "mb-3",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"], {
-          xs: 12,
-          md: 8,
-          lg: 8,
-          className: "bookworm__detail__colitem",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"], {
-            className: "bookworm__reviews",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"].Body, {
-              className: "bookworm__reviews__body",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-                className: "bookworm__reviews__title",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h5", {
-                  children: "Customer Reviews"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                  children: "(Filter by 5 star)"
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__["default"], {
-                className: "bookworm__reviews__statistics",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"], {
-                  xs: 12,
-                  md: 2,
-                  lg: 1,
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
-                    children: "4.6"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                    className: "bookworm__reviews__statistics__filtertext",
-                    children: "(21,233)"
-                  })]
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"], {
-                  xs: 12,
-                  md: 10,
-                  lg: 11,
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
-                    children: "Star"
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-                    className: "bookworm__reviews__statistics__filter",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                      className: "bookworm__reviews__statistics__filtertext",
-                      children: "5 star (200)"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                      children: " | "
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                      className: "bookworm__reviews__statistics__filtertext",
-                      children: "4 star (200)"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                      children: " | "
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                      className: "bookworm__reviews__statistics__filtertext",
-                      children: "3 star (200)"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                      children: " | "
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                      className: "bookworm__reviews__statistics__filtertext",
-                      children: "2 star (200)"
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                      children: " | "
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
-                      className: "bookworm__reviews__statistics__filtertext",
-                      children: "1 star (200)"
-                    })]
-                  })]
-                })]
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-                className: "bookworm__reviews__filterbar",
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h6", {
-                  children: "Showing 6 - 10 of 126 books"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-                  className: "bookworm__reviews__filterbar__dropdown",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"], {
-                    className: "bookworm__reviews__filterbar__dropdown__sorting",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"].Toggle, {
-                      variant: "success",
-                      id: "dropdown-basic",
-                      children: ["Sort by ", sortTypes[sortType]]
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"].Menu, {
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"].Item, {
-                        onClick: function onClick() {
-                          return setSortType('newest');
-                        },
-                        children: ["Sort by ", sortTypes['newest']]
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"].Item, {
-                        onClick: function onClick() {
-                          return setSortType('oldest');
-                        },
-                        children: ["Sort by ", sortTypes['oldest']]
-                      })]
-                    })]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"], {
-                    className: "bookworm__reviews__filterbar__dropdown__showing",
-                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"].Toggle, {
-                      variant: "success",
-                      id: "dropdown-basic-2",
-                      children: ["Show ", showType]
-                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"].Menu, {
-                      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"].Item, {
-                        onClick: function onClick() {
-                          return setShowType('5');
-                        },
-                        children: ["Show ", showTypes['5']]
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"].Item, {
-                        onClick: function onClick() {
-                          return setShowType('10');
-                        },
-                        children: ["Show ", showTypes['10']]
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"].Item, {
-                        onClick: function onClick() {
-                          return setShowType('15');
-                        },
-                        children: ["Show ", showTypes['15']]
-                      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"].Item, {
-                        onClick: function onClick() {
-                          return setShowType('20');
-                        },
-                        children: ["Show ", showTypes['20']]
-                      })]
-                    })]
-                  })]
-                })]
-              }), reviews.map(function (review, index) {
-                return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("h4", {
-                    children: [review.review_title, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("span", {
-                      className: "bookworm__reviews__rating",
-                      children: ["| ", review.rating_start, " starts"]
-                    })]
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
-                    className: "bookworm__reviews__content",
-                    children: review.review_details
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
-                    className: "bookworm__reviews__date",
-                    children: _utils__WEBPACK_IMPORTED_MODULE_3__.StringUtils.convertDate(review.review_date)
-                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("hr", {})]
-                }, index);
-              })]
+    children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__["default"], {
+      className: "mb-3",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        xs: 12,
+        md: 8,
+        lg: 8,
+        className: "bookworm__detail__colitem mb-2",
+        children: reviews.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          className: "bookworm__reviews",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"].Body, {
+            className: "bookworm__reviews__body",
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
+              className: "bookworm__review__empty",
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+                children: "There are no reviews yet."
+              })
             })
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"], {
-          xs: 12,
-          md: 4,
-          lg: 4,
-          className: "bookworm__detail__colitem",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components__WEBPACK_IMPORTED_MODULE_1__.ReviewForm, {
-            id: id
+        }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"], {
+          className: "bookworm__reviews",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"].Body, {
+            className: "bookworm__reviews__body",
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+              className: "bookworm__reviews__title",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h5", {
+                children: "Customer Reviews"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                children: "(Filter by 5 star)"
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__["default"], {
+              className: "bookworm__reviews__statistics",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"], {
+                xs: 12,
+                md: 2,
+                lg: 1,
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
+                  children: "4.6"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                  className: "bookworm__reviews__statistics__filtertext",
+                  children: "(21,233)"
+                })]
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"], {
+                xs: 12,
+                md: 10,
+                lg: 11,
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h3", {
+                  children: "Star"
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                  className: "bookworm__reviews__statistics__filter",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                    className: "bookworm__reviews__statistics__filtertext",
+                    children: "5 star (200)"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                    children: " | "
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                    className: "bookworm__reviews__statistics__filtertext",
+                    children: "4 star (200)"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                    children: " | "
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                    className: "bookworm__reviews__statistics__filtertext",
+                    children: "3 star (200)"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                    children: " | "
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                    className: "bookworm__reviews__statistics__filtertext",
+                    children: "2 star (200)"
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                    children: " | "
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                    className: "bookworm__reviews__statistics__filtertext",
+                    children: "1 star (200)"
+                  })]
+                })]
+              })]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+              className: "bookworm__reviews__filterbar",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h6", {
+                children: "Showing 6 - 10 of 126 books"
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                className: "bookworm__reviews__filterbar__dropdown",
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"], {
+                  className: "bookworm__reviews__filterbar__dropdown__sorting",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"].Toggle, {
+                    variant: "success",
+                    id: "dropdown-basic",
+                    children: ["Sort by ", sortTypes[sortType]]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"].Menu, {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"].Item, {
+                      onClick: function onClick() {
+                        return setSortType('newest');
+                      },
+                      children: ["Sort by ", sortTypes['newest']]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"].Item, {
+                      onClick: function onClick() {
+                        return setSortType('oldest');
+                      },
+                      children: ["Sort by ", sortTypes['oldest']]
+                    })]
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"], {
+                  className: "bookworm__reviews__filterbar__dropdown__showing",
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"].Toggle, {
+                    variant: "success",
+                    id: "dropdown-basic-2",
+                    children: ["Show ", showType]
+                  }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"].Menu, {
+                    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"].Item, {
+                      onClick: function onClick() {
+                        return setShowType('5');
+                      },
+                      children: ["Show ", showTypes['5']]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"].Item, {
+                      onClick: function onClick() {
+                        return setShowType('10');
+                      },
+                      children: ["Show ", showTypes['10']]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"].Item, {
+                      onClick: function onClick() {
+                        return setShowType('15');
+                      },
+                      children: ["Show ", showTypes['15']]
+                    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"].Item, {
+                      onClick: function onClick() {
+                        return setShowType('20');
+                      },
+                      children: ["Show ", showTypes['20']]
+                    })]
+                  })]
+                })]
+              })]
+            }), reviews.map(function (review, index) {
+              return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("h4", {
+                  children: [review.review_title, " ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("span", {
+                    className: "bookworm__reviews__rating",
+                    children: ["| ", review.rating_start, " starts"]
+                  })]
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+                  className: "bookworm__reviews__content",
+                  children: review.review_details
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
+                  className: "bookworm__reviews__date",
+                  children: _utils__WEBPACK_IMPORTED_MODULE_3__.StringUtils.convertDate(review.review_date)
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("hr", {})]
+              }, index);
+            })]
           })
-        })]
-      })
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"], {
+        xs: 12,
+        md: 4,
+        lg: 4,
+        className: "bookworm__detail__colitem",
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(_components__WEBPACK_IMPORTED_MODULE_1__.ReviewForm, {
+          id: id
+        })
+      })]
     })
   });
 }
@@ -15166,7 +15169,7 @@ function CardAddToCart(_ref) {
       message: alert.message
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"], {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"].Header, {
-        className: "bookworm__detail__card__header",
+        className: "bookworm__detail__card__header px-4",
         children: book.book_price === book.final_price ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           className: "bookworm__detail__card__price",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("span", {
@@ -15184,8 +15187,9 @@ function CardAddToCart(_ref) {
           })]
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"].Body, {
-        className: "bookworm__detail__card__body",
+        className: "bookworm__detail__card__body px-4 my-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
+          className: "mb-0",
           children: "Quantity"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
           className: "bookworm__detail__card__body__quantity",
@@ -15258,6 +15262,7 @@ function CardDetail(_ref) {
   var book = _ref.book;
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["default"], {
     children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__["default"], {
+      className: "bookworm__detail_card",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__["default"], {
         xs: 12,
         md: 4,
@@ -15419,7 +15424,8 @@ function ReviewForm(_ref) {
     children: [showAlert && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components__WEBPACK_IMPORTED_MODULE_2__.AlertCustom, {
       variant: "success",
       message: "Review successfully",
-      timeShow: 10000
+      timeShow: 10000,
+      reload: true
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("form", {
       onSubmit: handleSubmit(onSubmit),
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__["default"], {
@@ -15477,10 +15483,9 @@ function ReviewForm(_ref) {
             }))]
           })]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__["default"].Footer, {
-          className: "px-5",
+          className: "px-5 py-3 bookworm__detail__card__body__addtocart mt-0",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("button", {
             type: "submit",
-            className: "btn btn-primary w-100",
             children: "Submit Review"
           })
         })]
@@ -15796,7 +15801,6 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
-
 function OnSale() {
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
     _useState2 = _slicedToArray(_useState, 2),
@@ -15840,8 +15844,6 @@ function OnSale() {
       items: 1
     }
   };
-
-  // Load API
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var bookOnSale = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
@@ -15875,7 +15877,7 @@ function OnSale() {
     }();
     bookOnSale();
   }, []);
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.Fragment, {
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react__WEBPACK_IMPORTED_MODULE_1__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"], {
       className: "bookworm__onsale",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
@@ -15883,6 +15885,7 @@ function OnSale() {
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("h2", {
           children: "On Sale"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"], {
+          className: "bookworm__onsale_button",
           drop: "end",
           title: "View All",
           onClick: function onClick() {
@@ -17000,7 +17003,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".card__custom {\n  width: 15rem;\n  height: 30rem !important;\n  margin-bottom: 16px;\n}\n.card__custom .card__custom__img {\n  height: 300px !important;\n}\n.card__custom .card__custom__title {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".card__custom {\n  width: 15rem;\n  height: 30rem !important;\n  margin-bottom: 16px;\n  cursor: pointer;\n}\n.card__custom .card__custom__img {\n  height: 300px !important;\n}\n.card__custom .card__custom__title {\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n.card__custom:hover {\n  box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);\n}\n\n.card__price__discount .card__price--final {\n  font-size: 1.3rem;\n  font-weight: 700;\n}\n.card__price__discount .card__price--original {\n  font-size: 1rem;\n  font-weight: 300;\n  text-decoration: line-through;\n  margin-right: 4px;\n}\n\n.card__price .card__price--final {\n  font-size: 1rem;\n  font-weight: 400;\n  margin-right: 4px;\n}\n\n.card__custom__price {\n  height: 3rem;\n  display: flex;\n  justify-content: center;\n  flex-direction: column;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17072,7 +17075,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".bookworm__cart__quantity {\n  width: 100%;\n  margin: 20px 0;\n  display: flex;\n  justify-content: space-between;\n  background-color: #999;\n}\n.bookworm__cart__quantity h6 {\n  cursor: pointer;\n  font-size: 28px;\n  border-radius: 15px;\n}\n.bookworm__cart__quantity button {\n  height: 42px;\n  width: 42px;\n  border: none;\n  color: #000;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".bookworm__cart__quantity {\n  width: 100%;\n  margin: 20px 0;\n  display: flex;\n  justify-content: space-between;\n  background-color: #999;\n}\n.bookworm__cart__quantity h6 {\n  cursor: pointer;\n  font-size: 28px;\n  border-radius: 15px;\n}\n.bookworm__cart__quantity button {\n  height: 42px;\n  width: 42px;\n  border: none;\n  color: #000;\n}\n\n.bookworm__cart__empty h5 {\n  font-size: 28px;\n  font-weight: 600;\n  text-align: center;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17096,7 +17099,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".bookworm__cart_total {\n  text-align: center;\n}\n.bookworm__cart_total h1 {\n  font-size: 2.5rem;\n  font-weight: 700;\n  margin-bottom: 1.2rem;\n}\n.bookworm__cart_total button {\n  background-color: #000;\n  color: #fff;\n  font-size: 1.5rem;\n  font-weight: 700;\n  padding: 1rem 2rem;\n  border: none;\n  border-radius: 0.5rem;\n  cursor: pointer;\n  transition: all 0.3s ease-in-out;\n  border: 1px solid #000;\n}\n.bookworm__cart_total button:hover {\n  background-color: #fff;\n  color: #000;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".bookworm__cart_total {\n  text-align: center;\n}\n.bookworm__cart_total h1 {\n  font-size: 2.5rem;\n  font-weight: 700;\n  margin-bottom: 1.2rem;\n}\n.bookworm__cart_total button {\n  background-color: #000;\n  color: #fff;\n  font-size: 1.5rem;\n  font-weight: 700;\n  padding: 1rem 2rem;\n  border: none;\n  border-radius: 0.5rem;\n  cursor: pointer;\n  transition: all 0.15s ease-in-out;\n  border: 1px solid #000;\n}\n.bookworm__cart_total button:hover {\n  background-color: #fff;\n  color: #000;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17144,7 +17147,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".bookworm__reviews .bookworm__reviews__body {\n  background-color: #f5f5f5;\n  padding: 30px;\n}\n.bookworm__reviews .bookworm__reviews__title {\n  display: flex;\n  text-align: center;\n  margin-bottom: 1rem;\n}\n.bookworm__reviews .bookworm__reviews__title span {\n  margin-left: 6px;\n  color: #6c757d;\n}\n\n.bookworm__reviews__statistics h3 {\n  margin-bottom: 0px;\n}\n.bookworm__reviews__statistics .bookworm__reviews__statistics__filter span {\n  font-size: 12px;\n}\n.bookworm__reviews__statistics .bookworm__reviews__statistics__filtertext {\n  font-size: 12px;\n  color: #6c757d;\n  margin-bottom: 1rem;\n  text-decoration: underline;\n}\n\n.bookworm__reviews__filterbar {\n  display: flex !important;\n  justify-content: space-between;\n  margin-bottom: 20px;\n  margin-top: 20px;\n}\n\n.bookworm__reviews__filterbar__dropdown {\n  display: flex !important;\n  justify-content: flex-end;\n}\n.bookworm__reviews__filterbar__dropdown .bookworm__reviews__filterbar__dropdown__sorting {\n  margin-right: 6px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".bookworm__reviews .bookworm__reviews__body {\n  background-color: #f5f5f5;\n  padding: 30px;\n}\n.bookworm__reviews .bookworm__reviews__body .bookworm__review__empty {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  font-size: 20px;\n  color: #999;\n}\n.bookworm__reviews .bookworm__reviews__body .bookworm__review__empty p {\n  margin: 0;\n}\n.bookworm__reviews .bookworm__reviews__title {\n  display: flex;\n  text-align: center;\n  margin-bottom: 1rem;\n}\n.bookworm__reviews .bookworm__reviews__title span {\n  margin-left: 6px;\n  color: #6c757d;\n}\n\n.bookworm__reviews__statistics h3 {\n  margin-bottom: 0px;\n}\n.bookworm__reviews__statistics .bookworm__reviews__statistics__filter span {\n  font-size: 12px;\n}\n.bookworm__reviews__statistics .bookworm__reviews__statistics__filtertext {\n  font-size: 12px;\n  color: #6c757d;\n  margin-bottom: 1rem;\n  text-decoration: underline;\n}\n\n.bookworm__reviews__filterbar {\n  display: flex !important;\n  justify-content: space-between;\n  margin-bottom: 20px;\n  margin-top: 20px;\n}\n\n.bookworm__reviews__filterbar__dropdown {\n  display: flex !important;\n  justify-content: flex-end;\n}\n.bookworm__reviews__filterbar__dropdown .bookworm__reviews__filterbar__dropdown__sorting {\n  margin-right: 6px;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17168,7 +17171,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".card .bookworm__detail__card__header {\n  padding-left: 36px;\n  padding-right: 36px;\n}\n\n.bookworm__detail__card__price__finalprice {\n  font-size: 1.5rem;\n  font-weight: 600;\n  color: #000;\n  margin-left: 5px;\n}\n\n.bookworm__detail__card__price__bookprice {\n  text-decoration: line-through;\n  color: #999;\n}\n\n.bookworm__detail__card__price {\n  display: flex;\n  align-items: center;\n}\n\n.bookworm__detail__card__body__quantity {\n  display: flex;\n  align-items: center;\n  margin-bottom: 20px;\n}\n\n.bookworm__detail__card__body__quantity {\n  width: 100%;\n  margin: 20px 0;\n  display: flex;\n  justify-content: space-between;\n  background-color: #999;\n}\n.bookworm__detail__card__body__quantity span {\n  cursor: pointer;\n  font-size: 28px;\n  border-radius: 15px;\n}\n.bookworm__detail__card__body__quantity button {\n  height: 42px;\n  width: 42px;\n  border: none;\n  color: #000;\n}\n\n.bookworm__detail__card__body__addtocart button {\n  width: 100%;\n  height: 42px;\n  border: none;\n  background-color: #000;\n  color: #fff;\n  font-size: 1.2rem;\n  font-weight: 600;\n  cursor: pointer;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".bookworm__detail__card__price__finalprice {\n  font-size: 1.5rem;\n  font-weight: 600;\n  color: #000;\n  margin-left: 5px;\n}\n\n.bookworm__detail__card__price__bookprice {\n  text-decoration: line-through;\n  color: #999;\n}\n\n.bookworm__detail__card__price {\n  display: flex;\n  align-items: center;\n}\n\n.bookworm__detail__card__body__quantity {\n  display: flex;\n  align-items: center;\n  margin-bottom: 20px;\n}\n\n.bookworm__detail__card__body__quantity {\n  width: 100%;\n  display: flex;\n  justify-content: space-between;\n  background-color: #999;\n}\n.bookworm__detail__card__body__quantity span {\n  cursor: pointer;\n  font-size: 28px;\n  border-radius: 15px;\n}\n.bookworm__detail__card__body__quantity button {\n  height: 42px;\n  width: 42px;\n  border: none;\n  color: #000;\n}\n\n.bookworm__detail__card__body__addtocart {\n  margin-top: 30px;\n}\n.bookworm__detail__card__body__addtocart button {\n  width: 100%;\n  height: 42px;\n  border: none;\n  background-color: #000;\n  color: #fff;\n  font-size: 1.2rem;\n  font-weight: 600;\n  cursor: pointer;\n}\n.bookworm__detail__card__body__addtocart button:hover {\n  background-color: #999;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17192,7 +17195,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".bookworm__detail__image img {\n  width: 100%;\n  border-top-left-radius: 0.5rem;\n  border-bottom-left-radius: 0.5rem;\n}\n\n.bookworm__detail__author {\n  margin-top: 20px;\n  text-align: right;\n}\n\n.bookworm__detail__description p:first-child {\n  margin-bottom: 0;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".bookworm__detail_card {\n  padding-bottom: 20px;\n}\n\n.bookworm__detail__image img {\n  width: 100%;\n  border-top-left-radius: 0.5rem;\n  border-bottom-left-radius: 0.5rem;\n}\n\n.bookworm__detail__author {\n  margin-top: 20px;\n  text-align: right;\n}\n\n.bookworm__detail__description p:first-child {\n  margin-bottom: 0;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17288,7 +17291,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".bookworm__onsale {\n  padding: 0px;\n}\n.bookworm__onsale .bookworm__onsale__title {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n}\n\n.carousel {\n  background-color: #ffffff;\n  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;\n  padding: 30px 30px;\n  width: 100%;\n}\n\n.carousel__books .react-multi-carousel-item {\n  display: flex;\n  justify-content: center;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".bookworm__onsale {\n  padding: 0px;\n}\n.bookworm__onsale .bookworm__onsale__title {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n}\n.bookworm__onsale .bookworm__onsale_button button {\n  background-color: #000;\n  color: #fff;\n  font-size: 1rem;\n  font-weight: 600;\n  padding: 0.5rem 1rem;\n  border: none;\n  border-radius: 0.5rem;\n  cursor: pointer;\n  transition: all 0.15s ease-in-out;\n  border: 1px solid #000;\n}\n.bookworm__onsale .bookworm__onsale_button button:hover {\n  background-color: #fff;\n  color: #000;\n}\n\n.carousel {\n  background-color: #ffffff;\n  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;\n  padding: 30px 30px;\n  width: 100%;\n}\n\n.carousel__books .react-multi-carousel-item {\n  display: flex;\n  justify-content: center;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17312,7 +17315,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".home {\n  margin-top: 20px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".home {\n  margin-top: 20px;\n}\n.home .card__custom {\n  width: 18rem;\n  height: 35rem !important;\n}\n.home .card__custom .card__custom__img {\n  height: 400px !important;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

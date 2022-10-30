@@ -28,7 +28,7 @@ function ReviewForm({ id }) {
     return (
         <React.Fragment>
             {
-                showAlert && <AlertCustom variant="success" message="Review successfully" timeShow={10000}/>
+                showAlert && <AlertCustom variant="success" message="Review successfully" timeShow={10000} reload={true}/>
             }
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Card className="bookworm__review__form">
@@ -55,8 +55,8 @@ function ReviewForm({ id }) {
                             </select>
                         </div>
                     </Card.Body>
-                    <Card.Footer className="px-5">
-                        <button type="submit" className="btn btn-primary w-100">Submit Review</button>
+                    <Card.Footer className="px-5 py-3 bookworm__detail__card__body__addtocart mt-0">
+                        <button type="submit" >Submit Review</button>
                     </Card.Footer>
                 </Card>
             </form>

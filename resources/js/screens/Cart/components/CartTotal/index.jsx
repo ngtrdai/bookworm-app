@@ -20,7 +20,7 @@ function CartTotal(){
                 <h6>Cart Total</h6>
             </Card.Header>
             <Card.Body className="bookworm__cart_total">
-                <h1>${total}</h1>
+                <h1>${total.toFixed(2)}</h1>
                 <button>
                     Place order
                 </button>

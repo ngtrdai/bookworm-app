@@ -50,14 +50,18 @@ function BookReview({ id }) {
     }, [filterParams]);
     return (
         <React.Fragment>
-            {reviews.length === 0 ? (
-                <div className="bookworm__detail__loading">
-                    <div className="bookworm__detail__loading__spinner"></div>
-                </div>
-            ) : (
-                <React.Fragment>
-                    <Row className='mb-3'>
-                        <Col xs={12} md={8} lg={8} className="bookworm__detail__colitem">
+            <Row className='mb-3'>
+                <Col xs={12} md={8} lg={8} className="bookworm__detail__colitem mb-2">
+                    {
+                        reviews.length === 0 ? (
+                            <Card className="bookworm__reviews">
+                                <Card.Body className="bookworm__reviews__body">
+                                    <div className="bookworm__review__empty">
+                                        <p>There are no reviews yet.</p>
+                                    </div>
+                                </Card.Body>
+                            </Card>
+                        ) : (
                             <Card className="bookworm__reviews">
                                 <Card.Body className="bookworm__reviews__body">
                                     <div className="bookworm__reviews__title">
@@ -119,15 +123,15 @@ function BookReview({ id }) {
                                     })}
                                 </Card.Body>
                             </Card>
-                        </Col>
-                        <Col xs={12} md={4} lg={4} className="bookworm__detail__colitem">
-                            <ReviewForm id={id}/>
-                        </Col>
-                    </Row>
-                </React.Fragment>
-            )}
-        </React.Fragment>
+                        )
+                    }
 
+                </Col>
+                <Col xs={12} md={4} lg={4} className="bookworm__detail__colitem">
+                    <ReviewForm id={id}/>
+                </Col>
+            </Row>
+        </React.Fragment>
     ); 
 }
 

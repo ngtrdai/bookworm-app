@@ -5,6 +5,27 @@
         flex-direction: row;
         justify-content: space-between;
     }
+
+    .bookworm__onsale_button{
+        
+        button {
+            background-color: #000;
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.15s ease-in-out;
+            border: 1px solid #000;
+    
+            &:hover {
+                background-color: #fff;
+                color: #000;
+            }
+        }
+    }
 }
 
 .carousel {

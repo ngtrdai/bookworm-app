@@ -41,7 +41,7 @@ function CardForCart(){
             <Card.Body>
                 {
                     cart.length === 0 ? (
-                        <div className="bookworm__cart__empty">
+                        <div className="bookworm__cart__empty p-2">
                             <h5>Your cart is empty</h5>
                         </div>
                     ) : (

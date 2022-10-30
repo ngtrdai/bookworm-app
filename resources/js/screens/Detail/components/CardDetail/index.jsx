@@ -5,7 +5,7 @@ import "./style.scss";
 function CardDetail({ book }) {
     return (
         <Card>
-            <Row>
+            <Row className="bookworm__detail_card">
                 <Col xs={12} md={4} lg={4} className="bookworm__detail__colitem">
                     <div className="bookworm__detail__image">
                         <img src={book.book_cover_photo ? IMAGE[book.book_cover_photo] :IMAGE['bookDefault']}/>
