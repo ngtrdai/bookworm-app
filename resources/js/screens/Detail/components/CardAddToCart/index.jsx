@@ -12,27 +12,6 @@ function CardAddToCart({book}) {
         min: 1,
         max: 8
     };
-    // const handleAddToCart = () => {
-    //     const cart = CartUtils.getCart();
-    //     const index = cart.findIndex((item) => item.id === book.id);
-    //     if (index === -1) {
-    //         cart.push({
-    //             id: book.id,
-    //             quantity: quantity,
-    //             book: book
-    //         });
-    //     } else {
-    //         // Quantity <= 8
-    //         if (cart[index].quantity + quantity <= minMaxQuantity.max) {
-    //             cart[index].quantity += quantity;
-    //         }else{
-    //             // Throw error
-    //             console.log("Quantity is too much");
-    //         }
-
-    //     }
-    //     localStorage.setItem("cart", JSON.stringify(cart));
-    // };
     const alert = useSelector((state) => state.cartReducer.alert);
     const handleAddToCart = () => {
         const data = {

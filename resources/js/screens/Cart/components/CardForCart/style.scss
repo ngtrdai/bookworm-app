@@ -1,0 +1,18 @@
+.bookworm__cart__quantity {
+    width: 100%;
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+    background-color: #999;
+    h6 {
+        cursor: pointer;
+        font-size: 28px;
+        border-radius: 15px;
+    }
+    button {
+        height: 42px;
+        width: 42px;
+        border: none;
+        color: #000;
+    }
+}

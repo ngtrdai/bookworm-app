@@ -3,6 +3,7 @@ import { Accordion, Card, Button } from 'react-bootstrap';
 import { shopApi } from "../../../../services"
 import { useSelector, useDispatch } from "react-redux";
 import { setCategory, setAuthor, setRating } from '../../../../reducers/filterBook';
+import { StringUtils } from "../../../../utils";
 import "./style.scss";
 function FilterBar(){
     const dispatch = useDispatch();
@@ -50,14 +51,12 @@ function FilterBar(){
     }, []);
 
     const params = useSelector(state => state.filterBookReducer.params);
-
-    console.log(params);
     const handleFilter = (menuItem, menuName) => {
         if (menuName === 'Category') {
-            dispatch(setCategory(menuItem.id));
+            dispatch(setCategory({id: menuItem.id, name: menuItem.category_name}));
         }
         if (menuName === 'Author') {
-            dispatch(setAuthor(menuItem.id));
+            dispatch(setAuthor({id: menuItem.id, name: menuItem.author_name}));
         }
         if (menuName === 'Rating Review') {
             dispatch(setRating(menuItem));
@@ -96,7 +95,7 @@ function FilterBar(){
                                                     menuItem + ' Star'
                                                 ) : (
                                                     filterMenu.menuName === 'Category' ? (
-                                                        menuItem.category_name
+                                                        StringUtils.capitalizeWords(menuItem.category_name)
                                                     ) : (
                                                         menuItem.author_name
                                                     )

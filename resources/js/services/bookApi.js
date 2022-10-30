@@ -20,6 +20,10 @@ const bookApi = {
     getRecommendedBooks: () => {
         const url = "api/books/featured/recommended";
         return axiosClient.get(url);
+    },
+    getFeaturedBooks: () => {
+        const url = "api/books/featured";
+        return axiosClient.get(url);
     }
 };
 

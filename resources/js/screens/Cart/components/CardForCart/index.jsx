@@ -3,6 +3,8 @@ import { Card, Row, Col, Container } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { addToCart, removeFromCart, addQuantity, minusQuantity } from "../../../../reducers/cart";
 import IMAGE from "../../../../../assets";
+import { AlertCustom } from "../../../../components";
+import "./style.scss"
 function CardForCart(){
     const dispatch = useDispatch();
     const cart = useSelector(state => state.cartReducer.cart);
@@ -10,11 +12,9 @@ function CardForCart(){
     const handleAddQuantity = (book) => {
         dispatch(addQuantity(book.id));
     }
-
     const handleRemoveQuantity = (book) => {
         dispatch(minusQuantity(book.id));
     }
-   
 
     return (
         <Card>
@@ -59,9 +59,9 @@ function CardForCart(){
                                             </Col>
                                         </Row>
                                     </Col>
-                                    <Col xs={12} md={8} lg={8}>
-                                        <Row>
-                                            <Col xs={12} md={4} lg={4}>
+                                    <Col xs={12} md={8} lg={8} className="d-flex justify-content-center flex-column">
+                                        <Row className="bookworm__cart_detail">
+                                            <Col xs={12} md={4} lg={4} className="d-flex justify-content-center flex-column">
                                                 {
                                                     item.book.book_price === item.book.final_price ? (
                                                         <h6>${item.book.final_price}</h6>
@@ -73,15 +73,15 @@ function CardForCart(){
                                                     )
                                                 }
                                             </Col>
-                                            <Col xs={12} md={4} lg={4}>
+                                            <Col xs={12} md={4} lg={4}> 
                                                 <div className="bookworm__cart__quantity">
                                                     <button className="bookworm__cart__quantity__button" onClick={() => handleRemoveQuantity(item.book)}>-</button>
                                                     <h6 className="bookworm__cart__quantity__number">{item.quantity}</h6>
                                                     <button className="bookworm__cart__quantity__button" onClick={() => handleAddQuantity(item.book)}>+</button>
                                                 </div>
                                             </Col>
-                                            <Col xs={12} md={4} lg={4}>
-                                                <h6>{(item.book.final_price * item.quantity).toFixed(2)}</h6>
+                                            <Col xs={12} md={4} lg={4} className="d-flex justify-content-center flex-column">
+                                                <h3>{(item.book.final_price * item.quantity).toFixed(2)}</h3>
                                             </Col>
                                         </Row>
                                     </Col>

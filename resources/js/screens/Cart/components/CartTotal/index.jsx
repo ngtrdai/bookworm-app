@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Card } from "react-bootstrap";
 import { useSelector } from "react-redux";
-
+import "./style.scss"
 function CartTotal(){
     const cart = useSelector(state => state.cartReducer.cart);
     const [total, setTotal] = useState(0);
@@ -19,8 +19,8 @@ function CartTotal(){
             <Card.Header className='d-flex justify-content-center'>
                 <h6>Cart Total</h6>
             </Card.Header>
-            <Card.Body>
-                <h1>{total}</h1>
+            <Card.Body className="bookworm__cart_total">
+                <h1>${total}</h1>
                 <button>
                     Place order
                 </button>

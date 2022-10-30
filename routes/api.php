@@ -41,8 +41,6 @@ Route::prefix('auth') -> name('auth.') -> group(function(){
 
 // Routes for books
 Route::prefix('books') -> name('books.') -> group(function(){
-    // Route for API get list books
-    Route::get('/', [BookController::class, 'getListBooks']) -> name('getListBooks');
     // Route for API get list products on sale
     Route::get('/onsale', [BookController::class, 'getOnSale']) -> name('getOnSale');
     // Route for API get list featured of products
@@ -51,7 +49,11 @@ Route::prefix('books') -> name('books.') -> group(function(){
         Route::get('/popular', [BookController::class, 'getPopular']) -> name('getPopular');
         // Route for API get list recommended products
         Route::get('/recommended', [BookController::class, 'getRecommended']) -> name('getRecommended');
+        // Route for get list featured
+        Route::get('/', [BookController::class, 'getFeatured']) -> name('getFeatured');
     });
+    // Route for API get list books
+    Route::get('/', [BookController::class, 'getListBooks']) -> name('getListBooks');
 });
 
 

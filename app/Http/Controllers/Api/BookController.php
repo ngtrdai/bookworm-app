@@ -94,21 +94,30 @@ class BookController extends Controller
     {
         
         $books = $this->bookRepository->getAll();
-        return response()->json(new BookCollection($books), 200);
+        return new BookCollection($books);
     }
 
     public function getOnSale(){
         $books = $this->bookRepository->getOnSale();
-        return response()->json(new BookCollection($books), 200);
+        return new BookCollection($books);
     }
 
     public function getPopular(){
         $books = $this->bookRepository->getPopular();
-        return response()->json(new BookCollection($books), 200);
+        return new BookCollection($books);
     }
 
     public function getRecommended(){
         $books = $this->bookRepository->getRecommended();
-        return response()->json(new BookCollection($books), 200);
+        return new BookCollection($books);
+    }
+
+    public function getFeatured(){
+        // Featured books is popular books and recommended books
+        $books = [
+            'popular' => new BookCollection($this->bookRepository->getPopular()),
+            'recommended' => new BookCollection($this->bookRepository->getRecommended())
+        ];
+        return response() -> json($books);
     }
 }

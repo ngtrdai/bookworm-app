@@ -48,6 +48,8 @@ const cartSlice = createSlice({
                     carts[index].quantity += 1;
                     localStorage.setItem('cart', JSON.stringify(carts));
                     state.cart = carts;
+                    state.alert.show = true;
+                    state.alert.message = 'Book quantity updated';
                 } else {
                     state.alert.show = true;
                     state.alert.message = 'You can not add more than ' + state.limit + ' books';
@@ -88,9 +90,15 @@ const cartSlice = createSlice({
                 show: true,
                 message: 'Cart cleared',
             };
+        },
+        hideAlert: (state) => {
+            state.alert = {
+                show: false,
+                message: '',
+            };
         }
     }
 });
 
-export const {addToCart, removeFromCart, clearCart, addQuantity, minusQuantity} = cartSlice.actions;
+export const {addToCart, removeFromCart, clearCart, addQuantity, minusQuantity, hideAlert} = cartSlice.actions;
 export default cartSlice.reducer;
