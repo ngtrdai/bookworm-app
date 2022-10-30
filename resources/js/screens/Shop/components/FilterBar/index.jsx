@@ -1,7 +1,11 @@
-import { useState, useEffect } from "react";
-import FilterMenu from "./FilterMenu";
+import React, { useState, useEffect } from "react";
+import { Accordion, Card, Button } from 'react-bootstrap';
 import { shopApi } from "../../../../services"
+import { useSelector, useDispatch } from "react-redux";
+import { setCategory, setAuthor, setRating } from '../../../../reducers/filterBook';
+import "./style.scss";
 function FilterBar(){
+    const dispatch = useDispatch();
     const [filterMenuList, setFilterMenuList] = useState([
         {
             id: 1,
@@ -44,13 +48,66 @@ function FilterBar(){
         }
         fetchFiltersMenu();
     }, []);
-    console.log(filterMenuList);
+
+    const params = useSelector(state => state.filterBookReducer.params);
+
+    console.log(params);
+    const handleFilter = (menuItem, menuName) => {
+        if (menuName === 'Category') {
+            dispatch(setCategory(menuItem.id));
+        }
+        if (menuName === 'Author') {
+            dispatch(setAuthor(menuItem.id));
+        }
+        if (menuName === 'Rating Review') {
+            dispatch(setRating(menuItem));
+        }
+    };
+
     return (
         <div className='shop__filterbar'>
             <h6>Filter By</h6>
             {
                 filterMenuList.map((filterMenu, index) => (
-                    <FilterMenu key={index} menuName={filterMenu.menuName} menuItems={filterMenu.menuItems} />
+                    <React.Fragment key={index}>
+                        <Accordion className="shop__filtermenu">
+                            <Accordion.Item>
+                                <Accordion.Header className="shop__filtermenu__header">
+                                    {filterMenu.menuName}
+                                </Accordion.Header>
+                                {
+                                    filterMenu.menuItems.map((menuItem, index) => (
+                                        <Accordion.Body key={index} 
+                                            className={
+                                                filterMenu.menuName === 'Rating Review' && menuItem == params.rating ? (
+                                                    'shop__filtermenu__body--active'
+                                                ) : (
+                                                    filterMenu.menuName === 'Category' && menuItem.id == params.category ? (
+                                                        'shop__filtermenu__body--active'
+                                                    ) : (
+                                                        filterMenu.menuName === 'Author' && menuItem.id == params.author ? (
+                                                            'shop__filtermenu__body--active'
+                                                        ) : (
+                                                            'shop__filtermenu__body'
+                                                )))}
+                                            onClick={(e) => handleFilter(menuItem, filterMenu.menuName)}>
+                                            {
+                                                filterMenu.menuName === 'Rating Review' ? (
+                                                    menuItem + ' Star'
+                                                ) : (
+                                                    filterMenu.menuName === 'Category' ? (
+                                                        menuItem.category_name
+                                                    ) : (
+                                                        menuItem.author_name
+                                                    )
+                                                )
+                                            }
+                                        </Accordion.Body>
+                                    ))
+                                }
+                            </Accordion.Item>
+                        </Accordion>
+                    </React.Fragment>
                 ))
             }
         </div>

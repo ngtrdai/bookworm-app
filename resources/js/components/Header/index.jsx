@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation} from 'react-router-dom';
 import { setItemActive } from '../../reducers/header';
 import { SignInModal } from '../../components';
+import { CartUtils } from '../../utils';
 import { useState } from 'react';
 
 function Header() {
@@ -15,6 +16,8 @@ function Header() {
         navigate(`/${item}`);
         dispatch(setItemActive(item));
     }
+
+    const noOfCart = useSelector(state => state.cartReducer.cart).length || 0;
     
     const [isLogin, setIsLogin] = useState(false);
     const [fullname, setFullname] = useState('');
@@ -39,7 +42,7 @@ function Header() {
                                     className={itemActive === 'about' ? 'active' : ''}>About</Nav.Link>
                             <Nav.Link 
                                     onClick={() => handleItemClick('cart')}
-                                    className={itemActive === 'cart' ? 'active' : ''}>Cart</Nav.Link>
+                                    className={itemActive === 'cart' ? 'active' : ''}>Cart ({noOfCart})</Nav.Link>
                             {
                                 isLogin ?
                                 <>

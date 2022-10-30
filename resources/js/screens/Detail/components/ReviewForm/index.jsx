@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Card } from "react-bootstrap";
 import { reviewApi } from "../../../../services";
+import { AlertCustom } from "../../../../components";
 import "./style.scss";
 
 function ReviewForm({ id }) {
     const { register, handleSubmit, errors } = useForm();
+    const [showAlert, setShowAlert] = useState(false);
     const onSubmit = (data) => {
         const review = {
             book_id: id,
@@ -15,7 +17,7 @@ function ReviewForm({ id }) {
         const submitReview = async () => {
             try {
                 const response = await reviewApi.postReviewProduct(review);
-                console.log(response);
+                response.book_id == id && setShowAlert(true);
             } catch (error) {
                 console.log("Failed to create review: ", error);
             }
@@ -25,6 +27,9 @@ function ReviewForm({ id }) {
 
     return (
         <React.Fragment>
+            {
+                showAlert && <AlertCustom variant="success" message="Review successfully" timeShow={10000}/>
+            }
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Card className="bookworm__review__form">
                     <Card.Header>

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { fetchBooksRequest, fetchBooksSuccess, fetchBooksFailure } from '../../../../../reducers/books';
 import { useSelector, useDispatch } from "react-redux"; 
 import { CardCustom } from "../../../../../components";
@@ -11,37 +11,30 @@ function Products(){
     const books = useSelector(state => state.booksReducer.books);
     const loading = useSelector(state => state.booksReducer.loading);
     const error = useSelector(state => state.booksReducer.error);
-    const params = {
-        category: '1',
-        sort_by: 'sale',
-    }
+    const params = useSelector(state => state.filterBookReducer.params);
     useEffect(() => {
         dispatch(fetchBooksRequest());
         const fetchBooks = async () => {
             try {
                 const response = await shopApi.getListProducts(params);
-                console.log(response);
                 dispatch(fetchBooksSuccess(response.data));
             } catch (error) {
                 dispatch(fetchBooksFailure(error));
             }
         }
         fetchBooks();
-    }, [dispatch]);
-
+    }, [params]);
     return (
-        <>
+        <React.Fragment>
             <Row>
                 {loading && <div>Loading...</div>}
                 {error && <div>{error}</div>}
                 {books.map((book, index) => (
-                    // Devide the row into 4 columns and if the index is divisible by 4, then create a new row
                     <Col xs={12} md={3} key={index}>
                         <CardCustom book={book} />
                     </Col>
                 ))}
             </Row>
-            {/* Navigate */}
             <Nav className="justify-content-center" aria-label="Page navigation example">
                 <Nav.Item>
                     <Nav.Link href="#">1</Nav.Link>
@@ -53,7 +46,7 @@ function Products(){
                     <Nav.Link href="#">3</Nav.Link>
                 </Nav.Item>
             </Nav>
-        </>
+        </React.Fragment>
     );
 }
 

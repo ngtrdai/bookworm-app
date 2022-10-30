@@ -5,7 +5,6 @@ import { BookDetail, BookReview } from "./components";
 import "./style.scss";
 function Detail() {
     const { id } = useParams();
-    
     return (
         <Container className="detail">
             <BookDetail id={id} />

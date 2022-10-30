@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Modal, Button, Container } from 'react-bootstrap';
-
+import { useForm } from 'react-hook-form';
 
 function SignInModal(props){
     const [isShow, setIsShow] = useState(false);
@@ -9,32 +9,32 @@ function SignInModal(props){
         setIsShow(show);
     }, [show]);
 
+    const { register, handleSubmit } = useForm();
+    const onSubmit = (data, e) => console.log(data, e);
+    const onError = (errors, e) => console.log(errors, e);
+    
     return (
-        <>
+        <React.Fragment>
             <span onClick={()=>setIsShow(true)}>{props.text}</span>
             <Modal show={isShow} onHide={() => setIsShow(false)}>
                 <Modal.Header closeButton>
                     <Modal.Title>Sign In</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <Container>
-                        <form>
-                            <div className="form-group">
-                                <label htmlFor="email">Email address</label>
-                                <input type="email" className="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" />
-                            </div>
-                            <div className="form-group">
-                                <label htmlFor="password">Password</label>
-                                <input type="password" className="form-control" id="password" placeholder="Password" />
-                            </div>
-                            <Button variant="primary" type="submit">
-                                Submit
-                            </Button>
-                        </form>
-                    </Container>
+                    <form onSubmit={() => console.log("test")}>
+                        <div className="form-group">
+                            <label htmlFor="email">Email address</label>
+                            <input type="text" className="form-control"/>
+                        </div>
+                        <div className="form-group">
+                            <label htmlFor="password">Password</label>
+                            <input type="text" className="form-control"/>
+                        </div>
+                        <input type="submit" className="btn btn-primary w-100 my-2" value="sign in"/>
+                    </form>
                 </Modal.Body>
             </Modal>
-        </>
+        </React.Fragment>
     );
 }
 

@@ -4,6 +4,7 @@ import Products from "./Products";
 import "./style.scss";
 
 function ListProducts(){
+
     return (
         <div className='shop__listproduct'>
             <SortingBar />

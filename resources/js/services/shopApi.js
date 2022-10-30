@@ -9,9 +9,9 @@ const shopApi = {
         const url = "api/shop";
         return axiosClient.get(url, { params });
     },
-    getDetailProduct: (id) => {
-        const url = `api/shop/product/${id}`;
-        return axiosClient.get(url);
+    getDetailProduct: (params) => {
+        const url = `api/shop/product`;
+        return axiosClient.get(url, { params });
     }
 
 };

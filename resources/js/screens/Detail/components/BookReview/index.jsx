@@ -105,9 +105,9 @@ function BookReview({ id }) {
                                             </Dropdown>
                                         </div>
                                     </div>
-                                    {reviews.map((review) => {
+                                    {reviews.map((review, index) => {
                                         return (
-                                            <div>
+                                            <div key={index}>
                                                 <h4>
                                                     {review.review_title} <span className="bookworm__reviews__rating">| {review.rating_start} starts</span>
                                                 </h4>
@@ -117,48 +117,6 @@ function BookReview({ id }) {
                                             </div>
                                         );
                                     })}
-                                    <Nav className='d-flex justify-content-center'>
-                                        <ul className='bookworm__reviews__pagination'>
-                                            <li className={`bookworm__reviews__pagination__item ${currentPage === 1 ? 'disabled' : ''}`}>
-                                                <a className='bookworm__reviews__pagination__link' href='#' onClick={() => setFilterParams({ ...filterParams, page: currentPage - 1 })}>
-                                                    Previous
-                                                </a>
-                                            </li>
-                                            {
-                                                [... Array(totalPage).keys()].map(x => x + 1).map((pageIndex, index) => {
-                                                    if (currentPage === 1) {
-                                                        if([1, 2, 3].includes(pageIndex)) {
-                                                            return (
-                                                                <li className={`bookworm__reviews__pagination__item ${currentPage === pageIndex ? 'active' : ''}`}>
-                                                                    <a className='bookworm__reviews__pagination__link' href='#' onClick={() => setFilterParams({ ...filterParams, page: pageIndex })}>
-                                                                        {pageIndex}
-                                                                    </a>
-                                                                </li>
-                                                            );
-                                                        }
-                                                    } else if (currentPage === totalPage) {
-                                                        if([totalPage - 2, totalPage - 1, totalPage].includes(pageIndex)) {
-                                                            return (
-                                                                <li className={`bookworm__reviews__pagination__item ${currentPage === pageIndex ? 'active' : ''}`}>
-                                                                    <a className='bookworm__reviews__pagination__link' href='#' onClick={() => setFilterParams({ ...filterParams, page: pageIndex })}>
-                                                                        {pageIndex}
-                                                                    </a>
-                                                                </li>
-                                                            );
-                                                        }
-                                                    } else if ([currentPage - 1, currentPage, currentPage + 1].includes(pageIndex)) {
-                                                        return (
-                                                            <li className={`bookworm__reviews__pagination__item ${currentPage === pageIndex ? 'active' : ''}`}>
-                                                                <a className='bookworm__reviews__pagination__link' href='#' onClick={() => setFilterParams({ ...filterParams, page: pageIndex })}>  
-                                                                    {pageIndex}
-                                                                </a>
-                                                            </li>
-                                                        );
-                                                    }
-                                                })
-                                            }
-                                        </ul>
-                                    </Nav>
                                 </Card.Body>
                             </Card>
                         </Col>

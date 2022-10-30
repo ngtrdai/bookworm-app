@@ -17,11 +17,11 @@ class ProductController extends Controller
         $this->productRepository = $productRepository;
     }
 
-    public function show($id)
+    public function show(Request $request)
     {
-        $validate = $this->productRepository->validateIDBook($id);
+        $validate = $this->productRepository->validateIDBook($request -> id);
         if($validate){
-            $bookDetail = $this->productRepository->getProductById($id);
+            $bookDetail = $this->productRepository->getProductById($request -> id);
         }
         return response()->json(new DetailResource($bookDetail), 200);
     }

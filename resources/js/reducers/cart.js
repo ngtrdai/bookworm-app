@@ -1,47 +1,96 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { CartUtils } from "../utils";
+
+const cartInStore = CartUtils.getCart();
 
 const cartSlice = createSlice({
     name: 'cart',
     initialState: {
-        items: [],
-        total: 0,
-        totalQuantity: 0
+        cart : cartInStore,
+        alert: {
+            show: false,
+            message: '',
+        },
+        limit: 8,
     },
     reducers: {
-        addToCart(state, action) {
-            const newItem = action.payload;
-            const existingItem = state.items.find(item => item.id === newItem.id);
-            state.totalQuantity++;
-            state.total += newItem.price;
-            if (!existingItem) {
-                state.items.push({
-                    id: newItem.id,
-                    price: newItem.price,
-                    title: newItem.title,
-                    quantity: 1,
-                    totalPrice: newItem.price
-                });
-            }
-            else {
-                existingItem.quantity++;
-                existingItem.totalPrice = existingItem.totalPrice + newItem.price;
+        addToCart: (state, action) => {
+            const book = action.payload;
+            const carts = CartUtils.getCart();
+            const index =  carts.findIndex(item => item.id === book.id);
+            if (index !== -1) {
+                if(carts[index].quantity + book.quantity <= state.limit) {
+                    carts[index].quantity += book.quantity;
+                    state.alert.show = true;
+                    state.alert.message = "Book added to cart successfully";
+                    localStorage.setItem("cart", JSON.stringify(carts));
+                } else {
+                    state.alert.show = true;
+                    state.alert.message = 'You can not add more than ' + state.limit + ' books';
+                }
+
+            } else {
+                carts.push(book);
+                localStorage.setItem('cart', JSON.stringify(carts));
+                state.cart = carts;
+                state.alert = {
+                    show: true,
+                    message: 'Book added to cart',
+                };
             }
         },
-        removeFromCart(state, action) {
+        addQuantity: (state, action) => {
             const id = action.payload;
-            const existingItem = state.items.find(item => item.id === id);
-            state.totalQuantity--;
-            state.total -= existingItem.price;
-            if (existingItem.quantity === 1) {
-                state.items = state.items.filter(item => item.id !== id);
+            const carts = CartUtils.getCart();
+            const index = carts.findIndex(item => item.id === id);
+            if (index !== -1) {
+                if (carts[index].quantity < state.limit) {
+                    carts[index].quantity += 1;
+                    localStorage.setItem('cart', JSON.stringify(carts));
+                    state.cart = carts;
+                } else {
+                    state.alert.show = true;
+                    state.alert.message = 'You can not add more than ' + state.limit + ' books';
+                }
             }
-            else {
-                existingItem.quantity--;
-                existingItem.totalPrice = existingItem.totalPrice - existingItem.price;
+        },
+        minusQuantity: (state, action) => {
+            const id = action.payload;
+            const carts = CartUtils.getCart();
+            const index = carts.findIndex(item => item.id === id);
+            if (index !== -1) {
+                if (carts[index].quantity > 1) {
+                    carts[index].quantity -= 1;
+                    localStorage.setItem('cart', JSON.stringify(carts));
+                    state.cart = carts;
+                } else {
+                    carts.splice(index, 1);
+                    localStorage.setItem('cart', JSON.stringify(carts));
+                    state.cart = carts;
+                }
             }
+        },
+        removeFromCart: (state, action) => {
+            const bookId = action.payload;
+            const carts = CartUtils.getCart();
+            const newCarts = carts.filter(cart => cart.id !== bookId);
+            localStorage.setItem('cart', JSON.stringify(newCarts));
+            state.cart = newCarts;
+            state.alert = {
+                show: true,
+                message: 'Book removed from cart',
+            };
+        },
+        clearCart: (state) => {
+            localStorage.removeItem('cart');
+            state.cart = [];
+            state.alert = {
+                show: true,
+                message: 'Cart cleared',
+            };
         }
     }
 });
 
-export const cartActions = cartSlice.actions;
+export const {addToCart, removeFromCart, clearCart, addQuantity, minusQuantity} = cartSlice.actions;
 export default cartSlice.reducer;
