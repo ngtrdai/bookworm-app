@@ -69,7 +69,7 @@ function FilterBar(){
             {
                 filterMenuList.map((filterMenu, index) => (
                     <React.Fragment key={index}>
-                        <Accordion className="shop__filtermenu">
+                        <Accordion className="shop__filtermenu mb-3">
                             <Accordion.Item>
                                 <Accordion.Header className="shop__filtermenu__header">
                                     {filterMenu.menuName}

@@ -9,7 +9,7 @@
         font-size: 28px;
     }
 
-    .bookworm__featured__tabs{
+    &__tabs{
         display: flex;
         flex-direction: row;
         justify-content: center;
@@ -23,7 +23,7 @@
             border: none;
             border-radius: 0.5rem;
             cursor: pointer;
-            transition: all 0.3s ease-in-out;
+            transition: all 0.15s ease-in-out;
     
             &:hover {
                 background-color: #000;

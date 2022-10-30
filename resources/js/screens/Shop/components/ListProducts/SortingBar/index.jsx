@@ -1,5 +1,4 @@
 import React from "react";
-import { useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { setSortBy, setNoItems } from "../../../../../reducers/filterBook";
@@ -8,6 +7,7 @@ import "./style.scss";
 function SortingBar(){
     const dispatch = useDispatch();
     const params = useSelector(state => state.filterBookReducer.params);
+    const paginate = useSelector(state => state.filterBookReducer.pagination);
     const sortTypes = {
         "sale": 'on sale',
         "popular": 'popularity',
@@ -32,10 +32,10 @@ function SortingBar(){
 
     return (
         <div className="shop__listproduct__sorting">
-            <h6>Showing 6 - 10 of 126 books</h6>
+            <h6>Showing {paginate.from} - {paginate.to} of {paginate.total_items} books</h6>
             <div className="shop__listproduct__sorting__dropdown">
                 <Dropdown className="shop__listproduct__sorting__dropdown__sorting">
-                    <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    <Dropdown.Toggle variant="secondary" id="dropdown-basic">
                         Sort by {sortTypes[params.sort_by]}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
@@ -46,7 +46,7 @@ function SortingBar(){
                     </Dropdown.Menu>
                 </Dropdown>
                 <Dropdown className="shop__listproduct__sorting__dropdown__showing">
-                    <Dropdown.Toggle variant="success" id="dropdown-basic-2">
+                    <Dropdown.Toggle variant="secondary" id="dropdown-basic-2">
                         Show {params.no_items}
                     </Dropdown.Toggle>
                     <Dropdown.Menu>

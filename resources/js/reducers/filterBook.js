@@ -18,28 +18,35 @@ const filterBookSlice = createSlice({
         },
         pagination: {
             current_page: 1,
-            total_pages: 1,
-            total_items: 0
+            last_page: 1,
+            from: 1,
+            to: 1,
+            total_items: 1
         }
     },
     reducers: {
         setCategory(state, action) {
             state.params.category = action.payload.id;
             state.params_detail.category = action.payload.name;
+            state.params.page = 1;
         },
         setAuthor(state, action) {
             state.params.author = action.payload.id;
             state.params_detail.author = action.payload.name;
+            state.params.page = 1;
         },
         setRating(state, action) {
             state.params.rating = action.payload;
             state.params_detail.rating = action.payload;
+            state.params.page = 1;
         },
         setSortBy(state, action) {
             state.params.sort_by = action.payload;
+            state.params.page = 1;
         },
         setNoItems(state, action) {
             state.params.no_items = action.payload;
+            state.params.page = 1;
         },
         setPage(state, action) {
             state.params.page = action.payload;
@@ -64,7 +71,7 @@ const filterBookSlice = createSlice({
             state.pagination = {
                 current_page: 1,
                 total_pages: 1,
-                total_items: 0
+                last_page: 0
             };
         }
     }

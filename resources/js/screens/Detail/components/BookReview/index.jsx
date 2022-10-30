@@ -88,7 +88,7 @@ function BookReview({ id }) {
                                         <h6>Showing 6 - 10 of 126 books</h6>
                                         <div className="bookworm__reviews__filterbar__dropdown">
                                             <Dropdown className="bookworm__reviews__filterbar__dropdown__sorting">
-                                                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                                <Dropdown.Toggle variant="secondary" id="dropdown-basic">
                                                     Sort by {sortTypes[sortType]}
                                                 </Dropdown.Toggle>
                                                 <Dropdown.Menu>
@@ -97,7 +97,7 @@ function BookReview({ id }) {
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <Dropdown className="bookworm__reviews__filterbar__dropdown__showing">
-                                                <Dropdown.Toggle variant="success" id="dropdown-basic-2">
+                                                <Dropdown.Toggle variant="secondary" id="dropdown-basic-2">
                                                     Show {showType}
                                                 </Dropdown.Toggle>
                                                 <Dropdown.Menu>

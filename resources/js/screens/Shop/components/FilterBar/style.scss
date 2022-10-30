@@ -14,4 +14,21 @@
     .shop__filtermenu__body--active {
         background-color: #f5f5f5;
     }
+    
+
+    
 }
+
+.shop__filtermenu__header {
+
+    .accordion-button:focus {
+        border-color: #000;
+    }
+
+    .accordion-button:not(.collapsed) {
+        color: #000;
+        background-color: #f5f5f5;
+        border-color: #f5f5f5;
+    }
+}
+
