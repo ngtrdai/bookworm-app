@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Col, Row, Dropdown, Nav } from "react-bootstrap";
-import { CardDetail, ReviewForm } from "../../components";
+import ReactPaginate from 'react-paginate';
+import { ReviewForm } from "../../components";
 import { reviewApi } from "../../../../services";
 import { StringUtils } from "../../../../utils";
 import "./style.scss";
 function BookReview({ id }) {
     const [reviews, setReviews] = useState([]);
-    const [currentPage, setCurrentPage] = useState(0);
-    const [totalPage, setTotalPage] = useState(0);
-    const [fromToPage, setFromToPage] = useState({ from: 0, to: 0});
-    const [sortType, setSortType] = useState('newest');
-    const [showType, setShowType] = useState('15');
 
     const [filterParams, setFilterParams] = useState({
         page: 1,
-        limit: 5,
+        no_items: 5,
+        sort_by: 'newest',
         book_id: id,
+        rating: null
+    });
+
+    const [paginate, setPaginate] = useState({
+        total: 0,
+        current_page: 1,
+        last_page: 1,
+        from: 1,
+        to: 1
     });
 
     const sortTypes = {
@@ -30,14 +36,44 @@ function BookReview({ id }) {
         "20": '20',
     };
 
+    const handlePageClick = (data) => {
+        setFilterParams({
+            ...filterParams,
+            page: data.selected + 1
+        });
+    };
+
+    const handleSortChange = (sortBy) => {
+        setFilterParams({
+            ...filterParams,
+            sort_by: sortBy
+        });
+    };
+
+    const handleShowChange = (noItems) => {
+        setFilterParams({
+            ...filterParams,
+            no_items: noItems
+        });
+    };
+
+    const handleRatingChange = (rating) => {
+        setFilterParams({
+            ...filterParams,
+            rating: rating
+        });
+    };
+
+
     useEffect(() => {
         const fetchReviews = async () => {
             try {
-                const response = await reviewApi.getReviewProduct({book_id: id});
+                const response = await reviewApi.getReviewProduct(filterParams);
                 setReviews(response.data);
-                setCurrentPage(response.current_page);
-                setTotalPage(response.total);
-                setFromToPage({
+                setPaginate({
+                    current_page: response.current_page,
+                    last_page: response.last_page,
+                    total: response.total,
                     from: response.from,
                     to: response.to
                 });
@@ -48,6 +84,7 @@ function BookReview({ id }) {
         };
         fetchReviews();
     }, [filterParams]);
+
     return (
         <React.Fragment>
             <Row className='mb-3'>
@@ -66,45 +103,50 @@ function BookReview({ id }) {
                                 <Card.Body className="bookworm__reviews__body">
                                     <div className="bookworm__reviews__title">
                                         <h5>Customer Reviews</h5>
-                                        <span>(Filter by 5 star)</span>
+                                        {
+                                            filterParams.rating !== null ? (
+                                                <span>(Filter by {filterParams.rating} star)</span>
+                                            ) : null
+                                        }
+                                        
                                     </div>
                                     <Row className="bookworm__reviews__statistics">
                                         <Col xs={12} md={2} lg={1}>
                                             <h3>4.6</h3>
-                                            <span className='bookworm__reviews__statistics__filtertext'>(21,233)</span>
+                                            <span className='bookworm__reviews__statistics__filtertext' onClick={() => handleRatingChange(null)}>(21,233)</span>
                                         </Col>
                                         <Col xs={12} md={10} lg={11}>
                                             <h3>Star</h3>
                                             <div className='bookworm__reviews__statistics__filter'>
-                                                <span className='bookworm__reviews__statistics__filtertext'>5 star (200)</span><span> | </span>
-                                                <span className='bookworm__reviews__statistics__filtertext'>4 star (200)</span><span> | </span>
-                                                <span className='bookworm__reviews__statistics__filtertext'>3 star (200)</span><span> | </span>
-                                                <span className='bookworm__reviews__statistics__filtertext'>2 star (200)</span><span> | </span>
-                                                <span className='bookworm__reviews__statistics__filtertext'>1 star (200)</span>
+                                                <span onClick={() => handleRatingChange(5)} className='bookworm__reviews__statistics__filtertext'>5 star (200)</span><span> | </span>
+                                                <span onClick={() => handleRatingChange(4)} className='bookworm__reviews__statistics__filtertext'>4 star (200)</span><span> | </span>
+                                                <span onClick={() => handleRatingChange(3)} className='bookworm__reviews__statistics__filtertext'>3 star (200)</span><span> | </span>
+                                                <span onClick={() => handleRatingChange(2)} className='bookworm__reviews__statistics__filtertext'>2 star (200)</span><span> | </span>
+                                                <span onClick={() => handleRatingChange(1)} className='bookworm__reviews__statistics__filtertext'>1 star (200)</span>
                                             </div>
                                         </Col>
                                     </Row>
                                     <div className="bookworm__reviews__filterbar">
-                                        <h6>Showing 6 - 10 of 126 books</h6>
+                                        <h6>Showing {paginate.from} - {paginate.to} of {paginate.total} books</h6>
                                         <div className="bookworm__reviews__filterbar__dropdown">
                                             <Dropdown className="bookworm__reviews__filterbar__dropdown__sorting">
                                                 <Dropdown.Toggle variant="secondary" id="dropdown-basic">
-                                                    Sort by {sortTypes[sortType]}
+                                                    Sort by {sortTypes[filterParams.sort_by]}
                                                 </Dropdown.Toggle>
                                                 <Dropdown.Menu>
-                                                    <Dropdown.Item onClick={() => setSortType('newest')}>Sort by {sortTypes['newest']}</Dropdown.Item>
-                                                    <Dropdown.Item onClick={() => setSortType('oldest')}>Sort by {sortTypes['oldest']}</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => handleSortChange('newest')}>Sort by {sortTypes['newest']}</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => handleSortChange('oldest')}>Sort by {sortTypes['oldest']}</Dropdown.Item>
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                             <Dropdown className="bookworm__reviews__filterbar__dropdown__showing">
                                                 <Dropdown.Toggle variant="secondary" id="dropdown-basic-2">
-                                                    Show {showType}
+                                                    Show {filterParams.no_items}
                                                 </Dropdown.Toggle>
                                                 <Dropdown.Menu>
-                                                    <Dropdown.Item onClick={() => setShowType('5')}>Show {showTypes['5']}</Dropdown.Item>
-                                                    <Dropdown.Item onClick={() => setShowType('10')}>Show {showTypes['10']}</Dropdown.Item>
-                                                    <Dropdown.Item onClick={() => setShowType('15')}>Show {showTypes['15']}</Dropdown.Item>
-                                                    <Dropdown.Item onClick={() => setShowType('20')}>Show {showTypes['20']}</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => handleShowChange(5)}>Show {showTypes['5']}</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => handleShowChange(10)}>Show {showTypes['10']}</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => handleShowChange(15)}>Show {showTypes['15']}</Dropdown.Item>
+                                                    <Dropdown.Item onClick={() => handleShowChange(20)}>Show {showTypes['20']}</Dropdown.Item>
                                                 </Dropdown.Menu>
                                             </Dropdown>
                                         </div>
@@ -121,6 +163,29 @@ function BookReview({ id }) {
                                             </div>
                                         );
                                     })}
+
+                                    <div className="bookworm__reviews__pagination">
+                                        <ReactPaginate 
+                                            previousLabel={'Previous'}
+                                            nextLabel={'Next'}
+                                            breakLabel={'...'}
+                                            pageRangeDisplayed={3}
+                                            renderOnZeroPageCount={null}
+                                            pageClassName="page-item"
+                                            pageLinkClassName="page-link"
+                                            previousClassName="page-item"
+                                            previousLinkClassName="page-link"
+                                            nextClassName="page-item"
+                                            nextLinkClassName="page-link"
+                                            breakClassName="page-item"
+                                            breakLinkClassName="page-link"
+                                            containerClassName="pagination"
+                                            activeClassName="active"
+                                            pageCount={paginate.last_page}
+                                            onPageChange={(e) => handlePageClick(e)}
+                                            forcePage={paginate.current_page - 1}
+                                        />
+                                    </div>
                                 </Card.Body>
                             </Card>
                         )

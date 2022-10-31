@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal, Button, Container } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
+import "./style.scss"
 
 function SignInModal(props){
     const [isShow, setIsShow] = useState(false);
@@ -30,7 +31,7 @@ function SignInModal(props){
                             <label htmlFor="password">Password</label>
                             <input type="text" className="form-control"/>
                         </div>
-                        <input type="submit" className="btn btn-primary w-100 my-2" value="sign in"/>
+                        <button type="submit" className="bookworm__signin_button w-100">Sign In</button>
                     </form>
                 </Modal.Body>
             </Modal>

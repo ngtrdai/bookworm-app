@@ -5,6 +5,8 @@ import { setItemActive } from '../../reducers/header';
 import { SignInModal } from '../../components';
 import { CartUtils } from '../../utils';
 import { useState } from 'react';
+import IMAGE from '../../../assets';
+import "./style.scss"
 
 function Header() {
     let navigate = useNavigate();
@@ -18,7 +20,6 @@ function Header() {
     }
 
     const noOfCart = useSelector(state => state.cartReducer.cart).length || 0;
-    
     const [isLogin, setIsLogin] = useState(false);
     const [fullname, setFullname] = useState('');
 
@@ -26,7 +27,7 @@ function Header() {
         <header>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Container fluid>
-                    <Navbar.Brand href="#">BOOKWORM</Navbar.Brand>
+                    <Navbar.Brand href="#" className='bookworm__logo'><img className='bookworm__logo__header' src={IMAGE['logo']} /> <span>BOOKWORM</span></Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto"></Nav>

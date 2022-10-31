@@ -1,0 +1,11 @@
+.bookworm__signin_button {
+    background-color: #000;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 24px;
+    margin-top: 10px;
+    &:hover {
+        background-color: #fff;
+        color: #000;
+    }
+}
