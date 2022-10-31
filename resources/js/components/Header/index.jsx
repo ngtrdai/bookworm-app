@@ -4,7 +4,8 @@ import { useNavigate, useLocation} from 'react-router-dom';
 import { setItemActive } from '../../reducers/header';
 import { SignInModal } from '../../components';
 import { CartUtils } from '../../utils';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { userApi } from '../../services';
 import IMAGE from '../../../assets';
 import "./style.scss"
 
@@ -22,6 +23,34 @@ function Header() {
     const noOfCart = useSelector(state => state.cartReducer.cart).length || 0;
     const [isLogin, setIsLogin] = useState(false);
     const [fullname, setFullname] = useState('');
+
+    useEffect(() => {
+        const userLogin = JSON.parse(localStorage.getItem('userLogin'));
+        if(userLogin){
+            setIsLogin(true);
+            setFullname(userLogin.first_name + ' ' + userLogin.last_name);
+        }
+    }, []);
+
+    const handleLogout = () => {
+        // Call api sign out
+        const signOut = async () => {
+            try {
+                const response = await userApi.signOut();
+                if(response.status === 200){
+                    localStorage.removeItem('userLogin');
+                    localStorage.removeItem('token');
+                    localStorage.removeItem('isLogin');
+                    setIsLogin(false);
+                    setFullname('');
+                    navigate('/home');
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        signOut();
+    }
 
     return (
         <header>
@@ -48,7 +77,7 @@ function Header() {
                                 isLogin ?
                                 <>
                                     <NavDropdown title={fullname} id="collasible-nav-dropdown">
-                                        <NavDropdown.Item href="#action/3.1">Logout</NavDropdown.Item>
+                                        <NavDropdown.Item onClick={() => handleLogout()}>Logout</NavDropdown.Item>
                                     </NavDropdown>
                                 </>
                                 :

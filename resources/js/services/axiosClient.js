@@ -2,7 +2,7 @@ import axios from "axios";
 
 var token = '';
 if(JSON.parse(localStorage.getItem('userLogin'))){
-    token = JSON.parse(localStorage.getItem('userLogin')).token;
+    token = localStorage.getItem('token');
 }
 
 const axiosClient = axios.create({

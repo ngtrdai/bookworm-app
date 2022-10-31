@@ -8,6 +8,10 @@ const reviewApi = {
     postReviewProduct: (params) => {
         const url = `api/shop/product/review`;
         return axiosClient.post(url, params);
+    },
+    getRating: (params) => {
+        const url = `api/shop/product/review/rating`;
+        return axiosClient.get(url, {params});
     }
 };
 

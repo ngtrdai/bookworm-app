@@ -12,6 +12,10 @@ const shopApi = {
     getDetailProduct: (params) => {
         const url = `api/shop/product`;
         return axiosClient.get(url, { params });
+    },
+    orderProducts: (data) => {
+        const url = `api/shop/order`;
+        return axiosClient.post(url, data);
     }
 
 };

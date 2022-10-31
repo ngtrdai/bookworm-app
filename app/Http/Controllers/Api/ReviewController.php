@@ -23,7 +23,7 @@ class ReviewController extends Controller
     {
         $queryParamsArr = $this -> productRepository -> filterQueryParamsForLoadReviews($request);
         $reviews = $this -> productRepository -> filterReviews(...$queryParamsArr);
-        return response()->json($reviews, 200);
+        return new ReviewCollection($reviews);
     }
 
     public function store(PostReviewRequest $request)
@@ -31,5 +31,14 @@ class ReviewController extends Controller
         $paramsFiltered = $this -> productRepository -> filterParamsForCreateReview($request);
         $review = $this -> productRepository -> createReview(...$paramsFiltered);
         return response()->json($review, 200);
+    }
+
+    public function getRating(FilterReviewsRequest $request){
+        $respone = [
+            'rating_avg' => $this -> productRepository -> getRatingAvg($request -> book_id),
+            'count_stars' => $this -> productRepository -> getCountStars($request -> book_id)
+        ];
+
+        return response()->json($respone, 200);
     }
 }

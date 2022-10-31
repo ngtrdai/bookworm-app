@@ -68,16 +68,11 @@ Route::prefix('shop') -> name('shop.') -> group(function(){
     // Route for API get detail product and load review of product
     Route::prefix('product') -> name('product.') -> group(function(){
         // Route for API get list review of product
-        Route::apiResource('/review', ReviewController::class)->only(['index', 'store'])
-        -> missing(function (Request $request) {
-            return response()->json(['message' => 'Not Found!'], 404);
-        });
+        Route::apiResource('/review', ReviewController::class)->only(['index', 'store']);
+        Route::get('/review/rating', [ReviewController::class, 'getRating']) -> name('getRating');
         // Route for API get detail product
         Route::get('/', [ProductController::class, 'show']);
     });
     // Route for API for order products
-    Route::middleware('auth:sanctum')->apiResource('/order', OrderController::class)->only(['index', 'store'])
-            -> missing(function (Request $request) {
-                return response()->json(['message' => 'Not Found!'], 404);
-    });
+    Route::middleware('auth:sanctum')->apiResource('/order', OrderController::class)->only(['index', 'store']);
 });

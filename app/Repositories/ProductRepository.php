@@ -77,4 +77,33 @@ class ProductRepository{
         ]);
         return $review;
     }
+
+    public function getRatingAvg($id){
+        $ratingAvg = Review::where('book_id', $id) -> avg('rating_start');
+        return $ratingAvg;
+    }
+
+    public function getCountStars($bookId){
+        // If star not rated, set count = 0 and sort by rating_start
+        
+        $countStars = Review::selectRaw('rating_start, count(rating_start) as count_rating_start')
+                        ->  where('book_id', $bookId)
+                        ->  groupBy('rating_start')
+                        ->  orderBy('rating_start', 'desc')
+                        ->  get();
+
+        for($i = 5; $i >= 1; $i--){
+            $isExist = false;
+            foreach($countStars as $countStar){
+                if($countStar -> rating_start == $i){
+                    $isExist = true;
+                    break;
+                }
+            }
+            if(!$isExist){
+                $countStars -> push((object) ['rating_start' => $i, 'count_rating_start' => 0]);
+            }
+        }
+        return $countStars;
+    }
 }

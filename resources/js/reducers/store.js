@@ -9,7 +9,6 @@ const store = configureStore({
         headerReducer: headerReducer,
         booksReducer: booksReducer,
         filterBookReducer: filterBookReducer
-
     }
 });
 

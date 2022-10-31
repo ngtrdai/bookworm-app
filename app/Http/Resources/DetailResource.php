@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-use App\Models\Review;
+
 
 class DetailResource extends JsonResource
 {
@@ -24,9 +24,7 @@ class DetailResource extends JsonResource
             'book_cover_photo' => $this->book_cover_photo,
             'book_category_name' => $this->category->category_name,
             'book_price' => $this->book_price,
-            'final_price' => $this->finalPrice($this->id),
-            'book_rating' => Review::avgRatingStar($this -> id),
-            'book_rating_count' => Review::countStars($this -> id),
+            'final_price' => $this->finalPrice($this->id)
         ];
     }
 }
