@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { fetchBooksRequest, fetchBooksSuccess, fetchBooksFailure } from '../../../../../reducers/books';
-import { useSelector } from "react-redux"; 
 import { CardCustom } from "../../../../../components";
 import { Row, Col } from "react-bootstrap";
 import { shopApi} from "../../../../../services";
