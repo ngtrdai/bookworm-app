@@ -33,7 +33,7 @@ class AuthRequest extends FormRequest
         }
         elseif(Request() -> routeIs('auth.signin')){
             return [
-                'email' => 'required|email',
+                'email' => 'required|email|exists:user,email',
                 'password' => 'required|string|min:6'
             ];
         }
