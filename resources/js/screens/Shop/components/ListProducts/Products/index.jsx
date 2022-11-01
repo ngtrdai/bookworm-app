@@ -1,59 +1,71 @@
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { fetchBooksRequest, fetchBooksSuccess, fetchBooksFailure } from '../../../../../reducers/books';
-import { useSelector, useDispatch } from "react-redux"; 
+import { useSelector } from "react-redux"; 
 import { CardCustom } from "../../../../../components";
-import { Row, Col, Nav } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { shopApi} from "../../../../../services";
+import ReactPaginate from "react-paginate";
 import "./style.scss";
 
-function Products(){
-    const dispatch = useDispatch();
-    const books = useSelector(state => state.booksReducer.books);
-    const loading = useSelector(state => state.booksReducer.loading);
-    const error = useSelector(state => state.booksReducer.error);
-    const params = {
-        category: '1',
-        sort_by: 'sale',
-    }
+function Products({ params, setPage, paginate, setPaginate }) {
+    const [books, setBooks] = useState([]);
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
-        dispatch(fetchBooksRequest());
+        setLoading(true);
         const fetchBooks = async () => {
             try {
                 const response = await shopApi.getListProducts(params);
-                console.log(response);
-                dispatch(fetchBooksSuccess(response.data));
+                setBooks(response.data);
+                setPaginate({
+                    current_page: response.meta.current_page,
+                    total_items: response.meta.total,
+                    last_page: response.meta.last_page,
+                    from: response.meta.from,
+                    to: response.meta.to
+                });
+                setLoading(false);
             } catch (error) {
-                dispatch(fetchBooksFailure(error));
+                // 
             }
         }
         fetchBooks();
-    }, [dispatch]);
-
+    }, [params]);
+    const handlePageClick = (data) => {
+        setPage(data.selected + 1);
+    }
     return (
-        <>
+        <React.Fragment>
             <Row>
                 {loading && <div>Loading...</div>}
-                {error && <div>{error}</div>}
                 {books.map((book, index) => (
-                    // Devide the row into 4 columns and if the index is divisible by 4, then create a new row
                     <Col xs={12} md={3} key={index}>
                         <CardCustom book={book} />
                     </Col>
                 ))}
             </Row>
-            {/* Navigate */}
-            <Nav className="justify-content-center" aria-label="Page navigation example">
-                <Nav.Item>
-                    <Nav.Link href="#">1</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link href="#">2</Nav.Link>
-                </Nav.Item>
-                <Nav.Item>
-                    <Nav.Link href="#">3</Nav.Link>
-                </Nav.Item>
-            </Nav>
-        </>
+            <div className='shop__listproduct__pagination'>
+                <ReactPaginate 
+                    previousLabel={'Previous'}
+                    nextLabel={'Next'}
+                    breakLabel={'...'}
+                    pageRangeDisplayed={3}
+                    renderOnZeroPageCount={null}
+                    pageClassName="page-item"
+                    pageLinkClassName="page-link"
+                    previousClassName="page-item"
+                    previousLinkClassName="page-link"
+                    nextClassName="page-item"
+                    nextLinkClassName="page-link"
+                    breakClassName="page-item"
+                    breakLinkClassName="page-link"
+                    containerClassName="pagination"
+                    activeClassName="active"
+                    pageCount={paginate.last_page}
+                    onPageChange={(e) => handlePageClick(e)}
+                    forcePage={paginate.current_page - 1}
+                />
+            </div>
+        </React.Fragment>
     );
 }
 

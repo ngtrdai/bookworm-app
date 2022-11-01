@@ -51,8 +51,8 @@ class ShopRepository
 
     private const SORT_BY_SALE = 'sale';
     private const SORT_BY_POPULAR = 'popular';
-    private const SORT_BY_PRICE_ASC = 'price_asc';
-    private const SORT_BY_PRICE_DESC = 'price_desc';
+    private const SORT_BY_PRICE_ASC = 'price-asc';
+    private const SORT_BY_PRICE_DESC = 'price-desc';
     public function sortBy($bookTable, $sortBy){
         switch($sortBy){
             case Self::SORT_BY_SALE:

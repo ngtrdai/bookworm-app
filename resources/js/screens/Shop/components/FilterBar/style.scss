@@ -1,0 +1,35 @@
+.shop__filtermenu{
+    margin-bottom: 4px;
+
+    .shop__filtermenu__body{
+
+        // Cursor
+        cursor: pointer;
+        // Hover effect
+        &:hover{
+            background-color: #f5f5f5;
+        }
+    }
+
+    .shop__filtermenu__body--active {
+        background-color: #f5f5f5;
+        cursor: pointer;
+    }
+    
+
+    
+}
+
+.shop__filtermenu__header {
+
+    .accordion-button:focus {
+        border-color: #000;
+    }
+
+    .accordion-button:not(.collapsed) {
+        color: #000;
+        background-color: #f5f5f5;
+        border-color: #f5f5f5;
+    }
+}
+

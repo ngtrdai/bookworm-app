@@ -1,0 +1,28 @@
+.bookworm__cart_total{
+    // Align center
+    text-align: center;
+
+    h1 {
+        font-size: 2.5rem;
+        font-weight: 700;
+        margin-bottom: 1.2rem;
+    }
+
+    button {
+        background-color: #000;
+        color: #fff;
+        font-size: 1.5rem;
+        font-weight: 700;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: all 0.15s ease-in-out;
+        border: 1px solid #000;
+
+        &:hover {
+            background-color: #fff;
+            color: #000;
+        }
+    }
+}

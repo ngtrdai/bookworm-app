@@ -1,5 +1,15 @@
 .home {
     margin-top: 20px;
+
+    .card__custom {
+        width: 18rem;
+        height: 35rem !important;
+
+        .card__custom__img{
+            height: 400px !important;
+        }
+    }
+
 }
 
 

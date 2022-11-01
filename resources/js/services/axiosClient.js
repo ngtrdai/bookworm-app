@@ -1,15 +1,20 @@
 import axios from "axios";
 
+var token = '';
+if(JSON.parse(localStorage.getItem('userLogin'))){
+    token = localStorage.getItem('token');
+}
+
 const axiosClient = axios.create({
     baseURL: process.env.BASE_URL,
     headers: {
         "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
     },
 });
 
 // Interceptors
 axiosClient.interceptors.request.use(async (config) => {
-    // Handle token here ...
     return config;
 });
 
@@ -21,7 +26,6 @@ axiosClient.interceptors.response.use(
         return response;
     },
     (error) => {
-        // Handle errors
         throw error;
     }
 );

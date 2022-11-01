@@ -33,13 +33,4 @@ class ProductRequest extends FormRequest
             'id.exists' => 'Book id does not exist',
         ];
     }
-
-    public function failedValidation($validator)
-    {
-        $response = response()->json([
-            'status' => 'error',
-            'message' => $validator->errors()->first(),
-        ], 422);
-        throw new \Illuminate\Validation\ValidationException($validator, $response);
-    }
 }

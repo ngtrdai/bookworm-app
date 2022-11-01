@@ -41,8 +41,6 @@ Route::prefix('auth') -> name('auth.') -> group(function(){
 
 // Routes for books
 Route::prefix('books') -> name('books.') -> group(function(){
-    // Route for API get list books
-    Route::get('/', [BookController::class, 'getListBooks']) -> name('getListBooks');
     // Route for API get list products on sale
     Route::get('/onsale', [BookController::class, 'getOnSale']) -> name('getOnSale');
     // Route for API get list featured of products
@@ -51,7 +49,11 @@ Route::prefix('books') -> name('books.') -> group(function(){
         Route::get('/popular', [BookController::class, 'getPopular']) -> name('getPopular');
         // Route for API get list recommended products
         Route::get('/recommended', [BookController::class, 'getRecommended']) -> name('getRecommended');
+        // Route for get list featured
+        Route::get('/', [BookController::class, 'getFeatured']) -> name('getFeatured');
     });
+    // Route for API get list books
+    Route::get('/', [BookController::class, 'getListBooks']) -> name('getListBooks');
 });
 
 
@@ -65,17 +67,12 @@ Route::prefix('shop') -> name('shop.') -> group(function(){
     Route::get('/filtering', [ShopController::class, 'getListFiltering']) -> name('getFiltering');
     // Route for API get detail product and load review of product
     Route::prefix('product') -> name('product.') -> group(function(){
-        // Route for API get detail product
-        Route::get('/{id}', [ProductController::class, 'show']);
         // Route for API get list review of product
-        Route::apiResource('/{id}/review', ReviewController::class)->only(['index', 'store'])
-            -> missing(function (Request $request) {
-                return response()->json(['message' => 'Not Found!'], 404);
-        });
+        Route::apiResource('/review', ReviewController::class)->only(['index', 'store']);
+        Route::get('/review/rating', [ReviewController::class, 'getRating']) -> name('getRating');
+        // Route for API get detail product
+        Route::get('/', [ProductController::class, 'show']);
     });
     // Route for API for order products
-    Route::middleware('auth:sanctum')->apiResource('/order', OrderController::class)->only(['index', 'store'])
-            -> missing(function (Request $request) {
-                return response()->json(['message' => 'Not Found!'], 404);
-    });
+    Route::middleware('auth:sanctum')->apiResource('/order', OrderController::class)->only(['index', 'store']);
 });

@@ -9,14 +9,15 @@ const shopApi = {
         const url = "api/shop";
         return axiosClient.get(url, { params });
     },
-    getDetailProduct: (id) => {
-        const url = `api/shop/product/${id}`;
-        return axiosClient.get(url);
+    getDetailProduct: (params) => {
+        const url = `api/shop/product`;
+        return axiosClient.get(url, { params });
     },
-    getReviewProduct: (id, params) => {
-        const url = `api/shop/product/${id}/review`;
-        return axiosClient.get(url, {params});
+    orderProducts: (data) => {
+        const url = `api/shop/order`;
+        return axiosClient.post(url, data);
     }
+
 };
 
 export default shopApi;

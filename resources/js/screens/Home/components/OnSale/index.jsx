@@ -1,5 +1,5 @@
 import Carousel from 'react-multi-carousel';
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container, DropdownButton } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import { CardCustom } from "../../../../components";
@@ -35,7 +35,6 @@ function OnSale(){
 		}
 	};
 
-    // Load API
     useEffect(() => {
         const bookOnSale = async () => {
             try {
@@ -49,11 +48,11 @@ function OnSale(){
     }, []);
 
     return (
-        <>
+        <React.Fragment>
             <Container className="bookworm__onsale">
                 <div className='bookworm__onsale__title'>
                     <h2>On Sale</h2>
-                    <DropdownButton drop='end' title='View All' onClick={() => {navigate('/shop')}}/>
+                    <DropdownButton className='bookworm__onsale_button' drop='end' title='View All' onClick={() => {navigate('/shop')}}/>
                 </div>
             </Container>
             <Container className="p-12 mt-2">
@@ -65,7 +64,7 @@ function OnSale(){
                     </Carousel>
                 </div>
             </Container>
-        </>
+        </React.Fragment>
     );
 }
 

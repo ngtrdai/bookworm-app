@@ -2,6 +2,7 @@
     width: 15rem;
     height: 30rem !important;
     margin-bottom: 16px;
+    cursor: pointer;
     .card__custom__img{
         height: 300px !important;
     }
@@ -11,4 +12,38 @@
         overflow: hidden;
         text-overflow: ellipsis;
     }
+
+    &:hover{
+        box-shadow: 0 0 10px 0 rgba(0,0,0,0.2);
+    }
+}
+
+.card__price__discount {
+
+    .card__price--final {
+        font-size: 1.3rem;
+        font-weight: 700;
+    }
+
+    .card__price--original {
+        font-size: 1rem;
+        font-weight: 300;
+        text-decoration: line-through;
+        margin-right: 4px;
+    }
+}
+
+.card__price {
+    .card__price--final {
+        font-size: 1rem;
+        font-weight: 400;
+        margin-right: 4px;
+    }
+}
+
+.card__custom__price {
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }

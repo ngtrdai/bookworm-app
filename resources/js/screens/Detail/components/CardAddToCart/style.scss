@@ -1,9 +1,3 @@
-.card {
-    .bookworm__detail__card__header {
-        padding-left: 36px;
-        padding-right: 36px;
-    }
-}
 
 .bookworm__detail__card__price__finalprice{
     font-size: 1.5rem;
@@ -31,7 +25,6 @@
 
 .bookworm__detail__card__body__quantity{
     width: 100%;
-    margin: 20px 0;
     display: flex;
     justify-content: space-between;
     background-color: #999;
@@ -49,7 +42,7 @@
 }
 
 .bookworm__detail__card__body__addtocart {
-
+    margin-top: 30px;
     button {
         width: 100%;
         height: 42px;
@@ -59,5 +52,9 @@
         font-size: 1.2rem;
         font-weight: 600;
         cursor: pointer;
+
+        &:hover {
+            background-color: #999;
+        }
     }
 }
