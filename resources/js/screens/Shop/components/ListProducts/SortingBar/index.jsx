@@ -1,7 +1,5 @@
 import React from "react";
 import { Dropdown } from "react-bootstrap";
-import { useSelector } from "react-redux";
-import { setSortBy, setNoItems } from "../../../../../reducers/filterBook";
 import "./style.scss";
 
 function SortingBar({ params, setSortBy, setNoItems, paginate }) {

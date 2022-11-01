@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Accordion, Card, Button } from 'react-bootstrap';
+import { Accordion } from 'react-bootstrap';
 import { shopApi } from "../../../../services"
-import { useSelector, useDispatch } from "react-redux";
-import { setCategory, setAuthor, setRating } from '../../../../reducers/filterBook';
 import { StringUtils } from "../../../../utils";
 import "./style.scss";
 function FilterBar({ params, setCategory, setAuthor, setRating }) {
