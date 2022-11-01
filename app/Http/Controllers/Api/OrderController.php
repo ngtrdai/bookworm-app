@@ -38,6 +38,9 @@ class OrderController extends Controller
     {
         $params = $this->orderRepository->filterParams($request);
         $order = $this->orderRepository->createOrder(...$params);
+        // add status code 201 to response order json
+        $order['status'] = 201;
+
         return response()->json($order, 201);
     }
 }

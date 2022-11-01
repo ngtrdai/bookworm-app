@@ -10,7 +10,7 @@ const IMAGE = {
 	book9: require('./bookcover/book9.jpg').default,
 	book10: require('./bookcover/book10.jpg').default,
 	logo: require('./bookworm_icon.png').default,
-	bookDefault: require('./bookcover/book1.jpg').default,
+	bookDefault: require('./bookcover/bookCover.jpg').default,
 }
 
 export default IMAGE

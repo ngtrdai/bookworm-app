@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Card } from "react-bootstrap";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { SignInModal } from "../../../../components";
 import { shopApi } from "../../../../services";
+import { clearCart } from "../../../../reducers/cart";
 import "./style.scss"
 function CartTotal(){
+    const dispatch = useDispatch();
     const cart = useSelector(state => state.cartReducer.cart);
     const [isShow, setIsShow] = useState(false);
     const [total, setTotal] = useState(0);
@@ -20,25 +22,30 @@ function CartTotal(){
     const handlePlaceOrder = () => {
         if(!localStorage.getItem('isLogin')){
             setIsShow(true);
-        }
-        let confirm = window.confirm("Are you sure to place order?");
-        if(confirm){
-            const items_order = cart.map((item) => {
-                return {
-                    book_id: item.id,
-                    quantity: item.quantity
+        }else{
+            let confirm = window.confirm("Are you sure to place order?");
+            if(confirm){
+                const items_order = cart.map((item) => {
+                    return {
+                        book_id: item.id,
+                        quantity: item.quantity
+                    }
+                });
+                const order = async () => {
+                    try {
+                        const response = await shopApi.orderProducts({items_order: items_order});
+                        if(response.status === 201){
+                            alert("Place order successfully!");
+                            dispatch(clearCart());
+                        }
+                    } catch (error) {
+                        console.log(error);
+                    }
                 }
-            });
-            const order = async () => {
-                try {
-                    const response = await shopApi.orderProducts({items_order: items_order});
-                    alert("Order successfully!");
-                } catch (error) {
-                    console.log(error);
-                }
+                order();
             }
-            order();
         }
+        
     }
 
     return (
