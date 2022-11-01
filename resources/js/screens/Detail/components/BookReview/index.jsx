@@ -76,21 +76,26 @@ function BookReview({ id }) {
 
     useEffect(() => {
         const fetchRating = async () => {
-            const response = await reviewApi.getRating({book_id: id});
-            let countStarts = response.count_stars.sort((a, b) => parseInt(b.rating_start) - parseInt(a.rating_start));
-            let total = countStarts.reduce((sum, item) => {
-                return sum + item.count_rating_start;
-            }, 0)
-            const data = {
-                avg: response.rating_avg,
-                total: total,
-                five: countStarts[0].count_rating_start,
-                four: countStarts[1].count_rating_start,
-                three: countStarts[2].count_rating_start,
-                two: countStarts[3].count_rating_start,
-                one: countStarts[4].count_rating_start,
+            try {
+
+                const response = await reviewApi.getRating({book_id: id});
+                let countStarts = response.count_stars.sort((a, b) => parseInt(b.rating_start) - parseInt(a.rating_start));
+                let total = countStarts.reduce((sum, item) => {
+                    return sum + item.count_rating_start;
+                }, 0)
+                const data = {
+                    avg: response.rating_avg,
+                    total: total,
+                    five: countStarts[0].count_rating_start,
+                    four: countStarts[1].count_rating_start,
+                    three: countStarts[2].count_rating_start,
+                    two: countStarts[3].count_rating_start,
+                    one: countStarts[4].count_rating_start,
+                }
+                setRating(data);
+            } catch (error) {
+                // 
             }
-            setRating(data);
         };
         fetchRating();
     }, []);

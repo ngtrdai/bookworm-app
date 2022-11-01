@@ -3,16 +3,20 @@ import { Row, Col } from "react-bootstrap";
 import { CardDetail, CardAddToCart, DetailTitle } from "../../components";
 import { shopApi } from "../../../../services";
 import { StringUtils } from "../../../../utils";
+import { useNavigate } from "react-router-dom";
 
 function BookDetail({ id }) {
     const [bookDetail, setBookDetail] = useState({});
+    let navigate = useNavigate();
     useEffect(() => {
         const fetchBookDetail = async () => {
             try {
                 const response = await shopApi.getDetailProduct({id: id});
                 setBookDetail(response);
             } catch (error) {
-                console.log("Failed to fetch book detail: ", error);
+                if(error.response.status === 422){
+                    navigate('/home');
+                }
             }
         };
         fetchBookDetail();

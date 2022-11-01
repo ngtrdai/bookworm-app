@@ -1,48 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { fetchBooksRequest, fetchBooksSuccess, fetchBooksFailure } from '../../../../../reducers/books';
-import { setPagination, setPage } from '../../../../../reducers/filterBook';
-import { useSelector, useDispatch } from "react-redux"; 
+import { useSelector } from "react-redux"; 
 import { CardCustom } from "../../../../../components";
-import { Row, Col, Nav } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import { shopApi} from "../../../../../services";
 import ReactPaginate from "react-paginate";
 import "./style.scss";
 
-function Products(){
-    const dispatch = useDispatch();
-    const books = useSelector(state => state.booksReducer.books);
-    const loading = useSelector(state => state.booksReducer.loading);
-    const error = useSelector(state => state.booksReducer.error);
-    const params = useSelector(state => state.filterBookReducer.params);
-    const paginate = useSelector(state => state.filterBookReducer.pagination);
+function Products({ params, setPage, paginate, setPaginate }) {
+    const [books, setBooks] = useState([]);
+    const [loading, setLoading] = useState(false);
     useEffect(() => {
-        dispatch(fetchBooksRequest());
+        setLoading(true);
         const fetchBooks = async () => {
             try {
                 const response = await shopApi.getListProducts(params);
-                dispatch(fetchBooksSuccess(response.data));
-                dispatch(setPagination({
+                setBooks(response.data);
+                setPaginate({
                     current_page: response.meta.current_page,
                     total_items: response.meta.total,
                     last_page: response.meta.last_page,
                     from: response.meta.from,
                     to: response.meta.to
-                }));
+                });
+                setLoading(false);
             } catch (error) {
-                dispatch(fetchBooksFailure(error));
+                // 
             }
         }
         fetchBooks();
     }, [params]);
     const handlePageClick = (data) => {
-        dispatch(setPage(data.selected + 1));
+        setPage(data.selected + 1);
     }
-
     return (
         <React.Fragment>
             <Row>
                 {loading && <div>Loading...</div>}
-                {error && <div>{error}</div>}
                 {books.map((book, index) => (
                     <Col xs={12} md={3} key={index}>
                         <CardCustom book={book} />

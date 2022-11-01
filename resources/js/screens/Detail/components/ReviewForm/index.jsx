@@ -2,11 +2,22 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Card } from "react-bootstrap";
 import { reviewApi } from "../../../../services";
-import { AlertCustom } from "../../../../components";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup"; 
 import "./style.scss";
 
 function ReviewForm({ id }) {
-    const { register, handleSubmit, errors } = useForm();
+
+    const schema = yup.object().shape({
+        title: yup.string().required(),
+        content: yup.string().required(),
+        rating: yup.number().required(),
+    }).required();
+
+    const { register, handleSubmit, formState: { errors } } = useForm({
+        resolver: yupResolver(schema)
+    });
+
     const [showAlert, setShowAlert] = useState(false);
     const onSubmit = (data) => {
         const review = {
@@ -19,7 +30,14 @@ function ReviewForm({ id }) {
                 const response = await reviewApi.postReviewProduct(review);
                 response.book_id == id && setShowAlert(true);
             } catch (error) {
-                console.log("Failed to create review: ", error);
+                if(error.response.status === 422){
+                    for (const key in error.response.data.errors) {
+                        if (Object.hasOwnProperty.call(error.response.data.errors, key)) {
+                            const element = error.response.data.errors[key];
+                            alert(element[0])
+                        }
+                    }
+                }
             }
         }
         submitReview();
@@ -39,10 +57,12 @@ function ReviewForm({ id }) {
                         <div className="form-group mb-3">
                             <label htmlFor="reviewTitle">Add a title</label>
                             <input id="reviewTitle" {...register('title')}  className="form-control"/>
+                            <span className="text-danger">{errors.title?.message}</span>
                         </div>
                         <div className="form-group mb-3">
                             <label htmlFor="review">Detail please! Your review helps other shoppers.</label>
                             <textarea className="form-control" id="review" rows="3" {...register('detail')}></textarea>
+                            <span className="text-danger">{errors.content?.message}</span>
                         </div>
                         <div className="form-group">
                             <label htmlFor="rating">Select a rating star</label>

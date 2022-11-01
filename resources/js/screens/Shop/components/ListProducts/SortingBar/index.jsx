@@ -1,13 +1,10 @@
 import React from "react";
 import { Dropdown } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { setSortBy, setNoItems } from "../../../../../reducers/filterBook";
 import "./style.scss";
 
-function SortingBar(){
-    const dispatch = useDispatch();
-    const params = useSelector(state => state.filterBookReducer.params);
-    const paginate = useSelector(state => state.filterBookReducer.pagination);
+function SortingBar({ params, setSortBy, setNoItems, paginate }) {
     const sortTypes = {
         "sale": 'on sale',
         "popular": 'popularity',
@@ -23,11 +20,11 @@ function SortingBar(){
     };
 
     const handleSort = (value) => {
-        dispatch(setSortBy(value));
+        setSortBy(value);
     }
 
     const handleShow = (value) => {
-        dispatch(setNoItems(value));
+        setNoItems(value);
     }
 
     return (

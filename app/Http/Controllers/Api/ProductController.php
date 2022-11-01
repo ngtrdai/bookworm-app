@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
 use Illuminate\Http\Request;
 use App\Repositories\ProductRepository;
 use App\Http\Resources\DetailResource;
@@ -17,12 +18,9 @@ class ProductController extends Controller
         $this->productRepository = $productRepository;
     }
 
-    public function show(Request $request)
+    public function show(ProductRequest $request)
     {
-        $validate = $this->productRepository->validateIDBook($request -> id);
-        if($validate){
-            $bookDetail = $this->productRepository->getProductById($request -> id);
-        }
+        $bookDetail = $this->productRepository->getProductById($request -> id);
         return response()->json(new DetailResource($bookDetail), 200);
     }
 }

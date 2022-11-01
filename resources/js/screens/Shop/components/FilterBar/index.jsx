@@ -5,8 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { setCategory, setAuthor, setRating } from '../../../../reducers/filterBook';
 import { StringUtils } from "../../../../utils";
 import "./style.scss";
-function FilterBar(){
-    const dispatch = useDispatch();
+function FilterBar({ params, setCategory, setAuthor, setRating }) {
     const [filterMenuList, setFilterMenuList] = useState([
         {
             id: 1,
@@ -50,20 +49,19 @@ function FilterBar(){
         fetchFiltersMenu();
     }, []);
 
-    const params = useSelector(state => state.filterBookReducer.params);
     const handleFilter = (e, menuItem, menuName) => {
         // Get classname from e, if active set null
         const className = e.target.className;
         const activated = className.includes('active');
 
         if (menuName === 'Category') {
-            !activated ? dispatch(setCategory({id: menuItem.id, name: menuItem.category_name})) : dispatch(setCategory({id: null, name: null}));
+            !activated ? setCategory({id: menuItem.id, name: menuItem.category_name}) : setCategory({id: null, name: null});
         }
         if (menuName === 'Author') {
-            !activated ? dispatch(setAuthor({id: menuItem.id, name: menuItem.author_name})): dispatch(setAuthor({id: null, name: null}));
+            !activated ? setAuthor({id: menuItem.id, name: menuItem.author_name}): setAuthor({id: null, name: null});
         }
         if (menuName === 'Rating Review') {
-            !activated ? dispatch(setRating(menuItem)): dispatch(setRating(null));
+            !activated ? setRating(menuItem): setRating(null);
         }
     };
 
