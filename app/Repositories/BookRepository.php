@@ -20,10 +20,9 @@ class BookRepository
     public function getOnSale(){
         $books = Book::select('book.*', 'discount.discount_price')
                     -> groupBy('book.id')
-                    -> orderBy('final_price', 'asc')
+                    -> orderBy('sub_price', 'desc')
                     -> limit(env('LIMIT_NO_OF_ITEMS_ON_SALE'));
-        $books = $this -> getFinalPrice($books)-> get();
-        // return new BookCollection($books);
+        $books = $this -> getSubPrice($books)-> get();
         return $books;
     }
 
@@ -74,6 +73,13 @@ class BookRepository
     }
 
     public function getSubPrice($query){
-        
+        return $query -> leftjoin('discount', 'book.id', '=', 'discount.book_id')
+                      -> selectRaw('case
+                                    when now() >= discount.discount_start_date 
+                                    and (now() <= discount.discount_end_date or discount.discount_end_date is null) 
+                                    then book.book_price - discount.discount_price
+                                    else 0
+                                end as sub_price')
+                      -> groupBy('discount.discount_start_date', 'discount.discount_end_date', 'discount.discount_price');
     }
 }

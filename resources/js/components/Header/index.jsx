@@ -3,7 +3,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, useLocation} from 'react-router-dom';
 import { setItemActive } from '../../reducers/header';
 import { SignInModal } from '../../components';
-import { CartUtils } from '../../utils';
 import { useEffect, useState } from 'react';
 import { userApi } from '../../services';
 import IMAGE from '../../../assets';
@@ -33,7 +32,6 @@ function Header() {
     }, []);
 
     const handleLogout = () => {
-        // Call api sign out
         const signOut = async () => {
             try {
                 const response = await userApi.signOut();

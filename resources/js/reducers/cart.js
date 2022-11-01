@@ -57,31 +57,37 @@ const cartSlice = createSlice({
             }
         },
         minusQuantity: (state, action) => {
-            const id = action.payload;
-            const carts = CartUtils.getCart();
-            const index = carts.findIndex(item => item.id === id);
-            if (index !== -1) {
-                if (carts[index].quantity > 1) {
-                    carts[index].quantity -= 1;
-                    localStorage.setItem('cart', JSON.stringify(carts));
-                    state.cart = carts;
-                } else {
-                    carts.splice(index, 1);
-                    localStorage.setItem('cart', JSON.stringify(carts));
-                    state.cart = carts;
+            let confirm = window.confirm('Are you sure to remove this book from cart?');
+            if (confirm) {
+                const id = action.payload;
+                const carts = CartUtils.getCart();
+                const index = carts.findIndex(item => item.id === id);
+                if (index !== -1) {
+                    if (carts[index].quantity > 1) {
+                        carts[index].quantity -= 1;
+                        localStorage.setItem('cart', JSON.stringify(carts));
+                        state.cart = carts;
+                    } else {
+                        carts.splice(index, 1);
+                        localStorage.setItem('cart', JSON.stringify(carts));
+                        state.cart = carts;
+                    }
                 }
             }
         },
         removeFromCart: (state, action) => {
-            const bookId = action.payload;
-            const carts = CartUtils.getCart();
-            const newCarts = carts.filter(cart => cart.id !== bookId);
-            localStorage.setItem('cart', JSON.stringify(newCarts));
-            state.cart = newCarts;
-            state.alert = {
-                show: true,
-                message: 'Book removed from cart',
-            };
+            let confirm = window.confirm('Are you sure to remove this book from cart?');
+            if (confirm) {
+                const bookId = action.payload;
+                const carts = CartUtils.getCart();
+                const newCarts = carts.filter(cart => cart.id !== bookId);
+                localStorage.setItem('cart', JSON.stringify(newCarts));
+                state.cart = newCarts;
+                state.alert = {
+                    show: true,
+                    message: 'Book removed from cart',
+                };
+            }
         },
         clearCart: (state) => {
             localStorage.removeItem('cart');

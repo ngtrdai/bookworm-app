@@ -51,15 +51,19 @@ function FilterBar(){
     }, []);
 
     const params = useSelector(state => state.filterBookReducer.params);
-    const handleFilter = (menuItem, menuName) => {
+    const handleFilter = (e, menuItem, menuName) => {
+        // Get classname from e, if active set null
+        const className = e.target.className;
+        const activated = className.includes('active');
+
         if (menuName === 'Category') {
-            dispatch(setCategory({id: menuItem.id, name: menuItem.category_name}));
+            !activated ? dispatch(setCategory({id: menuItem.id, name: menuItem.category_name})) : dispatch(setCategory({id: null, name: null}));
         }
         if (menuName === 'Author') {
-            dispatch(setAuthor({id: menuItem.id, name: menuItem.author_name}));
+            !activated ? dispatch(setAuthor({id: menuItem.id, name: menuItem.author_name})): dispatch(setAuthor({id: null, name: null}));
         }
         if (menuName === 'Rating Review') {
-            dispatch(setRating(menuItem));
+            !activated ? dispatch(setRating(menuItem)): dispatch(setRating(null));
         }
     };
 
@@ -89,7 +93,7 @@ function FilterBar(){
                                                         ) : (
                                                             'shop__filtermenu__body'
                                                 )))}
-                                            onClick={(e) => handleFilter(menuItem, filterMenu.menuName)}>
+                                            onClick={(e) => handleFilter(e, menuItem, filterMenu.menuName)}>
                                             {
                                                 filterMenu.menuName === 'Rating Review' ? (
                                                     menuItem + ' Star'

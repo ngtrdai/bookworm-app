@@ -148,11 +148,11 @@ function BookReview({ id }) {
                                         <Col xs={12} md={10} lg={11}>
                                             <h3>Star</h3>
                                             <div className='bookworm__reviews__statistics__filter'>
-                                                <span onClick={() => handleRatingChange(5)} className='bookworm__reviews__statistics__filtertext'>5 star ({rating.five})</span><span> | </span>
-                                                <span onClick={() => handleRatingChange(4)} className='bookworm__reviews__statistics__filtertext'>4 star ({rating.four})</span><span> | </span>
-                                                <span onClick={() => handleRatingChange(3)} className='bookworm__reviews__statistics__filtertext'>3 star ({rating.three})</span><span> | </span>
-                                                <span onClick={() => handleRatingChange(2)} className='bookworm__reviews__statistics__filtertext'>2 star ({rating.two})</span><span> | </span>
-                                                <span onClick={() => handleRatingChange(1)} className='bookworm__reviews__statistics__filtertext'>1 star ({rating.one})</span>
+                                                <span onClick={() => rating.five ? handleRatingChange(5) : null} className='bookworm__reviews__statistics__filtertext'>5 star ({rating.five})</span><span> | </span>
+                                                <span onClick={() => rating.four ? handleRatingChange(4) : null} className='bookworm__reviews__statistics__filtertext'>4 star ({rating.four})</span><span> | </span>
+                                                <span onClick={() => rating.three ? handleRatingChange(3) : null} className='bookworm__reviews__statistics__filtertext'>3 star ({rating.three})</span><span> | </span>
+                                                <span onClick={() => rating.two ? handleRatingChange(2) : null} className='bookworm__reviews__statistics__filtertext'>2 star ({rating.two})</span><span> | </span>
+                                                <span onClick={() => rating.one ? handleRatingChange(1) : null} className='bookworm__reviews__statistics__filtertext'>1 star ({rating.one})</span>
                                             </div>
                                         </Col>
                                     </Row>
