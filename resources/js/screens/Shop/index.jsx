@@ -4,7 +4,6 @@ import { FilterBar, ListProducts, TitleShop } from './components';
 import "./style.scss";
 
 function Shop(){
-    // Not create again
     const [category, setCategory] = useState({id: null, name: null});
     const [author, setAuthor] = useState({id: null, name: null});
     const [rating, setRating] = useState(null);

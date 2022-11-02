@@ -30,13 +30,20 @@ function Products({ params, setPage, paginate, setPaginate }) {
     }, [params]);
     const handlePageClick = (data) => {
         setPage(data.selected + 1);
+        window.scrollTo(0, 0);
     }
     return (
         <React.Fragment>
             <Row>
-                {loading && <div>Loading...</div>}
+                {
+                    loading ? (
+                        <div className="loading">
+                            <div className="spinner-border text-dark" role="status"></div>
+                        </div>
+                    ) : null
+                }
                 {books.map((book, index) => (
-                    <Col xs={12} md={3} key={index}>
+                    <Col xs={12} md={3} key={index} className="d-flex justify-content-center">
                         <CardCustom book={book} />
                     </Col>
                 ))}

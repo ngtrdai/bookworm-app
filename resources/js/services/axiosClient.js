@@ -6,7 +6,7 @@ if(JSON.parse(localStorage.getItem('userLogin'))){
 }
 
 const axiosClient = axios.create({
-    baseURL: process.env.BASE_URL,
+    baseURL: "http://localhost:8000/",
     headers: {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${token}`
