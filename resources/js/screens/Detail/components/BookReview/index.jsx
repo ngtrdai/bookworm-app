@@ -190,7 +190,7 @@ function BookReview({ id }) {
                                         return (
                                             <div key={index}>
                                                 <h4>
-                                                    {review.review_title} <span className="bookworm__reviews__rating">| {review.rating_start} starts</span>
+                                                    {review.review_title} <span className="bookworm__reviews__rating">| {review.rating_start} stars</span>
                                                 </h4>
                                                 <p className="bookworm__reviews__content">{review.review_details}</p>
                                                 <p className="bookworm__reviews__date">{StringUtils.convertDate(review.review_date)}</p>

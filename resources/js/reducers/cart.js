@@ -57,17 +57,17 @@ const cartSlice = createSlice({
             }
         },
         minusQuantity: (state, action) => {
-            let confirm = window.confirm('Are you sure to remove this book from cart?');
-            if (confirm) {
-                const id = action.payload;
-                const carts = CartUtils.getCart();
-                const index = carts.findIndex(item => item.id === id);
-                if (index !== -1) {
-                    if (carts[index].quantity > 1) {
-                        carts[index].quantity -= 1;
-                        localStorage.setItem('cart', JSON.stringify(carts));
-                        state.cart = carts;
-                    } else {
+            const id = action.payload;
+            const carts = CartUtils.getCart();
+            const index = carts.findIndex(item => item.id === id);
+            if (index !== -1) {
+                if (carts[index].quantity > 1) {
+                    carts[index].quantity -= 1;
+                    localStorage.setItem('cart', JSON.stringify(carts));
+                    state.cart = carts;
+                } else {
+                    let confirm = window.confirm('Are you sure to remove this book from cart?');
+                    if(confirm) {
                         carts.splice(index, 1);
                         localStorage.setItem('cart', JSON.stringify(carts));
                         state.cart = carts;

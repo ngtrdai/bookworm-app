@@ -23,26 +23,30 @@ function CartTotal(){
         if(!localStorage.getItem('isLogin')){
             setIsShow(true);
         }else{
-            let confirm = window.confirm("Are you sure to place order?");
-            if(confirm){
-                const items_order = cart.map((item) => {
-                    return {
-                        book_id: item.id,
-                        quantity: item.quantity
-                    }
-                });
-                const order = async () => {
-                    try {
-                        const response = await shopApi.orderProducts({items_order: items_order});
-                        if(response.status === 201){
-                            alert("Place order successfully!");
-                            dispatch(clearCart());
+            if(cart.length === 0){
+                alert('Cart is empty');
+            }else{
+                let confirm = window.confirm("Are you sure to place order?");
+                if(confirm){
+                    const items_order = cart.map((item) => {
+                        return {
+                            book_id: item.id,
+                            quantity: item.quantity
                         }
-                    } catch (error) {
-                        console.log(error);
+                    });
+                    const order = async () => {
+                        try {
+                            const response = await shopApi.orderProducts({items_order: items_order});
+                            if(response.status === 201){
+                                alert("Place order successfully!");
+                                dispatch(clearCart());
+                            }
+                        } catch (error) {
+                            console.log(error);
+                        }
                     }
+                    order();
                 }
-                order();
             }
         }
         
