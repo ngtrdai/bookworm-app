@@ -1,5 +1,5 @@
 import { Container, Nav, Navbar, NavDropdown } from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { SignInModal } from '../../components';
 import { useEffect, useState } from 'react';
@@ -30,7 +30,7 @@ function Header() {
                     localStorage.removeItem('isLogin');
                     setIsLogin(false);
                     setFullname('');
-                    navigate('/home');
+                    navigate('/');
                 }
             } catch (error) {
                 console.log(error);
@@ -43,12 +43,12 @@ function Header() {
         <header>
             <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
                 <Container fluid>
-                    <Navbar.Brand href="#" className='bookworm__logo'><img className='bookworm__logo__header' src={IMAGE['logo']} /> <span>BOOKWORM</span></Navbar.Brand>
+                    <Navbar.Brand href="/" className='bookworm__logo'><img className='bookworm__logo__header' src={IMAGE['logo']} /> <span>BOOKWORM</span></Navbar.Brand>
                     <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto"></Nav>
                         <Nav>
-                            <NavLink to="home" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Home</NavLink>
+                            <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Home</NavLink>
                             <NavLink to="shop" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Shop</NavLink>
                             <NavLink to="about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>About</NavLink>
                             <NavLink to="cart" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Cart ({noOfCart})</NavLink>

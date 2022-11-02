@@ -1,3 +1,11 @@
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+}
+
 .bookworm__logo__header {
     width: 32px;
     margin-right: 4px;

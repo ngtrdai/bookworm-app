@@ -11,7 +11,6 @@ function App(){
             <Header />
             <Routes>
                 <Route index path="/" element={<Home />} />
-                <Route path="home" element={<Home />} />
                 <Route path="shop">
                     <Route path=":id" element={<Detail />} />
                     <Route index element={<Shop />} />

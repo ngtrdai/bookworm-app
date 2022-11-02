@@ -11,8 +11,8 @@ function BookDetail({ id }) {
     useEffect(() => {
         const fetchBookDetail = async () => {
             try {
-                const response = await shopApi.getDetailProduct({id: id});
-                setBookDetail(response);
+                const response = await shopApi.getDetailProduct(id);
+                setBookDetail(response.data);
             } catch (error) {
                 if(error.response.status === 422){
                     navigate('/home');
@@ -21,6 +21,7 @@ function BookDetail({ id }) {
         };
         fetchBookDetail();
     }, []);
+    console.log(bookDetail);
     return (
         <React.Fragment>
             {Object.keys(bookDetail).length === 0 ? (

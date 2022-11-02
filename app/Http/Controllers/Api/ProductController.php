@@ -21,6 +21,6 @@ class ProductController extends Controller
     public function show(ProductRequest $request)
     {
         $bookDetail = $this->productRepository->getProductById($request -> id);
-        return response()->json(new DetailResource($bookDetail), 200);
+        return new DetailResource($bookDetail);
     }
 }

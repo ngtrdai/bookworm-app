@@ -146,11 +146,11 @@ function BookReview({ id }) {
                                         
                                     </div>
                                     <Row className="bookworm__reviews__statistics">
-                                        <Col >
+                                        <Col xs={12} md={2} lg={1}>
                                             <h3>{(rating.avg*1.0).toFixed(1)}</h3>
                                             <span className='bookworm__reviews__statistics__filtertext' onClick={() => handleRatingChange(null)}>({rating.total})</span>
                                         </Col>
-                                        <Col >
+                                        <Col xs={12} md={10} lg={11}>
                                             <h3>Star</h3>
                                             <div className='bookworm__reviews__statistics__filter'>
                                                 <span onClick={() => rating.five ? handleRatingChange(5) : null} className='bookworm__reviews__statistics__filtertext'>5 star ({rating.five})</span><span> | </span>

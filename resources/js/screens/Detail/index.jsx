@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { BookDetail, BookReview } from "./components";
