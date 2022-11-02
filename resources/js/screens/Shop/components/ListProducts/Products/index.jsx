@@ -34,7 +34,15 @@ function Products({ params, setPage, paginate, setPaginate }) {
     return (
         <React.Fragment>
             <Row>
-                {loading && <div>Loading...</div>}
+                {
+                    loading ? (
+                        <div className="loading">
+                            <div className="spinner-border text-dark" role="status">
+                                {/* <span className="sr-only">Loading...</span> */}
+                            </div>
+                        </div>
+                    ) : null
+                }
                 {books.map((book, index) => (
                     <Col xs={12} md={3} key={index}>
                         <CardCustom book={book} />

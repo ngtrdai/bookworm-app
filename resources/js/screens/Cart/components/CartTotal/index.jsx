@@ -22,7 +22,7 @@ function CartTotal(){
     const handlePlaceOrder = () => {
         if(!localStorage.getItem('isLogin')){
             setIsShow(true);
-        }else{
+        } else {
             if(cart.length === 0){
                 alert('Cart is empty');
             }else{
