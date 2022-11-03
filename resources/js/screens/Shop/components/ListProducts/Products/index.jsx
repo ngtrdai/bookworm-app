@@ -43,7 +43,7 @@ function Products({ params, setPage, paginate, setPaginate }) {
                     ) : null
                 }
                 {books.map((book, index) => (
-                    <Col xs={12} md={3} key={index} className="d-flex justify-content-center">
+                    <Col xs={12} md={6} lg={4} xl={3} key={index} className="d-flex justify-content-center">
                         <CardCustom book={book} />
                     </Col>
                 ))}

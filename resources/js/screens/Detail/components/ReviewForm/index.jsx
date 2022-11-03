@@ -10,8 +10,8 @@ import "./style.scss";
 function ReviewForm({ id }) {
 
     const schema = yup.object().shape({
-        title: yup.string().required(),
-        detail: yup.string().required(),
+        title: yup.string().required().max(120),    
+        detail: yup.string(),
         rating: yup.number().required(),
     }).required();
 

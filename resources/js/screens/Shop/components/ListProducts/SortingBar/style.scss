@@ -4,8 +4,13 @@
 }
 
 .shop__listproduct__sorting{
-    display: flex !important;
-    justify-content: space-between;
+    // responsive for lg
+    @media (min-width: 992px) {
+        display: flex;
+        justify-content: space-between;
+
+    }
+    
     margin-bottom: 20px;
 }
 

@@ -7,20 +7,22 @@ import 'bootstrap/dist/css/bootstrap.css';
 
 function App(){
     return (
-        <div className="app">
-            <Header />
-            <Routes>
-                <Route index path="/" element={<Home />} />
-                <Route path="shop">
-                    <Route path=":id" element={<Detail />} />
-                    <Route index element={<Shop />} />
-                </Route>
-                <Route path="cart" element={<Cart />} />
-                <Route path="about" element={<About />} />
-                <Route path="*" element={<Error404 />} />
-            </Routes>
-            <Footer />
-        </div>
+        <React.Fragment>
+            <div className="app position-relative">
+                <Header />
+                <Routes>
+                    <Route index path="/" element={<Home />} />
+                    <Route path="shop">
+                        <Route path=":id" element={<Detail />} />
+                        <Route index element={<Shop />} />
+                    </Route>
+                    <Route path="cart" element={<Cart />} />
+                    <Route path="about" element={<About />} />
+                    <Route path="*" element={<Error404 />} />
+                </Routes>
+                <Footer />
+            </div>
+        </React.Fragment>
     );
 }
 

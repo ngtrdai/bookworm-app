@@ -81,13 +81,13 @@ function Shop(){
         <Container className='bookworm__shop'>
             <TitleShop params={params}/>
             <Row>
-                <Col xs={12} md={3}>
+                <Col xs={12} md={12} lg={3}>
                     <FilterBar params={params}
                                setCategory={setCategory}
                                setAuthor={setAuthor}
                                setRating={setRating}/>
                 </Col>
-                <Col xs={12} md={9}>
+                <Col xs={12} md={12} lg={9}>
                     <ListProducts params={params} 
                                   setPage={setPage} 
                                   setSortBy={setSortBy}

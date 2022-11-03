@@ -3,7 +3,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import "./style.scss";
 function About() {
     return (
-        <Container className="bookworm__about">
+        <Container className="bookworm__about min-vh-100">
             <div>
                 <h3>About Us</h3>
                 <hr />
