@@ -13766,6 +13766,7 @@ function Header() {
           }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"], {
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_10__.NavLink, {
               to: "/",
+              end: true,
               className: function className(_ref2) {
                 var isActive = _ref2.isActive;
                 return isActive ? "nav-link active" : "nav-link";

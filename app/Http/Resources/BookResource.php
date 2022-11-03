@@ -22,7 +22,7 @@ class BookResource extends JsonResource
             'book_title' => $this->book_title,
             'book_cover_photo' => $this->book_cover_photo,
             'book_category_name' => $this -> category -> category_name,
-            'final_price' => Book::finalPrice($this -> id),
+            'final_price' => Book::finalPrice($this -> id)
         ];
     }
 }
