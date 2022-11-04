@@ -14,10 +14,10 @@ function Cart(){
         <Container className="bookworm__cart">
             <TitleCustom firstStr="Your cart:" number={cart.length} lastStr="items" />
             <Row className="bookworm__cart__content">
-                <Col xs={12} md={8} lg={8}>
+                <Col md={12} lg={8} className="mb-2">
                     <CardForCart />
                 </Col>
-                <Col xs={12} md={4} lg={4}>
+                <Col md={12} lg={4}>
                     <CartTotal />
                 </Col>
             </Row>
