@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 function App(){
     return (
         <React.Fragment>
-            <div className="app position-relative">
+            <div className="app">
                 <Header />
                 <Routes>
                     <Route index path="/" element={<Home />} />

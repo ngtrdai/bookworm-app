@@ -1,13 +1,11 @@
-import React, {useState, useEffect} from "react";
-import { Container, Row, Col, Card } from "react-bootstrap";
-import { CartUtils } from "../../utils";
+import React from "react";
+import { Container, Row, Col } from "react-bootstrap";
 import { TitleCustom } from "../../components";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import "./style.scss";
 import { CartTotal, CardForCart } from "./components";
 function Cart(){
-    const dispatch = useDispatch();
     const cart = useSelector(state => state.cartReducer.cart);
 
     return (

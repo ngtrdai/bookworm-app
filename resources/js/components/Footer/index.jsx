@@ -4,6 +4,7 @@ import IMAGE from "../../../assets";
 function Footer(){
     return (
         <footer className="bookworm__footer">
+            <img src={IMAGE['logo']} alt="" />
             <div className="bookworm__footer__text">
                 <h1>Bookworm</h1>
                 <h5>Address:</h5>
