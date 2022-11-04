@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card } from "react-bootstrap";
+import { Card,Alert } from "react-bootstrap";
 import { CartUtils } from "../../../../utils";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../../../reducers/cart";
@@ -24,7 +24,9 @@ function CardAddToCart({book}) {
     return (
         <React.Fragment>
             {
-                alert.show && <AlertCustom variant="success" message={alert.message} />
+                alert.show && <Alert variant="success">
+                                {alert.message}
+                              </Alert>    
             }
             <Card>
                 <Card.Header className="bookworm__detail__card__header px-4">

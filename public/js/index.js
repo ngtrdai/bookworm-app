@@ -13503,7 +13503,9 @@ function AlertCustom(_ref) {
     _ref$timeShow = _ref.timeShow,
     timeShow = _ref$timeShow === void 0 ? 3000 : _ref$timeShow,
     _ref$reload = _ref.reload,
-    reload = _ref$reload === void 0 ? false : _ref$reload;
+    reload = _ref$reload === void 0 ? false : _ref$reload,
+    _ref$redictTo = _ref.redictTo,
+    redictTo = _ref$redictTo === void 0 ? "" : _ref$redictTo;
   var _useState = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(true),
     _useState2 = _slicedToArray(_useState, 2),
     show = _useState2[0],
@@ -13511,7 +13513,8 @@ function AlertCustom(_ref) {
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var timer = setTimeout(function () {
       setShow(false);
-      reload ? window.location.reload() : null;
+      redictTo && window.location.replace(redictTo);
+      reload && window.location.reload();
     }, timeShow);
     return function () {
       return clearTimeout(timer);
@@ -13953,9 +13956,6 @@ function SignInModal(props) {
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"].Body, {
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
-          onSubmit: function onSubmit() {
-            return console.log("test");
-          },
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             className: "form-group",
             children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("label", {
@@ -14547,10 +14547,14 @@ function CartTotal() {
     _useState2 = _slicedToArray(_useState, 2),
     isShow = _useState2[0],
     setIsShow = _useState2[1];
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
     _useState4 = _slicedToArray(_useState3, 2),
-    total = _useState4[0],
-    setTotal = _useState4[1];
+    isShowAlert = _useState4[0],
+    setIsShowAlert = _useState4[1];
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(0),
+    _useState6 = _slicedToArray(_useState5, 2),
+    total = _useState6[0],
+    setTotal = _useState6[1];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
     var total = 0;
     cart.forEach(function (item) {
@@ -14588,7 +14592,7 @@ function CartTotal() {
                     case 3:
                       response = _context.sent;
                       if (response.status === 201) {
-                        alert("Place order successfully!");
+                        setIsShowAlert(true);
                         dispatch((0,_reducers_cart__WEBPACK_IMPORTED_MODULE_4__.clearCart)());
                       }
                       _context.next = 10;
@@ -14619,6 +14623,11 @@ function CartTotal() {
       onHide: function onHide() {
         return setIsShow(false);
       }
+    }), isShowAlert && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components__WEBPACK_IMPORTED_MODULE_2__.AlertCustom, {
+      variant: "success",
+      timeShow: 10000,
+      redictTo: "/",
+      message: "Place order successfully!"
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"], {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"].Header, {
         className: "d-flex justify-content-center",
@@ -15257,7 +15266,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Card.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Alert.js");
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Card.js");
 /* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../utils */ "./resources/js/utils/index.js");
 /* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
 /* harmony import */ var _reducers_cart__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../reducers/cart */ "./resources/js/reducers/cart.js");
@@ -15302,11 +15312,11 @@ function CardAddToCart(_ref) {
     dispatch((0,_reducers_cart__WEBPACK_IMPORTED_MODULE_3__.addToCart)(data));
   };
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
-    children: [alert.show && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components__WEBPACK_IMPORTED_MODULE_4__.AlertCustom, {
+    children: [alert.show && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"], {
       variant: "success",
-      message: alert.message
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"], {
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"].Header, {
+      children: alert.message
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"], {
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"].Header, {
         className: "bookworm__detail__card__header px-4",
         children: book.book_price === book.final_price ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
           className: "bookworm__detail__card__price",
@@ -15324,7 +15334,7 @@ function CardAddToCart(_ref) {
             children: ["$", book.final_price]
           })]
         })
-      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"].Body, {
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"].Body, {
         className: "bookworm__detail__card__body px-4 my-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
           className: "mb-0",
@@ -16615,36 +16625,13 @@ function TitleShop(_ref) {
   var params = _ref.params;
   var category_name = params.category_name,
     author_name = params.author_name,
-    rating = params.rating,
-    sort_by = params.sort_by;
-  var filterBy = "(Filtered by ";
-  var filterByString = "";
-  if (category_name) {
-    filterByString = filterBy + "category: " + _utils__WEBPACK_IMPORTED_MODULE_1__.StringUtils.capitalizeWords(category_name) + ")";
-  }
-  if (author_name) {
-    filterByString = filterBy + "author: " + author_name + ")";
-  }
-  if (rating) {
-    filterByString = filterBy + "rating: " + rating + ")";
-  }
-  if (category_name && author_name) {
-    filterByString = filterBy + "category: " + _utils__WEBPACK_IMPORTED_MODULE_1__.StringUtils.capitalizeWords(category_name) + " | author: " + author_name + ")";
-  }
-  if (category_name && rating) {
-    filterByString = filterBy + "category: " + _utils__WEBPACK_IMPORTED_MODULE_1__.StringUtils.capitalizeWords(category_name) + " | rating: " + rating + ")";
-  }
-  if (author_name && rating) {
-    filterByString = filterBy + "author: " + author_name + " | rating: " + rating + ")";
-  }
-  if (category_name && author_name && rating) {
-    filterByString = filterBy + "category: " + _utils__WEBPACK_IMPORTED_MODULE_1__.StringUtils.capitalizeWords(category_name) + " | author: " + author_name + "| rating: " + rating + ")";
-  }
+    rating = params.rating;
+  var filterBy = _utils__WEBPACK_IMPORTED_MODULE_1__.StringUtils.getStringFilter(category_name, author_name, rating);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["default"], {
     className: "bookworm__title",
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h3", {
       children: ["Books ", params.category || params.author || params.rating ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
-        children: filterByString
+        children: filterBy
       }) : ""]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("hr", {})]
   });
@@ -17175,6 +17162,34 @@ var StringUtils = /*#__PURE__*/function () {
       var month = months[date.getMonth()];
       var year = date.getFullYear();
       return "".concat(month, " ").concat(day, ", ").concat(year);
+    }
+  }, {
+    key: "getStringFilter",
+    value: function getStringFilter(category_name, author_name, rating) {
+      var filterBy = "(Filtered by ";
+      var filterByString = "";
+      if (category_name) {
+        filterByString = filterBy + "category: " + this.capitalizeWords(category_name) + ")";
+      }
+      if (author_name) {
+        filterByString = filterBy + "author: " + author_name + ")";
+      }
+      if (rating) {
+        filterByString = filterBy + "rating: " + rating + ")";
+      }
+      if (category_name && author_name) {
+        filterByString = filterBy + "category: " + this.capitalizeWords(category_name) + " | author: " + author_name + ")";
+      }
+      if (category_name && rating) {
+        filterByString = filterBy + "category: " + this.capitalizeWords(category_name) + " | rating: " + rating + ")";
+      }
+      if (author_name && rating) {
+        filterByString = filterBy + "author: " + author_name + " | rating: " + rating + ")";
+      }
+      if (category_name && author_name && rating) {
+        filterByString = filterBy + "category: " + this.capitalizeWords(category_name) + " | author: " + author_name + "| rating: " + rating + ")";
+      }
+      return filterByString;
     }
   }]);
   return StringUtils;
