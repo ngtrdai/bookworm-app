@@ -16601,12 +16601,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Row.js");
-/* harmony import */ var react_redux__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-redux */ "./node_modules/react-redux/es/index.js");
-/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../utils */ "./resources/js/utils/index.js");
-/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style.scss */ "./resources/js/screens/Shop/components/Title/style.scss");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
-
+/* harmony import */ var react_bootstrap__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-bootstrap */ "./node_modules/react-bootstrap/esm/Row.js");
+/* harmony import */ var _utils__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../utils */ "./resources/js/utils/index.js");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./style.scss */ "./resources/js/screens/Shop/components/Title/style.scss");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
 
 
 
@@ -16615,13 +16613,40 @@ __webpack_require__.r(__webpack_exports__);
 
 function TitleShop(_ref) {
   var params = _ref.params;
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__["default"], {
+  var category_name = params.category_name,
+    author_name = params.author_name,
+    rating = params.rating,
+    sort_by = params.sort_by;
+  var filterBy = "(Filtered by ";
+  var filterByString = "";
+  if (category_name) {
+    filterByString = filterBy + "category: " + _utils__WEBPACK_IMPORTED_MODULE_1__.StringUtils.capitalizeWords(category_name) + ")";
+  }
+  if (author_name) {
+    filterByString = filterBy + "author: " + author_name + ")";
+  }
+  if (rating) {
+    filterByString = filterBy + "rating: " + rating + ")";
+  }
+  if (category_name && author_name) {
+    filterByString = filterBy + "category: " + _utils__WEBPACK_IMPORTED_MODULE_1__.StringUtils.capitalizeWords(category_name) + " | author: " + author_name + ")";
+  }
+  if (category_name && rating) {
+    filterByString = filterBy + "category: " + _utils__WEBPACK_IMPORTED_MODULE_1__.StringUtils.capitalizeWords(category_name) + " | rating: " + rating + ")";
+  }
+  if (author_name && rating) {
+    filterByString = filterBy + "author: " + author_name + " | rating: " + rating + ")";
+  }
+  if (category_name && author_name && rating) {
+    filterByString = filterBy + "category: " + _utils__WEBPACK_IMPORTED_MODULE_1__.StringUtils.capitalizeWords(category_name) + " | author: " + author_name + "| rating: " + rating + ")";
+  }
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_4__["default"], {
     className: "bookworm__title",
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("h3", {
-      children: ["Books ", params.category || params.author || params.rating ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("span", {
-        children: "(Filtered by " + (params.category_name ? "category: " + _utils__WEBPACK_IMPORTED_MODULE_2__.StringUtils.capitalizeWords(params.category_name) : "") + " " + (params.author_name ? "author: " + params.author_name : "") + " " + (params.rating ? "rating: " + params.rating + " star" : "") + ")"
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsxs)("h3", {
+      children: ["Books ", params.category || params.author || params.rating ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("span", {
+        children: filterByString
       }) : ""]
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("hr", {})]
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("hr", {})]
   });
 }
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (TitleShop);
