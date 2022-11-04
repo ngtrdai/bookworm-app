@@ -32,10 +32,10 @@ function BookDetail({ id }) {
                 <React.Fragment>
                     <DetailTitle CategoryName={StringUtils.capitalizeWords(bookDetail.book_category_name)} />
                     <Row className='mb-2'>
-                        <Col xs={12} md={8} lg={8} className="bookworm__detail__colitem mb-2">
+                        <Col xs={12} md={12} lg={8} xl={8} className="bookworm__detail__colitem mb-2">
                             <CardDetail book={bookDetail}/>
                         </Col>
-                        <Col xs={12} md={4} lg={4} className="bookworm__detail__colitem">
+                        <Col xs={12} md={12} lg={4} xl={4} className="bookworm__detail__colitem">
                             <CardAddToCart book={bookDetail} />
                         </Col>
                     </Row>

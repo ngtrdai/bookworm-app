@@ -14822,16 +14822,18 @@ function BookDetail(_ref) {
         className: "mb-2",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"], {
           xs: 12,
-          md: 8,
+          md: 12,
           lg: 8,
+          xl: 8,
           className: "bookworm__detail__colitem mb-2",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components__WEBPACK_IMPORTED_MODULE_1__.CardDetail, {
             book: bookDetail
           })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_7__["default"], {
           xs: 12,
-          md: 4,
+          md: 12,
           lg: 4,
+          xl: 4,
           className: "bookworm__detail__colitem",
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_components__WEBPACK_IMPORTED_MODULE_1__.CardAddToCart, {
             book: bookDetail
@@ -15052,7 +15054,7 @@ function BookReview(_ref) {
       className: "mb-3",
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"], {
         xs: 12,
-        md: 8,
+        md: 12,
         lg: 8,
         className: "bookworm__detail__colitem mb-2",
         children: reviews.length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"], {
@@ -15241,7 +15243,7 @@ function BookReview(_ref) {
         })
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"], {
         xs: 12,
-        md: 4,
+        md: 12,
         lg: 4,
         className: "bookworm__detail__colitem",
         children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components__WEBPACK_IMPORTED_MODULE_2__.ReviewForm, {
@@ -17525,7 +17527,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".bookworm__reviews .bookworm__reviews__body {\n  background-color: #f5f5f5;\n  padding: 30px;\n}\n.bookworm__reviews .bookworm__reviews__body .bookworm__review__empty {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  font-size: 20px;\n  color: #999;\n}\n.bookworm__reviews .bookworm__reviews__body .bookworm__review__empty p {\n  margin: 0;\n}\n.bookworm__reviews .bookworm__reviews__body .bookworm__reviews__rating {\n  color: #6c757d;\n  font-size: 16px;\n}\n.bookworm__reviews .bookworm__reviews__title {\n  display: flex;\n  text-align: center;\n  margin-bottom: 1rem;\n}\n.bookworm__reviews .bookworm__reviews__title span {\n  margin-left: 6px;\n  color: #6c757d;\n}\n\n.bookworm__reviews__statistics h3 {\n  margin-bottom: 0px;\n}\n.bookworm__reviews__statistics .bookworm__reviews__statistics__filter span {\n  font-size: 12px;\n  cursor: pointer;\n}\n.bookworm__reviews__statistics .bookworm__reviews__statistics__filtertext {\n  font-size: 12px;\n  color: #6c757d;\n  margin-bottom: 1rem;\n  text-decoration: underline;\n  cursor: pointer;\n}\n\n.bookworm__reviews__filterbar {\n  display: flex !important;\n  justify-content: space-between;\n  margin-bottom: 20px;\n  margin-top: 20px;\n}\n\n.bookworm__reviews__filterbar__dropdown {\n  display: flex !important;\n  justify-content: flex-end;\n}\n.bookworm__reviews__filterbar__dropdown .bookworm__reviews__filterbar__dropdown__sorting {\n  margin-right: 6px;\n}\n.bookworm__reviews__filterbar__dropdown button {\n  background-color: #000;\n  color: #fff;\n  font-size: 1rem;\n  font-weight: 600;\n  padding: 0.5rem 1rem;\n  border: none;\n  border-radius: 0.5rem;\n  cursor: pointer;\n  transition: all 0.15s ease-in-out;\n  border: 1px solid #000;\n}\n.bookworm__reviews__filterbar__dropdown button:hover {\n  background-color: #fff;\n  color: #000;\n  border: 1px solid #000;\n}\n.bookworm__reviews__filterbar__dropdown button::backdrop {\n  background-color: #000;\n}\n.bookworm__reviews__filterbar__dropdown a:hover {\n  color: #fff;\n  background-color: #000;\n}\n\n.bookworm__reviews__pagination {\n  display: flex;\n  justify-content: center;\n}\n.bookworm__reviews__pagination .page-link {\n  color: #000;\n  background-color: #f5f5f5;\n}\n.bookworm__reviews__pagination .page-link:active {\n  background-color: #000;\n  color: #fff;\n}\n.bookworm__reviews__pagination .page-link.active, .bookworm__reviews__pagination .active > .page-link {\n  background-color: #000;\n  color: #fff;\n  border-color: #000;\n}\n.bookworm__reviews__pagination .page-link:hover {\n  background-color: #000;\n  color: #fff;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".bookworm__reviews .bookworm__reviews__body {\n  background-color: #f5f5f5;\n  padding: 30px;\n}\n.bookworm__reviews .bookworm__reviews__body .bookworm__review__empty {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  flex-direction: column;\n  font-size: 20px;\n  color: #999;\n}\n.bookworm__reviews .bookworm__reviews__body .bookworm__review__empty p {\n  margin: 0;\n}\n.bookworm__reviews .bookworm__reviews__body .bookworm__reviews__rating {\n  color: #6c757d;\n  font-size: 16px;\n}\n.bookworm__reviews .bookworm__reviews__title {\n  display: flex;\n  text-align: center;\n  margin-bottom: 1rem;\n}\n.bookworm__reviews .bookworm__reviews__title span {\n  margin-left: 6px;\n  color: #6c757d;\n}\n\n.bookworm__reviews__statistics h3 {\n  margin-bottom: 0px;\n}\n.bookworm__reviews__statistics .bookworm__reviews__statistics__filter span {\n  font-size: 12px;\n  cursor: pointer;\n}\n.bookworm__reviews__statistics .bookworm__reviews__statistics__filtertext {\n  font-size: 12px;\n  color: #6c757d;\n  margin-bottom: 1rem;\n  text-decoration: underline;\n  cursor: pointer;\n}\n\n.bookworm__reviews__filterbar {\n  margin-bottom: 20px;\n  margin-top: 20px;\n}\n@media (min-width: 767px) {\n  .bookworm__reviews__filterbar {\n    display: flex !important;\n    justify-content: space-between;\n  }\n}\n\n@media (min-width: 767px) {\n  .bookworm__reviews__filterbar__dropdown {\n    display: flex !important;\n    justify-content: space-between;\n  }\n}\n.bookworm__reviews__filterbar__dropdown .bookworm__reviews__filterbar__dropdown__sorting {\n  margin-right: 6px;\n}\n@media (max-width: 767px) {\n  .bookworm__reviews__filterbar__dropdown .bookworm__reviews__filterbar__dropdown__sorting {\n    margin-bottom: 6px;\n  }\n}\n.bookworm__reviews__filterbar__dropdown button {\n  background-color: #000;\n  color: #fff;\n  font-size: 1rem;\n  font-weight: 600;\n  padding: 0.5rem 1rem;\n  border: none;\n  border-radius: 0.5rem;\n  cursor: pointer;\n  transition: all 0.15s ease-in-out;\n  border: 1px solid #000;\n}\n.bookworm__reviews__filterbar__dropdown button:hover {\n  background-color: #fff;\n  color: #000;\n  border: 1px solid #000;\n}\n.bookworm__reviews__filterbar__dropdown button::backdrop {\n  background-color: #000;\n}\n.bookworm__reviews__filterbar__dropdown a:hover {\n  color: #fff;\n  background-color: #000;\n}\n\n.bookworm__reviews__pagination {\n  display: flex;\n  justify-content: center;\n}\n.bookworm__reviews__pagination .page-link {\n  color: #000;\n  background-color: #f5f5f5;\n}\n.bookworm__reviews__pagination .page-link:active {\n  background-color: #000;\n  color: #fff;\n}\n.bookworm__reviews__pagination .page-link.active, .bookworm__reviews__pagination .active > .page-link {\n  background-color: #000;\n  color: #fff;\n  border-color: #000;\n}\n.bookworm__reviews__pagination .page-link:hover {\n  background-color: #000;\n  color: #fff;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17645,7 +17647,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".bookworm__featured {\n  margin-top: 24px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.bookworm__featured h1 {\n  margin: auto;\n  font-size: 28px;\n}\n.bookworm__featured__tabs {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n}\n.bookworm__featured__tabs button {\n  background-color: #fff;\n  color: #000;\n  font-size: 1.5rem;\n  font-weight: 700;\n  padding: 0.5rem 1rem;\n  border: none;\n  border-radius: 0.5rem;\n  cursor: pointer;\n  transition: all 0.15s ease-in-out;\n}\n.bookworm__featured__tabs button:hover {\n  background-color: #000;\n  color: #fff;\n}\n.bookworm__featured__tabs .bookworm__featured__tab--active {\n  background-color: #000;\n  color: #fff;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".bookworm__featured {\n  margin-top: 24px;\n  display: flex;\n  flex-direction: column;\n  justify-content: center;\n}\n.bookworm__featured h1 {\n  margin: auto;\n  font-size: 28px;\n}\n.bookworm__featured__tabs {\n  display: flex;\n  flex-direction: row;\n  justify-content: center;\n}\n.bookworm__featured__tabs button {\n  background-color: #fff;\n  color: #000;\n  font-size: 1.5rem;\n  font-weight: 700;\n  padding: 0.5rem 1rem;\n  border: none;\n  border-radius: 0.5rem;\n  cursor: pointer;\n  transition: all 0.15s ease-in-out;\n}\n.bookworm__featured__tabs .bookworm__featured__tab--active {\n  background-color: #000;\n  color: #fff;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17669,7 +17671,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".bookworm__onsale {\n  padding: 0px;\n}\n.bookworm__onsale .bookworm__onsale__title {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n}\n.bookworm__onsale .bookworm__onsale_button button {\n  background-color: #000;\n  color: #fff;\n  font-size: 1rem;\n  font-weight: 600;\n  padding: 0.5rem 1rem;\n  border: none;\n  border-radius: 0.5rem;\n  cursor: pointer;\n  transition: all 0.15s ease-in-out;\n  border: 1px solid #000;\n}\n.bookworm__onsale .bookworm__onsale_button button:hover {\n  background-color: #fff;\n  color: #000;\n}\n\n.carousel {\n  background-color: #ffffff;\n  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;\n  padding: 30px 30px;\n  width: 100%;\n}\n\n.carousel__books .react-multi-carousel-item {\n  display: flex;\n  justify-content: center;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".bookworm__onsale {\n  padding: 0px;\n}\n.bookworm__onsale .bookworm__onsale__title {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n}\n.bookworm__onsale .bookworm__onsale_button button {\n  background-color: #000;\n  color: #fff;\n  font-size: 1rem;\n  font-weight: 600;\n  padding: 0.5rem 1rem;\n  border: none;\n  border-radius: 0.5rem;\n  cursor: pointer;\n  transition: all 0.15s ease-in-out;\n  border: 1px solid #000;\n}\n.bookworm__onsale .bookworm__onsale_button button:hover {\n  background-color: #fff;\n  color: #000;\n}\n\n.carousel {\n  background-color: #ffffff;\n  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;\n  padding: 30px 30px;\n  width: 100%;\n}\n\n.carousel__books .react-multi-carousel-item {\n  display: flex;\n  justify-content: center;\n}\n.carousel__books .card__custom {\n  width: 95%;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

@@ -16,11 +16,13 @@ class OrderRepository{
     public function filterParams($request){
         $userId = $request->user()->id;
         $itemsOrder = $request->items_order;
+        $amount = 0;
         foreach($itemsOrder as $key => $item){
             $finalPrice = Book::finalPrice($item['book_id']);
             $itemsOrder[$key]['price'] = $finalPrice;
+            $amount += $finalPrice;
         }
-        return [$userId, $itemsOrder];
+        return [$userId, $itemsOrder, $amount];
     }
 
     /**
@@ -29,13 +31,13 @@ class OrderRepository{
      * @description Create order and order items
      * @return Order
      */
-    public function createOrder($userId, $itemsOrder){
+    public function createOrder($userId, $itemsOrder, $amount){
         DB::beginTransaction();
         try{
             $order = Order::create([
                 'user_id' => $userId,
                 'order_date' => Carbon::now(),
-                'order_amount' => count($itemsOrder),
+                'order_amount' => $amount,
             ]);
             $order->items()->createMany($itemsOrder);
             DB::commit();
