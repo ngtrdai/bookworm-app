@@ -14190,20 +14190,19 @@ var cartSlice = (0,_reduxjs_toolkit__WEBPACK_IMPORTED_MODULE_1__.createSlice)({
       }
     },
     removeFromCart: function removeFromCart(state, action) {
-      var confirm = window.confirm('Are you sure to remove this book from cart?');
-      if (confirm) {
-        var bookId = action.payload;
-        var carts = _utils__WEBPACK_IMPORTED_MODULE_0__.CartUtils.getCart();
-        var newCarts = carts.filter(function (cart) {
-          return cart.id !== bookId;
+      var listIdBook = action.payload;
+      var carts = _utils__WEBPACK_IMPORTED_MODULE_0__.CartUtils.getCart();
+      listIdBook.forEach(function (id) {
+        var index = carts.findIndex(function (item) {
+          return item.id === id;
         });
-        localStorage.setItem('cart', JSON.stringify(newCarts));
-        state.cart = newCarts;
-        state.alert = {
-          show: true,
-          message: 'Book removed from cart'
-        };
-      }
+        if (index !== -1) {
+          alert("Book: " + carts[index].book.book_title + " not available");
+          carts.splice(index, 1);
+        }
+      });
+      localStorage.setItem('cart', JSON.stringify(carts));
+      state.cart = carts;
     },
     clearCart: function clearCart(state) {
       localStorage.removeItem('cart');
@@ -14579,7 +14578,7 @@ function CartTotal() {
           });
           var order = /*#__PURE__*/function () {
             var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
-              var response;
+              var response, listIdBook;
               return _regeneratorRuntime().wrap(function _callee$(_context) {
                 while (1) {
                   switch (_context.prev = _context.next) {
@@ -14600,7 +14599,20 @@ function CartTotal() {
                     case 7:
                       _context.prev = 7;
                       _context.t0 = _context["catch"](0);
-                      console.log(_context.t0);
+                      if (_context.t0.response.status === 422) {
+                        listIdBook = [];
+                        if (_context.t0.response.data.errors.book_id) {
+                          _context.t0.response.data.errors.book_id.forEach(function (item) {
+                            if (item[0].includes('Exists:')) {
+                              var itemId = item[0].match(/\d+/)[0];
+                              listIdBook.push(cart[itemId].id);
+                            }
+                          });
+                        }
+                        if (listIdBook) {
+                          dispatch((0,_reducers_cart__WEBPACK_IMPORTED_MODULE_4__.removeFromCart)(listIdBook));
+                        }
+                      }
                     case 10:
                     case "end":
                       return _context.stop();
@@ -14769,8 +14781,13 @@ function BookDetail(_ref) {
     _useState2 = _slicedToArray(_useState, 2),
     bookDetail = _useState2[0],
     setBookDetail = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    loading = _useState4[0],
+    setLoading = _useState4[1];
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_5__.useNavigate)();
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setLoading(true);
     var fetchBookDetail = /*#__PURE__*/function () {
       var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var response;
@@ -14784,20 +14801,21 @@ function BookDetail(_ref) {
               case 3:
                 response = _context.sent;
                 setBookDetail(response.data);
-                _context.next = 10;
+                setLoading(false);
+                _context.next = 11;
                 break;
-              case 7:
-                _context.prev = 7;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 if (_context.t0.response.status === 422) {
                   navigate('/home');
                 }
-              case 10:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee, null, [[0, 8]]);
       }));
       return function fetchBookDetail() {
         return _ref2.apply(this, arguments);
@@ -14805,7 +14823,6 @@ function BookDetail(_ref) {
     }();
     fetchBookDetail();
   }, []);
-  console.log(bookDetail);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react__WEBPACK_IMPORTED_MODULE_0__.Fragment, {
     children: Object.keys(bookDetail).length === 0 ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
       className: "bookworm__detail__loading",
@@ -15591,7 +15608,7 @@ function ReviewForm(_ref) {
     children: [showAlert && /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(_components__WEBPACK_IMPORTED_MODULE_2__.AlertCustom, {
       variant: "success",
       message: "Review successfully",
-      timeShow: 10000,
+      timeShow: 5000,
       reload: true
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("form", {
       onSubmit: handleSubmit(onSubmit),
@@ -15855,7 +15872,12 @@ function Featured() {
     _useState6 = _slicedToArray(_useState5, 2),
     recommended = _useState6[0],
     setRecommended = _useState6[1];
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(false),
+    _useState8 = _slicedToArray(_useState7, 2),
+    loading = _useState8[0],
+    setLoading = _useState8[1];
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
+    setLoading(true);
     var books = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var response;
@@ -15870,18 +15892,19 @@ function Featured() {
                 response = _context.sent;
                 setPopular(response.popular.data);
                 setRecommended(response.recommended.data);
-                _context.next = 11;
+                setLoading(false);
+                _context.next = 12;
                 break;
-              case 8:
-                _context.prev = 8;
+              case 9:
+                _context.prev = 9;
                 _context.t0 = _context["catch"](0);
                 console.log('Failed to fetch book list: ', _context.t0);
-              case 11:
+              case 12:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 8]]);
+        }, _callee, null, [[0, 9]]);
       }));
       return function books() {
         return _ref.apply(this, arguments);
@@ -15912,9 +15935,15 @@ function Featured() {
       })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_5__["default"], {
       className: "p-12 mt-2",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsxs)("div", {
         className: "carousel",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        children: [loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+          className: "loading mb-4",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)("div", {
+            className: "spinner-border text-dark",
+            role: "status"
+          })
+        }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_6__["default"], {
           xs: 1,
           md: 2,
           lg: 3,
@@ -15924,7 +15953,7 @@ function Featured() {
           }) : /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_4__.jsx)(_ListFeatured__WEBPACK_IMPORTED_MODULE_1__["default"], {
             books: popular
           })
-        })
+        })]
       })
     })]
   });
@@ -15979,6 +16008,10 @@ function OnSale() {
     _useState2 = _slicedToArray(_useState, 2),
     books = _useState2[0],
     setBooks = _useState2[1];
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+    _useState4 = _slicedToArray(_useState3, 2),
+    loading = _useState4[0],
+    setLoading = _useState4[1];
   var navigate = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_7__.useNavigate)();
   var responsive = {
     superLargeDesktop: {
@@ -16018,6 +16051,7 @@ function OnSale() {
     }
   };
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+    setLoading(true);
     var bookOnSale = /*#__PURE__*/function () {
       var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee() {
         var response;
@@ -16031,18 +16065,19 @@ function OnSale() {
               case 3:
                 response = _context.sent;
                 setBooks(response.data);
-                _context.next = 10;
+                setLoading(false);
+                _context.next = 11;
                 break;
-              case 7:
-                _context.prev = 7;
+              case 8:
+                _context.prev = 8;
                 _context.t0 = _context["catch"](0);
                 console.log('Failed to fetch book list: ', _context.t0);
-              case 10:
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[0, 7]]);
+        }, _callee, null, [[0, 8]]);
       }));
       return function bookOnSale() {
         return _ref.apply(this, arguments);
@@ -16068,9 +16103,15 @@ function OnSale() {
       })
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_8__["default"], {
       className: "p-12 mt-2",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
         className: "carousel",
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_multi_carousel__WEBPACK_IMPORTED_MODULE_0__["default"], {
+        children: [loading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+          className: "loading",
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("div", {
+            className: "spinner-border text-dark",
+            role: "status"
+          })
+        }) : null, /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_multi_carousel__WEBPACK_IMPORTED_MODULE_0__["default"], {
           responsive: responsive,
           className: "carousel__books",
           infinite: true,
@@ -16079,7 +16120,7 @@ function OnSale() {
               book: book
             }, index);
           })
-        })
+        })]
       })
     })]
   });
@@ -17156,10 +17197,11 @@ var StringUtils = /*#__PURE__*/function () {
   }, {
     key: "convertDate",
     value: function convertDate(dateTypeTimestamp) {
-      var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
       var date = new Date(dateTypeTimestamp);
       var day = date.getDate();
-      var month = months[date.getMonth()];
+      var month = date.toLocaleString('en-us', {
+        month: 'long'
+      });
       var year = date.getFullYear();
       return "".concat(month, " ").concat(day, ", ").concat(year);
     }
@@ -17175,19 +17217,19 @@ var StringUtils = /*#__PURE__*/function () {
         filterByString = filterBy + "author: " + author_name + ")";
       }
       if (rating) {
-        filterByString = filterBy + "rating: " + rating + ")";
+        filterByString = filterBy + "rating review)";
       }
       if (category_name && author_name) {
         filterByString = filterBy + "category: " + this.capitalizeWords(category_name) + " | author: " + author_name + ")";
       }
       if (category_name && rating) {
-        filterByString = filterBy + "category: " + this.capitalizeWords(category_name) + " | rating: " + rating + ")";
+        filterByString = filterBy + "category: " + this.capitalizeWords(category_name) + " | rating review)";
       }
       if (author_name && rating) {
-        filterByString = filterBy + "author: " + author_name + " | rating: " + rating + ")";
+        filterByString = filterBy + "author: " + author_name + " | rating review)";
       }
       if (category_name && author_name && rating) {
-        filterByString = filterBy + "category: " + this.capitalizeWords(category_name) + " | author: " + author_name + "| rating: " + rating + ")";
+        filterByString = filterBy + "category: " + this.capitalizeWords(category_name) + " | author: " + author_name + "| rating review)";
       }
       return filterByString;
     }
@@ -17651,7 +17693,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".detail {\n  margin-top: 80px;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".detail {\n  margin-top: 80px;\n}\n\n.loading {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100%;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17699,7 +17741,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".bookworm__onsale {\n  padding: 0px;\n}\n.bookworm__onsale .bookworm__onsale__title {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n}\n.bookworm__onsale .bookworm__onsale_button button {\n  background-color: #000;\n  color: #fff;\n  font-size: 1rem;\n  font-weight: 600;\n  padding: 0.5rem 1rem;\n  border: none;\n  border-radius: 0.5rem;\n  cursor: pointer;\n  transition: all 0.15s ease-in-out;\n  border: 1px solid #000;\n}\n.bookworm__onsale .bookworm__onsale_button button:hover {\n  background-color: #fff;\n  color: #000;\n}\n\n.carousel {\n  background-color: #ffffff;\n  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;\n  padding: 30px 30px;\n  width: 100%;\n}\n\n.carousel__books .react-multi-carousel-item {\n  display: flex;\n  justify-content: center;\n}\n.carousel__books .card__custom {\n  width: 95%;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".bookworm__onsale {\n  padding: 0px;\n}\n.bookworm__onsale .bookworm__onsale__title {\n  display: flex;\n  flex-direction: row;\n  justify-content: space-between;\n}\n.bookworm__onsale .bookworm__onsale_button button {\n  background-color: #000;\n  color: #fff;\n  font-size: 1rem;\n  font-weight: 600;\n  padding: 0.5rem 1rem;\n  border: none;\n  border-radius: 0.5rem;\n  cursor: pointer;\n  transition: all 0.15s ease-in-out;\n  border: 1px solid #000;\n}\n.bookworm__onsale .bookworm__onsale_button button:hover {\n  background-color: #fff;\n  color: #000;\n}\n\n.carousel {\n  background-color: #ffffff;\n  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;\n  padding: 30px 30px;\n  width: 100%;\n}\n.carousel .loading {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 50%;\n}\n\n.carousel__books .react-multi-carousel-item {\n  display: flex;\n  justify-content: center;\n}\n.carousel__books .card__custom {\n  width: 95%;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17723,7 +17765,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".home {\n  margin-top: 80px;\n}\n.home .card__custom {\n  height: 35rem !important;\n}\n.home .card__custom .card__custom__img {\n  height: 400px !important;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".home {\n  margin-top: 80px;\n  min-height: calc(100vh - 210px);\n}\n.home .card__custom {\n  height: 35rem !important;\n}\n.home .card__custom .card__custom__img {\n  height: 400px !important;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -17771,7 +17813,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, ".shop__listproduct__pagination {\n  display: flex;\n  justify-content: center;\n}\n.shop__listproduct__pagination .page-link {\n  color: #000;\n  background-color: #f5f5f5;\n}\n.shop__listproduct__pagination .page-link:active {\n  background-color: #000;\n  color: #fff;\n}\n.shop__listproduct__pagination .page-link.active, .shop__listproduct__pagination .active > .page-link {\n  background-color: #000;\n  color: #fff;\n  border-color: #000;\n}\n.shop__listproduct__pagination .page-link:hover {\n  background-color: #000;\n  color: #fff;\n}\n\n.loading {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100vh;\n}", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, ".shop__listproduct__pagination {\n  display: flex;\n  justify-content: center;\n}\n.shop__listproduct__pagination .page-link {\n  color: #000;\n  background-color: #f5f5f5;\n}\n.shop__listproduct__pagination .page-link:active {\n  background-color: #000;\n  color: #fff;\n}\n.shop__listproduct__pagination .page-link.active, .shop__listproduct__pagination .active > .page-link {\n  background-color: #000;\n  color: #fff;\n  border-color: #000;\n}\n.shop__listproduct__pagination .page-link:hover {\n  background-color: #000;\n  color: #fff;\n}\n\n.row .loading {\n  display: flex;\n  justify-content: center;\n  align-items: center;\n  height: 100vh;\n}", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

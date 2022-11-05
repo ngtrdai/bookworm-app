@@ -3,7 +3,7 @@ import { Card } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
 import { SignInModal, AlertCustom } from "../../../../components";
 import { shopApi } from "../../../../services";
-import { clearCart } from "../../../../reducers/cart";
+import { clearCart, removeFromCart } from "../../../../reducers/cart";
 import "./style.scss"
 function CartTotal(){
     const dispatch = useDispatch();
@@ -43,7 +43,20 @@ function CartTotal(){
                                 dispatch(clearCart());
                             }
                         } catch (error) {
-                            console.log(error);
+                            if(error.response.status === 422){
+                                let listIdBook = [];
+                                if(error.response.data.errors.book_id){
+                                    error.response.data.errors.book_id.forEach((item) => {
+                                        if(item[0].includes('Exists:')){
+                                            const itemId = item[0].match(/\d+/)[0];
+                                            listIdBook.push(cart[itemId].id);
+                                        }
+                                    });
+                                }
+                                if(listIdBook){
+                                    dispatch(removeFromCart(listIdBook));
+                                }
+                            }
                         }
                     }
                     order();

@@ -47,7 +47,7 @@ function ReviewForm({ id }) {
     return (
         <React.Fragment>
             {
-                showAlert && <AlertCustom variant="success" message="Review successfully" timeShow={10000} reload={true}/>
+                showAlert && <AlertCustom variant="success" message="Review successfully" timeShow={5000} reload={true}/>
             }
             <form onSubmit={handleSubmit(onSubmit)}>
                 <Card className="bookworm__review__form">

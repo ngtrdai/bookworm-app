@@ -26,16 +26,38 @@ class PostOrderRequest extends FormRequest
         return [
             'items_order' => 'required|array',
             'items_order.*.book_id' => 'required|integer|exists:book,id',
-            'items_order.*.quantity' => 'required|integer|min:1',
+            'items_order.*.quantity' => 'required|integer|min:1|max:'.env('MAX_NUMBER_OF_ITEMS_ORDER'),
         ];
     }
 
     public function failedValidation($validator)
     {
+        $errors = $validator->errors();
+        $newErrors = [];
+        foreach ($errors->get('items_order.*.book_id') as $error) {
+            $newErrors['book_id'][] = $error;
+        }
+        $newErrors['quantity'] = $errors->get('items_order.*.quantity');
+    
         $response = response()->json([
-            'status' => 'error',
-            'message' => $validator->errors()->first(),
+            'message' => 'The given data was invalid.',
+            'errors' => $newErrors,
         ], 422);
         throw new \Illuminate\Validation\ValidationException($validator, $response);
     }
+
+    public function messages()
+    {
+        return [
+            'items_order.*.book_id.required' => 'Required: :index',
+            'items_order.*.book_id.integer' => 'Integer: :index',
+            'items_order.*.book_id.exists' => 'Exists: :index',
+            'items_order.*.quantity.required' => 'Required: :index',
+            'items_order.*.quantity.integer' => 'Integer: :index',
+            'items_order.*.quantity.min' => 'Min: :index',
+            'items_order.*.quantity.max' => 'Max: :index',
+        ];
+    }
+
+
 }
