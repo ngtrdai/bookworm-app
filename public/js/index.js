@@ -14605,7 +14605,7 @@ function CartTotal() {
                           _context.t0.response.data.errors.book_id.forEach(function (item) {
                             if (item[0].includes('Exists:')) {
                               var itemId = item[0].match(/\d+/)[0];
-                              listIdBook.push(cart[itemId].id);
+                              listIdBook.push(itemId);
                             }
                           });
                         }

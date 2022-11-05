@@ -49,7 +49,7 @@ function CartTotal(){
                                     error.response.data.errors.book_id.forEach((item) => {
                                         if(item[0].includes('Exists:')){
                                             const itemId = item[0].match(/\d+/)[0];
-                                            listIdBook.push(cart[itemId].id);
+                                            listIdBook.push(itemId);
                                         }
                                     });
                                 }

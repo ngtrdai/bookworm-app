@@ -38,7 +38,7 @@ class PostOrderRequest extends FormRequest
             $newErrors['book_id'][] = $error;
         }
         $newErrors['quantity'] = $errors->get('items_order.*.quantity');
-    
+
         $response = response()->json([
             'message' => 'The given data was invalid.',
             'errors' => $newErrors,
@@ -51,7 +51,7 @@ class PostOrderRequest extends FormRequest
         return [
             'items_order.*.book_id.required' => 'Required: :index',
             'items_order.*.book_id.integer' => 'Integer: :index',
-            'items_order.*.book_id.exists' => 'Exists: :index',
+            'items_order.*.book_id.exists' => 'Exists: :input',
             'items_order.*.quantity.required' => 'Required: :index',
             'items_order.*.quantity.integer' => 'Integer: :index',
             'items_order.*.quantity.min' => 'Min: :index',
