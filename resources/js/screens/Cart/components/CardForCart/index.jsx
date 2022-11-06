@@ -48,7 +48,7 @@ function CardForCart(){
                     ) : (
                         cart.map((item, index) => {
                             return (
-                                <Row key={index} className="mb-3">
+                                <Row key={index}>
                                     <Col xs={12} md={12} lg={5}>
                                         <div className="bookworm__cart__booktitle d-flex">
                                             <img onClick={() => handleClick(item.book)} className="bookworm__cart__image" src={item.book.book_cover_photo ? IMAGE[item.book.book_cover_photo]: IMAGE['bookDefault']} alt="book" />

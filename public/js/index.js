@@ -14415,7 +14415,6 @@ function CardForCart() {
         })
       }) : cart.map(function (item, index) {
         return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)(react_bootstrap__WEBPACK_IMPORTED_MODULE_9__["default"], {
-          className: "mb-3",
           children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)(react_bootstrap__WEBPACK_IMPORTED_MODULE_10__["default"], {
             xs: 12,
             md: 12,
@@ -14961,17 +14960,20 @@ function BookReview(_ref) {
   };
   var handleSortChange = function handleSortChange(sortBy) {
     setFilterParams(_objectSpread(_objectSpread({}, filterParams), {}, {
-      sort_by: sortBy
+      sort_by: sortBy,
+      page: 1
     }));
   };
   var handleShowChange = function handleShowChange(noItems) {
     setFilterParams(_objectSpread(_objectSpread({}, filterParams), {}, {
-      no_items: noItems
+      no_items: noItems,
+      page: 1
     }));
   };
   var handleRatingChange = function handleRatingChange(rating) {
     setFilterParams(_objectSpread(_objectSpread({}, filterParams), {}, {
-      rating: rating
+      rating: rating,
+      page: 1
     }));
   };
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
