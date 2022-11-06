@@ -13634,7 +13634,7 @@ function Footer() {
       children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h1", {
         children: "Bookworm"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h5", {
-        children: "Address: "
+        children: "Address: Etown 1, Level 3, 364 Cong Hoa Street"
       }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_3__.jsx)("h5", {
         children: "Phone: (+84).979.808.617"
       })]
