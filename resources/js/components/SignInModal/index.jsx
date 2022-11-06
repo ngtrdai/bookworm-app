@@ -58,7 +58,7 @@ function SignInModal(props){
                     <Modal.Title>Sign In</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <form onSubmit={() => console.log("test")}>
+                    <form>
                         <div className="form-group">
                             <label htmlFor="email">Email address</label>
                             <input {...register('email')} type="email" className="form-control"/>

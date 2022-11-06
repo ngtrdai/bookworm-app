@@ -123,7 +123,7 @@ function BookReview({ id }) {
     return (
         <React.Fragment>
             <Row className='mb-3'>
-                <Col xs={12} md={8} lg={8} className="bookworm__detail__colitem mb-2">
+                <Col xs={12} md={12} lg={8} className="bookworm__detail__colitem mb-2">
                     {
                         reviews.length === 0 ? (
                             <Card className="bookworm__reviews">
@@ -227,7 +227,7 @@ function BookReview({ id }) {
                     }
 
                 </Col>
-                <Col xs={12} md={4} lg={4} className="bookworm__detail__colitem">
+                <Col xs={12} md={12} lg={4} className="bookworm__detail__colitem">
                     <ReviewForm id={id}/>
                 </Col>
             </Row>

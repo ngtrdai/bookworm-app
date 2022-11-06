@@ -8,13 +8,16 @@ function Featured(){
     const [featured, setFeatured] = useState('recommended');
     const [popular, setPopular] = useState([]);
     const [recommended, setRecommended] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
+        setLoading(true);
         const books = async () => {
             try {
                 const response = await bookApi.getFeaturedBooks();
                 setPopular(response.popular.data);
                 setRecommended(response.recommended.data);
+                setLoading(false);
             } catch (error) {
                 console.log('Failed to fetch book list: ', error);
             }
@@ -33,6 +36,13 @@ function Featured(){
             </Container>
             <Container className="p-12 mt-2">
                 <div className="carousel">
+                    {
+                        loading ? (
+                            <div className="loading mb-4">
+                                <div className="spinner-border text-dark" role="status"></div>
+                            </div>
+                        ) : null
+                    }
                     <Row xs={1} md={2} lg={3} className="g-4">
                         {featured === 'recommended' ? <ListFeatured books={recommended} /> : <ListFeatured books={popular} />}
                     </Row>

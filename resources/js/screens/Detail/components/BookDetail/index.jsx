@@ -7,12 +7,15 @@ import { useNavigate } from "react-router-dom";
 
 function BookDetail({ id }) {
     const [bookDetail, setBookDetail] = useState({});
+    const [loading, setLoading] = useState(false);
     let navigate = useNavigate();
     useEffect(() => {
+        setLoading(true);
         const fetchBookDetail = async () => {
             try {
                 const response = await shopApi.getDetailProduct(id);
                 setBookDetail(response.data);
+                setLoading(false);
             } catch (error) {
                 if(error.response.status === 422){
                     navigate('/home');
@@ -21,7 +24,6 @@ function BookDetail({ id }) {
         };
         fetchBookDetail();
     }, []);
-    console.log(bookDetail);
     return (
         <React.Fragment>
             {Object.keys(bookDetail).length === 0 ? (
@@ -30,13 +32,14 @@ function BookDetail({ id }) {
                 </div>
             ) : (
                 <React.Fragment>
+                    
                     <DetailTitle CategoryName={StringUtils.capitalizeWords(bookDetail.book_category_name)} />
                     <Row className='mb-2'>
-                        <Col xs={12} md={8} lg={8} className="bookworm__detail__colitem mb-2">
+                        <Col xs={12} md={12} lg={8} xl={8} className="bookworm__detail__colitem mb-2">
                             <CardDetail book={bookDetail}/>
                         </Col>
-                        <Col xs={12} md={4} lg={4} className="bookworm__detail__colitem">
-                            <CardAddToCart book={bookDetail} />
+                        <Col xs={12} md={12} lg={4} xl={4} className="bookworm__detail__colitem">
+                            <CardAddToCart book={bookDetail}/>
                         </Col>
                     </Row>
                 </React.Fragment>

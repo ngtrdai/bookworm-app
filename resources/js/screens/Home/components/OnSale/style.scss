@@ -33,6 +33,13 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     padding: 30px 30px;
     width: 100%;
+
+    .loading {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50%;
+    }
 }
 
 .carousel__books{
@@ -40,4 +47,9 @@
         display: flex;
         justify-content: center;
     }
+
+    .card__custom {
+        width: 95%;
+    }
 }
+

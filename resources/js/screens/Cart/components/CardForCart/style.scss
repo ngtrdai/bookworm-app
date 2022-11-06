@@ -1,3 +1,25 @@
+@media (max-width: 1200px) {
+    .bookworm__cart__header{
+        div {
+            display: flex;
+            justify-content: center;
+        }
+    }
+
+    .bookworm__cart__booktitle {
+        display: flex;
+        justify-content: center;
+    }
+
+    .bookworm__cart__price__final, .bookworm__cart__price__discount {
+        display: flex;
+        justify-content: center;
+    }
+    
+}
+
+
+
 .bookworm__cart__quantity {
     width: 100%;
     margin: 20px 0;
@@ -22,5 +44,12 @@
         font-size: 28px;
         font-weight: 600;
         text-align: center;
+    }
+}
+
+.bookworm__cart__image {
+
+    &:hover {
+        cursor: pointer;
     }
 }

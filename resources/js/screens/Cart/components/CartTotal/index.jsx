@@ -1,14 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Card } from "react-bootstrap";
 import { useSelector, useDispatch } from "react-redux";
-import { SignInModal } from "../../../../components";
+import { SignInModal, AlertCustom } from "../../../../components";
 import { shopApi } from "../../../../services";
-import { clearCart } from "../../../../reducers/cart";
+import { clearCart, removeFromCart } from "../../../../reducers/cart";
 import "./style.scss"
 function CartTotal(){
     const dispatch = useDispatch();
     const cart = useSelector(state => state.cartReducer.cart);
     const [isShow, setIsShow] = useState(false);
+    const [isShowAlert, setIsShowAlert] = useState(false);
     const [total, setTotal] = useState(0);
 
     useEffect(() => {
@@ -38,11 +39,24 @@ function CartTotal(){
                         try {
                             const response = await shopApi.orderProducts({items_order: items_order});
                             if(response.status === 201){
-                                alert("Place order successfully!");
+                                setIsShowAlert(true);
                                 dispatch(clearCart());
                             }
                         } catch (error) {
-                            console.log(error);
+                            if(error.response.status === 422){
+                                let listIdBook = [];
+                                if(error.response.data.errors.book_id){
+                                    error.response.data.errors.book_id.forEach((item) => {
+                                        if(item[0].includes('Exists:')){
+                                            const itemId = item[0].match(/\d+/)[0];
+                                            listIdBook.push(itemId);
+                                        }
+                                    });
+                                }
+                                if(listIdBook){
+                                    dispatch(removeFromCart(listIdBook));
+                                }
+                            }
                         }
                     }
                     order();
@@ -55,6 +69,9 @@ function CartTotal(){
     return (
         <React.Fragment>
             <SignInModal show={isShow} onHide={() => setIsShow(false)} />
+            {
+                isShowAlert && <AlertCustom variant="success" timeShow={10000} redictTo="/" message="Place order successfully!" />
+            }
             <Card>
                 <Card.Header className='d-flex justify-content-center'>
                     <h6>Cart Total</h6>

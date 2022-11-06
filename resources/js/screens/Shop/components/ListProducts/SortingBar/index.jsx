@@ -12,9 +12,9 @@ function SortingBar({ params, setSortBy, setNoItems, paginate }) {
 
     const showTypes = {
         "5": '5',
-        "10": '10',
         "15": '15',
         "20": '20',
+        "25": '25'
     };
 
     const handleSort = (value) => {
@@ -46,9 +46,9 @@ function SortingBar({ params, setSortBy, setNoItems, paginate }) {
                     </Dropdown.Toggle>
                     <Dropdown.Menu>
                         <Dropdown.Item onClick={() => handleShow('5')}>Show {showTypes['5']}</Dropdown.Item>
-                        <Dropdown.Item onClick={() => handleShow('10')}>Show {showTypes['10']}</Dropdown.Item>
                         <Dropdown.Item onClick={() => handleShow('15')}>Show {showTypes['15']}</Dropdown.Item>
                         <Dropdown.Item onClick={() => handleShow('20')}>Show {showTypes['20']}</Dropdown.Item>
+                        <Dropdown.Item onClick={() => handleShow('25')}>Show {showTypes['25']}</Dropdown.Item>
                     </Dropdown.Menu>
                 </Dropdown>
             </div>

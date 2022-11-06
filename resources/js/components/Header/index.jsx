@@ -48,7 +48,7 @@ function Header() {
                     <Navbar.Collapse id="responsive-navbar-nav">
                         <Nav className="me-auto"></Nav>
                         <Nav>
-                            <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Home</NavLink>
+                            <NavLink to="/" end className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Home</NavLink>
                             <NavLink to="shop" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Shop</NavLink>
                             <NavLink to="about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>About</NavLink>
                             <NavLink to="cart" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>Cart ({noOfCart})</NavLink>

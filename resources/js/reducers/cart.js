@@ -76,18 +76,17 @@ const cartSlice = createSlice({
             }
         },
         removeFromCart: (state, action) => {
-            let confirm = window.confirm('Are you sure to remove this book from cart?');
-            if (confirm) {
-                const bookId = action.payload;
-                const carts = CartUtils.getCart();
-                const newCarts = carts.filter(cart => cart.id !== bookId);
-                localStorage.setItem('cart', JSON.stringify(newCarts));
-                state.cart = newCarts;
-                state.alert = {
-                    show: true,
-                    message: 'Book removed from cart',
-                };
-            }
+            const listIdBook = action.payload;
+            const carts = CartUtils.getCart();
+            listIdBook.forEach(id => {
+                const index = carts.findIndex(item => item.id === id);
+                if (index !== -1) {
+                    alert("Book: " + carts[index].book.book_title + " not available");
+                    carts.splice(index, 1);
+                }
+            });
+            localStorage.setItem('cart', JSON.stringify(carts));
+            state.cart = carts;
         },
         clearCart: (state) => {
             localStorage.removeItem('cart');
