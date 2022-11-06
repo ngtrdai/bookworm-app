@@ -11,6 +11,10 @@ function Shop(){
     const [noItems, setNoItems] = useState(15);
     const [page, setPage] = useState(1);
 
+    useEffect(() => {
+        document.title = "Bookworm - Shop";
+    }, []);
+
     const [paginate, setPaginate] = useState({
         current_page: 1,
         last_page: 1,

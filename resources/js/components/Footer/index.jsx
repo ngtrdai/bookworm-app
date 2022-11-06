@@ -7,8 +7,8 @@ function Footer(){
             <img src={IMAGE['logo']} alt="" />
             <div className="bookworm__footer__text">
                 <h1>Bookworm</h1>
-                <h5>Address:</h5>
-                <h5>Phone:</h5>
+                <h5>Address: </h5>
+                <h5>Phone: (+84).979.808.617</h5>
             </div>
         </footer>
     );

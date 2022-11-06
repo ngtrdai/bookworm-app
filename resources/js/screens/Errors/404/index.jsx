@@ -1,6 +1,9 @@
+import React, { useEffect } from "react";
 import "./style.scss"
 function Error404() {
-  console.log();
+  useEffect(() => {
+    document.title = "Bookworm - 404";
+  }, []);
   return (
     <div className="bookworm__404">
       <div className="bookworm__404__content">
