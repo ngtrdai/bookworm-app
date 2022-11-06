@@ -1,5 +1,6 @@
 import "./style.scss"
 function Error404() {
+  console.log();
   return (
     <div className="bookworm__404">
       <div className="bookworm__404__content">

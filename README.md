@@ -1,20 +1,29 @@
-# **DỰ ÁN BOOKWORM**
+# **BOOKWORM PROJECT**
 
-# **HƯỚNG DẪN CẤU HÌNH**
+**Description:** Bookworm - Bookstore using Laravel and ReactJs with database is PostgreSQL.
+## **Usage**
 
-**Khởi tạo các Packages Composer**
+**Install packages composer**
 
 ```console
 composer i
 ```
-**Khởi tạo các Packages NPM**
+**Install packages NPM**
 ```console
 npm i
 ```
 
-**ĐỔI FILE .env.example thành .env**
+**Change type of file**
+```console
+.env.example to .env
+```
 
-**TẠO KEY**
+**Change base URL in .env**
+```console
+MIX_BASE_URL = <URL_APP>
+```
+
+**Generate KEY**
 ```console
 php artisan key:generate
 ```
@@ -23,4 +32,15 @@ php artisan key:generate
 ```console
 php artisan migrate:fresh --seed
 ```
+
+**Build Frontend (ReactJS)**
+```console
+npm run production
+```
+
+**Start Laravel using Artisan**
+```console
+php artisan serve
+```
+
 
