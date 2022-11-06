@@ -1,7 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Container, Row, Col } from "react-bootstrap";
 import "./style.scss";
 function About() {
+    useEffect(() => {
+        document.title = "Bookworm - About";
+    }, []);
     return (
         <Container className="bookworm__about">
             <div>

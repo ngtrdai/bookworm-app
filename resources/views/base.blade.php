@@ -3,7 +3,8 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Book Worm</title>
+        <link rel="icon" href="{{ asset('images/bookworm_icon.png') }}" type="image/x-icon"/>
+        <title>Bookworm</title>
     </head>
     <body class="antialiased">
         <div id="root"></div>

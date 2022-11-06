@@ -16,6 +16,7 @@ function BookDetail({ id }) {
                 const response = await shopApi.getDetailProduct(id);
                 setBookDetail(response.data);
                 setLoading(false);
+                document.title = `Bookworm - ${response.data.book_title}`;
             } catch (error) {
                 if(error.response.status === 422){
                     navigate('/home');

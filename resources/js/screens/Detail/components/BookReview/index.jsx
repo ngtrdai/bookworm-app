@@ -56,21 +56,24 @@ function BookReview({ id }) {
     const handleSortChange = (sortBy) => {
         setFilterParams({
             ...filterParams,
-            sort_by: sortBy
+            sort_by: sortBy,
+            page: 1
         });
     };
 
     const handleShowChange = (noItems) => {
         setFilterParams({
             ...filterParams,
-            no_items: noItems
+            no_items: noItems,
+            page: 1
         });
     };
 
     const handleRatingChange = (rating) => {
         setFilterParams({
             ...filterParams,
-            rating: rating
+            rating: rating,
+            page: 1
         });
     };
 
